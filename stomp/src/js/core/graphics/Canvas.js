@@ -18,31 +18,31 @@ Canvas.prototype.rescale = function()
     this.x = 0;
     this.y = 0;
 
+    this.canvasWidth = this.width;
+    this.canvasHeight = this.height;
+
     var arg_width = Arguments.get("w");
     var arg_height = Arguments.get("h");
 
     if(arg_width != undefined)
     {
-        this.width = parseInt(arg_width);
-        this.x = parseInt((window.innerWidth / 2) - (this.width / 2));
+        this.canvasWidth = parseInt(arg_width);
     }
 
     if(arg_height != undefined)
     {
-        this.height = parseInt(arg_height);
-        this.y = parseInt((window.innerHeight / 2) - (this.height / 2));
+        this.canvasHeight = parseInt(arg_height);
     }
 
-    this.canvas.width = this.width;
-    this.canvas.height = this.height;
-
-    Align.setSS(this.width, this.height);
+    this.canvas.width = this.canvasWidth;
+    this.canvas.height = this.canvasHeight;
 
     this.canvas.style.position = "absolute";
-    this.canvas.style.width = this.width + "px";
-    this.canvas.style.height = this.height + "px";
-    this.canvas.style.left = this.x + "px";
-    this.canvas.style.top = this.y + "px";
+    this.canvas.style.width = window.innerWidth + "px";
+    this.canvas.style.height = window.innerHeight + "px";
+    this.canvas.style.left = 0 + "px";
+    this.canvas.style.top = 0 + "px";
+    this.canvas.style.imageRendering = "-webkit-optimize-contrast";
 
     // rotate
     this.rotated = false;
@@ -56,7 +56,7 @@ Canvas.prototype.rescale = function()
 
         this.rotated = true;
 
-        this.gfx.gfx.scale(Align.ratioy, Align.ratiox);
+        this.gfx.gfx.scale(this.canvasWidth / Align.height, this.canvasHeight / Align.width);
         this.gfx.gfx.translate(Align.height, 0);
         this.gfx.gfx.rotate(90 * Math.PI / 180);
     }
@@ -64,6 +64,6 @@ Canvas.prototype.rescale = function()
     {
         Align.setSS(this.width, this.height);
         this.gfx.gfx.rotate(0);
-        this.gfx.gfx.scale(Align.ratiox, Align.ratioy);
+        this.gfx.gfx.scale(this.canvasWidth / Align.width, this.canvasHeight / Align.height);
     }
 };

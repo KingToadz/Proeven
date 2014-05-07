@@ -1,14 +1,15 @@
 /**
- * Created by Jelle on 4/27/2014.
+ * Created by Jelle on 5/6/2014.
  */
 
-Button = function()
+RotatableButton = function()
 {
     this.texture = null;
     this.x = 0;
     this.y = 0;
     this.width = 100;
     this.height = 100;
+    this.rotation = 0;
 
     this.item = undefined;
 
@@ -16,24 +17,24 @@ Button = function()
     this.aligny = Align.TOP;
 };
 
-Button.prototype.setTexture = function(texture)
+RotatableButton.prototype.setTexture = function(texture)
 {
     this.texture = texture;
 };
 
-Button.prototype.setPosition = function(x, y)
+RotatableButton.prototype.setPosition = function(x, y)
 {
     this.x = x;
     this.y = y;
 };
 
-Button.prototype.setSize = function(width, height)
+RotatableButton.prototype.setSize = function(width, height)
 {
     this.width = width;
     this.height = height;
 };
 
-Button.prototype.initialize = function()
+RotatableButton.prototype.initialize = function()
 {
     if(this.item == undefined)
     {
@@ -44,7 +45,7 @@ Button.prototype.initialize = function()
     this.y -= parseInt(this.height / 2);
 };
 
-Button.prototype.tick = function()
+RotatableButton.prototype.tick = function()
 {
     if(this.item.itemHandler.windowHandler.isMouseDown())
     {
@@ -60,10 +61,10 @@ Button.prototype.tick = function()
     }
 };
 
-Button.prototype.draw = function(gfx)
+RotatableButton.prototype.draw = function(gfx)
 {
-    gfx.drawTexture(this.texture, this.alignx.sx() + this.x, this.aligny.sy() + this.y, this.width, this.height);
+    gfx.drawRotatedTexture(this.texture, this.alignx.sx() + this.x, this.aligny.sy() + this.y, this.width, this.height, this.rotation);
 };
 
 // events
-Button.prototype.onClick = function(){};
+RotatableButton.prototype.onClick = function(){};

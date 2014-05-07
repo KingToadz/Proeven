@@ -67,7 +67,7 @@ Align.prototype.y = function(h)
 };
 
 Align.LEFT = new Align(0.0, 0.0);
-Align.TOP = new Align(0.0, 1.0);
+Align.TOP = new Align(0.0, 0.0);
 Align.CENTER = new Align(0.5, 0.5);
 Align.RIGHT = new Align(1.0, 0.0);
 Align.BOTTOM = new Align(0.0, 1.0);

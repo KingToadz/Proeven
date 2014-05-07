@@ -39,7 +39,11 @@ Files.addFile = function(path)
 Files.PIC_LOADER_BACKGROUND = Files.addPreFile("PreAssets/background.jpg");
 
 //////// ----- File list ----- ////////
-Files.PIC_MENU_BACKGROUND = Files.addFile("Assets/Menu/background.jpg");
+Files.PIC_MENU_BACKGROUND = Files.addFile("Assets/Menu/Background.jpg");
 Files.PIC_MENU_BUTTON_PLAY = Files.addFile("Assets/Menu/PlayButton.png");
 Files.PIC_MENU_BUTTON_BACK = Files.addFile("Assets/Menu/BackButton.png");
 Files.PIC_MENU_BUTTON_CREDITS = Files.addFile("Assets/Menu/CreditsButton.png");
+
+Files.PIC_GAME_BUTTON_JUMP = Files.addFile("Assets/Game/JumpButton.png");
+
+Files.PIC_GAME_OBJECT_PLAYER = Files.addFile("Assets/Game/Objects/Player.png");

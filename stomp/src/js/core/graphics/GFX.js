@@ -6,6 +6,12 @@ GFX = function(canvas)
 {
     this.canvas = canvas;
     this.gfx = this.canvas.canvas.getContext("2d");
+
+    this.gfx.imageSmoothingEnabled = false;
+    this.gfx.mozImageSmoothingEnabled = false;
+    this.gfx.webkitImageSmoothingEnabled = false;
+
+    this.gfx.save();
 };
 
 GFX.prototype.clear = function(style)
@@ -43,4 +49,17 @@ GFX.prototype.drawCenteredString = function(text, x, y, fillstyle, font)
 GFX.prototype.drawTexture = function(texture, x, y, width, height)
 {
     this.gfx.drawImage(texture, x, y, width, height);
+};
+
+GFX.prototype.drawRotatedTexture = function(texture, x, y, width, height, rotation)
+{
+    this.gfx.save();
+
+    this.gfx.translate(x + (width / 2), y + (height / 2));
+
+    this.gfx.rotate(rotation * (Math.PI / 180));
+
+    this.gfx.drawImage(texture, -(width / 2), -(height / 2), width, height);
+
+    this.gfx.restore();
 };
