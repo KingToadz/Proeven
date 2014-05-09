@@ -4,13 +4,13 @@
 
 ObstacleSpawner = function()
 {
-    this.curTick = 0;
+    this.curTick = 300;
 };
 
 ObstacleSpawner.prototype.spawn = function()
 {
     this.curTick = 0;
-    var obstacle = new Obstacle();
+    var obstacle = new Obstacle(this.objectHandler.world.dir);
     this.objectHandler.addObstacle(obstacle);
 };
 

@@ -45,17 +45,8 @@ WindowHandler.prototype.tick = function()
     }
 
     this.mouseListener.tick();
+    this.keyboardListener.tick();
 
     this.itemHandler.tick();
     this.itemHandler.draw(this.gfx);
-
-    this.gfx.drawString("FPS: " + this.ticker.curFPS + ";", 0, 80, "#FF0", "90px Arial");
-
-    //this.gfx.drawString("Mouses: " + this.mouseListener.mousedown.length + ";", 100, 100, "#FFFF00", "30px Arial");
-    /*
-    for(var i = 0; i < this.mouseListener.mousedown.length; i++)
-    {
-        this.gfx.drawString("Mouse[" + i + "]: " + this.mouseListener.mousedown[i].ticksAlive + ";", 100, 130 + (i * 30), "#FFFF00", "30px Arial");
-    }
-    */
 };

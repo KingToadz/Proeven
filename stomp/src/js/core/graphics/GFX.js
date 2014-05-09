@@ -20,6 +20,54 @@ GFX.prototype.clear = function(style)
     this.gfx.fillRect(0, 0, Align.width, Align.height);
 };
 
+GFX.prototype.drawLine = function(x, y, w, h, strokeStyle, lineWidth)
+{
+    this.gfx.lineWidth = lineWidth;
+    this.gfx.strokeStyle = strokeStyle;
+    this.gfx.beginPath();
+    this.gfx.moveTo(x, y);
+    this.gfx.lineTo(x + w, y + h);
+    this.gfx.stroke();
+};
+
+GFX.prototype.drawCurve = function(x1, y1, x2, y2, x3, y3, strokeStyle, lineWidth)
+{
+    this.gfx.lineWidth = lineWidth;
+    this.gfx.strokeStyle = strokeStyle;
+    this.gfx.beginPath();
+	this.gfx.quadraticCurveTo(x1, y1, x2, y2);
+	this.gfx.quadraticCurveTo(x2, y2, x3, y3);
+    this.gfx.stroke();
+};
+
+GFX.prototype.fillCircle = function(x, y, radius, fillStyle)
+{
+    this.gfx.fillStyle = fillStyle;
+    this.gfx.beginPath();
+	this.gfx.arc(x, y, radius, 0, 2 * Math.PI);
+    this.gfx.fill();
+};
+
+GFX.prototype.drawPath = function(path, len, strokeStyle, lineWidth)
+{
+    this.gfx.lineWidth = lineWidth;
+    this.gfx.strokeStyle = strokeStyle;
+
+    this.gfx.beginPath();
+
+    if(path.length > 1)
+    {
+        this.gfx.moveTo(path[0], path[1]);
+
+        for(var i = 1; i < len; i++)
+        {
+            this.gfx.lineTo(path[0 + (i * 2)], path[1 + (i * 2)]);
+        }
+    }
+
+    this.gfx.stroke();
+};
+
 GFX.prototype.drawRect = function(x, y, w, h, strokeStyle, lineWidth)
 {
     this.gfx.lineWidth = lineWidth;

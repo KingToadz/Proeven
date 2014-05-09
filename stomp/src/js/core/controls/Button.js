@@ -51,7 +51,7 @@ Button.prototype.tick = function()
         var mousesdown = this.item.itemHandler.windowHandler.getMousesDown();
         for(var i = 0; i < mousesdown.length; i++)
         {
-            if(mousesdown[i].x >= this.alignx.sx() + this.x && mousesdown[i].y >= this.aligny.sy() + this.y && mousesdown[i].x < this.alignx.sx() + this.x + this.width && mousesdown[i].y < this.aligny.sy() + this.y + this.height)
+            if(mousesdown[i].ticksAlive == 1 && mousesdown[i].x >= this.alignx.sx() + this.x && mousesdown[i].y >= this.aligny.sy() + this.y && mousesdown[i].x < this.alignx.sx() + this.x + this.width && mousesdown[i].y < this.aligny.sy() + this.y + this.height)
             {
                 this.onClick();
                 break;

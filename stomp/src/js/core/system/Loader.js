@@ -37,8 +37,8 @@ Loader.prototype.loadImage = function(path)
 {
     console.log("Image path: " + path);
     var obj = new Image();
-    obj.onload = this.completeEventHandler.execute;
-    obj.onerror = this.completeEventHandler.execute;
+    obj.onload = this.completeEventHandler;
+    obj.onerror = this.completeEventHandler;
     obj.src = path;
     return obj;
 };

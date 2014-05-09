@@ -12,4 +12,6 @@ EventHandler = function(object, executeFunction)
     {
         instance.executeFunction.call(instance.object, args);
     };
+	
+	return this.execute;
 };

@@ -25,7 +25,7 @@ Ticker.prototype.start = function()
     this.curTime = this.getCurTime();
     this.lastTickTime = this.curTime;
     this.lastFPSCountTime = this.curTime;
-    setTimeout(this.tickEventHandler.execute, 1);
+    setTimeout(this.tickEventHandler, 1);
 };
 
 Ticker.prototype.getCurTime = function()
@@ -61,11 +61,11 @@ Ticker.prototype.tick = function()
     {
         sleep = parseInt(sleep);
         this.lastSleep = sleep;
-        setTimeout(this.tickEventHandler.execute, sleep);
+        setTimeout(this.tickEventHandler, sleep);
     }
     else
     {
         this.lastSleep = 1;
-        setTimeout(this.tickEventHandler.execute, 1);
+        setTimeout(this.tickEventHandler, 1);
     }
 };

@@ -2,19 +2,22 @@
  * Created by Jelle on 5/7/2014.
  */
 
-ObjectHandler = function()
+ObjectHandler = function(world)
 {
-    // players
-    this.player1 = new Player(1);
-    this.player2 = new Player(-1);
+    this.world = world;
 
-    this.player1.otherPlayer = this.player2;
-    this.player2.otherPlayer = this.player1;
+    // player
+    this.player = new Player(this.world.dir);
 
     // obstacles
     this.obstacleSpawner = new ObstacleSpawner();
     this.obstacleSpawner.objectHandler = this;
     this.obstacles = [];
+};
+
+ObjectHandler.prototype.initialize = function()
+{
+    this.player.otherPlayer = this.world.otherWorld.objectHandler.player;
 };
 
 ObjectHandler.prototype.addObstacle = function(obj)
@@ -24,22 +27,23 @@ ObjectHandler.prototype.addObstacle = function(obj)
 
 ObjectHandler.prototype.tick = function()
 {
-    this.player1.tick();
-    this.player2.tick();
-
+    this.player.tick();
     this.obstacleSpawner.tick();
 
     for(var i = 0; i < this.obstacles.length; i++)
     {
         this.obstacles[i].tick();
+        if(this.obstacles[i].remove == true)
+        {
+            this.obstacles.splice(i, 1);
+            i -= 1;
+        }
     }
 };
 
 ObjectHandler.prototype.draw = function(gfx)
 {
-    this.player1.draw(gfx);
-    this.player2.draw(gfx);
-
+    this.player.draw(gfx);
     this.obstacleSpawner.draw(gfx);
 
     for(var i = 0; i < this.obstacles.length; i++)

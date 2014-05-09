@@ -4,45 +4,42 @@
 
 ItemTestMenu = function()
 {
-    this.backgroundTexture = Files.PIC_MENU_BACKGROUND.obj;
-
-    this.lastMouseX = 0;
-    this.lastMouseY = 0;
-
-    this.backButton = new Button();
-    this.backButton.alignx = Align.CENTER;
-    this.backButton.aligny = Align.CENTER;
-    this.backButton.setTexture(Files.PIC_MENU_BUTTON_BACK.obj);
-    this.backButton.setPosition(0, 0);
-    this.backButton.setSize(Files.PIC_MENU_BUTTON_BACK.obj.width, Files.PIC_MENU_BUTTON_BACK.obj.height);
-    this.backButton.onClick = function(){this.item.itemHandler.setGotoItem(ItemMainMenu);};
+    this.firstDraw = true;
 };
 
 ItemTestMenu.prototype.initialize = function()
 {
-    this.backButton.item = this;
-    this.backButton.initialize();
 };
 
 ItemTestMenu.prototype.activate = function()
 {
-
 };
 
 ItemTestMenu.prototype.deActivate = function()
 {
-
 };
 
 ItemTestMenu.prototype.tick = function()
 {
-    this.backButton.tick();
 };
 
 ItemTestMenu.prototype.draw = function(gfx)
 {
-    gfx.clear("black");
-    gfx.drawTexture(this.backgroundTexture, 0, 0, Align.width, Align.height);
+    if(this.firstDraw == true)
+    {
+        this.firstDraw = false;
+        gfx.clear("#FFF");
+    }
 
-    this.backButton.draw(gfx);
+    if(this.itemHandler.windowHandler.isMouseDown())
+    {
+        var mousesdown = this.itemHandler.windowHandler.getMousesDown();
+        for (var i = 0; i < mousesdown.length; i++)
+        {
+            if(mousesdown[i].lastX != mousesdown[i].x || mousesdown[i].lastY != mousesdown[i].y)
+            {
+                gfx.drawLine(mousesdown[i].lastX, mousesdown[i].lastY, mousesdown[i].x - mousesdown[i].lastX, mousesdown[i].y - mousesdown[i].lastY, mousesdown[i].color, 10);
+            }
+        }
+    }
 };
