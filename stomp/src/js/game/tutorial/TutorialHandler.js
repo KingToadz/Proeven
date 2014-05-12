@@ -32,7 +32,7 @@ TutorialHandler.prototype.tryNextState = function()
     // 2.) Spawn big block
     // 3.) Start a game
 
-    if(this.world1.stateDone == true && this.world2.stateDone == true)
+    if(this.world1.currentStateDone() == true && this.world2.currentStateDone() == true)
     {
         // state++
         this.world1.nextState();

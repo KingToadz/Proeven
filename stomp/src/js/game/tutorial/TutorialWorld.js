@@ -17,8 +17,6 @@ TutorialWorld = function(dir, tutorialHandler)
     this.waitCount = 0;
     this.innerState = 0;
 
-    this.worldPaused = false;
-
     // Jump button
     button = new RotatableButton();
     button.alignx = Align.LEFT;
@@ -36,7 +34,7 @@ TutorialWorld = function(dir, tutorialHandler)
 
     button.rotation = (dir + 1) * 90;
     button.world = this;
-    button.onClick = function(){this.world.otherWorld.continueJump(); this.world.otherWorld.objectHandler.player.tryJump();};
+    button.onClick = function(){if(this.world.otherWorld.continueJump()){ this.world.otherWorld.objectHandler.player.tryJump();}};
     this.buttons.push(button);
 
     // Back button
@@ -60,6 +58,20 @@ TutorialWorld = function(dir, tutorialHandler)
     this.buttons.push(button);
 
     this.objectHandler = new TutorialObjectHandler(this);
+
+    this.currentState = 0;
+    this.states = [];
+
+    var jumpState = new JumpState(this);
+    jumpState.start();
+
+    this.states.push(jumpState);
+
+    jumpState = new JumpState(this);
+    jumpState.start();
+    this.states.push(jumpState);
+
+    this.worldPaused = false;
 };
 
 TutorialWorld.prototype.initialize = function()
@@ -75,16 +87,13 @@ TutorialWorld.prototype.initialize = function()
 
 TutorialWorld.prototype.nextState = function()
 {
-    this.state++;
-    this.stateDone = false;
-    this.innerState = 0;
+    this.currentState++;
+    this.states[this.currentState].start();
+};
 
-    if(this.state == 1)
-    {
-        // Spawn small block
-        this.currentObstacle = new Obstacle(this.objectHandler.world.dir);
-        this.objectHandler.addObstacle(this.currentObstacle);
-    }
+TutorialWorld.prototype.currentStateDone = function()
+{
+    return this.states[this.currentState].done;
 };
 
 TutorialWorld.prototype.currentObatacleFromPlayer = function()
@@ -94,11 +103,7 @@ TutorialWorld.prototype.currentObatacleFromPlayer = function()
 
 TutorialWorld.prototype.continueJump = function()
 {
-    if(this.stateDone == false && this.worldPaused == true)
-    {
-        this.worldPaused = false;
-        this.innerState++;
-    }
+    return this.states[this.currentState].handleJump();
 };
 
 TutorialWorld.prototype.tick = function()
@@ -108,34 +113,7 @@ TutorialWorld.prototype.tick = function()
         this.buttons[i].tick();
     }
 
-    if(this.state == 0)
-    {
-        this.waitCount++;
-        if(this.TouchDownInWorld() && this.waitCount >= 50)
-        {
-            this.stateDone = true;
-        }
-    }
-    else if(this.state == 1)
-    {
-        var distToPlayer = this.currentObatacleFromPlayer();
-
-        if(distToPlayer < 200 && distToPlayer > 0 && this.innerState == 0)
-        {
-            this.worldPaused = true;
-        }
-        else if(distToPlayer < -200 && this.innerState == 1)
-        {
-            // spawn new block
-            this.currentObstacle = new Obstacle(this.objectHandler.world.dir);
-            this.objectHandler.addObstacle(this.currentObstacle);
-            this.innerState++;
-        }
-        else if(distToPlayer < -200 && this.innerState == 2)
-        {
-            this.stateDone = true;
-        }
-    }
+    this.states[this.currentState].tick();
 
     if(!this.worldPaused){
         this.objectHandler.tick();
@@ -174,31 +152,11 @@ TutorialWorld.prototype.draw = function(gfx)
     gfx.gfx.scale(1, this.dir);
     gfx.gfx.translate(0, (Align.height / 2) * (this.dir - 1));
 
-    //gfx.fillRect(100, 200, 100, 100, "#00f");
-    gfx.drawString("State = " + this.state + this.waitCount, 600, 300, "#FFF", "20pt Arial");
+    gfx.drawCenteredString("State = " + this.currentState, Align.width / 2, 300, "#FFF", "20pt Arial");
 
-    //gfx.drawTexture(this.backgroudTexture, 0, 0, this.backgroudTexture.width, this.backgroudTexture.height);
     this.objectHandler.draw(gfx);
 
-    if(this.stateDone)
-    {
-        gfx.drawCenteredString("Wacht op de andere speler!", 800, 400, "#FFF", "20pt Arial");
-    }
-    else if(this.state == 0)
-    {
-        gfx.drawCenteredString("Leer springen.\r\n Druk op het scherm om door te gaan", 800, 400, "#FFF", "20pt Arial");
-    }
-    else if(this.state == 1)
-    {
-        if(this.worldPaused && this.innerState == 0)
-        {
-            gfx.drawCenteredString("Druk nu op de spring knop!", 800, 400, "#FFF", "20pt Arial");
-        }
-        else if(this.worldPaused && this.innerState == 1)
-        {
-            //gfx.drawCenteredString("ontwijk de obstakels!", 800, 400, "#FFF", "20pt Arial");
-        }
-    }
+    this.states[this.currentState].draw(gfx);
 
     gfx.gfx.restore();
 
