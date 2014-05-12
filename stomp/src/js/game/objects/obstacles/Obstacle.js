@@ -16,13 +16,21 @@ Obstacle = function()
 
     this.collisionContainer = new CollisionContainer();
     this.collisionContainer.addBox(0, 0, this.width, this.height);
+
+    this.collisionContainer.owner = this;
     this.collisionContainer.initialize();
+};
+
+Obstacle.prototype.onPlayerCollision = function(player)
+{
+    this.collisionContainer.isColliding = true;
+    player.onCollision();
 };
 
 Obstacle.prototype.tick = function()
 {
     this.x -= 10;
-    if(this.x < 10)
+    if(this.x < 0 - this.width)
     {
         this.remove = true;
     }

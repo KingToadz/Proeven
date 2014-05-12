@@ -8,6 +8,7 @@ ObjectHandler = function(world)
 
     // player
     this.player = new Player(this.world.dir);
+    this.player.objectHandler = this;
 
     // obstacles
     this.obstacleSpawner = new ObstacleSpawner();
@@ -17,6 +18,7 @@ ObjectHandler = function(world)
 
 ObjectHandler.prototype.initialize = function()
 {
+    this.obstacleSpawner.initialize();
     this.player.otherPlayer = this.world.otherWorld.objectHandler.player;
 };
 
@@ -27,7 +29,6 @@ ObjectHandler.prototype.addObstacle = function(obj)
 
 ObjectHandler.prototype.tick = function()
 {
-    this.player.tick();
     this.obstacleSpawner.tick();
 
     for(var i = 0; i < this.obstacles.length; i++)
@@ -39,15 +40,16 @@ ObjectHandler.prototype.tick = function()
             i -= 1;
         }
     }
+
+    this.player.tick();
 };
 
 ObjectHandler.prototype.draw = function(gfx)
 {
-    this.player.draw(gfx);
-    this.obstacleSpawner.draw(gfx);
-
     for(var i = 0; i < this.obstacles.length; i++)
     {
         this.obstacles[i].draw(gfx);
     }
+
+    this.player.draw(gfx);
 };

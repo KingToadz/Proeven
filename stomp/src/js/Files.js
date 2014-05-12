@@ -45,6 +45,8 @@ Files.PIC_MENU_BUTTON_OPTIONS = Files.addFile("Assets/Menu/OptionsButton.png");
 Files.PIC_MENU_BUTTON_CREDITS = Files.addFile("Assets/Menu/CreditsButton.png");
 Files.PIC_MENU_BUTTON_BACK = Files.addFile("Assets/Menu/BackButton.png");
 
+Files.SND_MENU_BACKGROUND = "Assets/Menu/Background.ogg";
+
 Files.PIC_GAME__BACKGROUND = Files.addFile("Assets/Game/Background.jpg");
 
 Files.PIC_GAME_BUTTON_JUMP = Files.addFile("Assets/Game/JumpButton.png");

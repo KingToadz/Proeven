@@ -83,7 +83,7 @@ World.prototype.draw = function(gfx)
     gfx.gfx.scale(1, this.dir);
     gfx.gfx.translate(0, (Align.height / 2) * (this.dir - 1));
 
-    //gfx.drawTexture(this.backgroudTexture, 0, 0, this.backgroudTexture.width, this.backgroudTexture.height);
+    gfx.drawTexture(this.backgroudTexture, 0, 0, Align.width, Align.height / 2);
     this.objectHandler.draw(gfx);
     gfx.gfx.restore();
 

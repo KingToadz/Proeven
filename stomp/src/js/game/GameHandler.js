@@ -6,6 +6,8 @@ GameHandler = function(item)
 {
     this.item = item;
 
+    this.sharedSpawnOptions = new SharedSpawnOptions();
+
     this.world1 = new World(1);
     this.world2 = new World(-1);
 

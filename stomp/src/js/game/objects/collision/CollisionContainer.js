@@ -10,11 +10,16 @@ CollisionContainer = function()
     this.height = 0;
 
     this.boxes = [];
+
+    this.isColliding = false;
+
+    this.collidingWith = [];
 };
 
 CollisionContainer.prototype.addBox = function(x, y, width, height)
 {
     var box = new CollisionBox(x, y, width, height);
+    box.container = this;
     this.boxes.push(box);
 };
 
@@ -49,15 +54,64 @@ CollisionContainer.prototype.initialize = function()
     if(py2 != undefined){this.height = py2 - py1;}else{this.height = 0;}
 };
 
-CollisionContainer.prototype.draw = function(gfx, x, y)
+CollisionContainer.prototype.isCollidingWith = function(checkContainer)
+{
+    var tx1 = this.owner.x + this.x;
+    var ty1 = this.owner.y + this.y;
+    var tx2 = tx1 + this.width;
+    var ty2 = ty1 + this.height;
+
+    var cx1 = checkContainer.owner.x + checkContainer.x;
+    var cy1 = checkContainer.owner.y + checkContainer.y;
+    var cx2 = cx1 + checkContainer.width;
+    var cy2 = cy1 + checkContainer.height;
+
+    return CollisionUtil.checkCollision(tx1, ty1, tx2, ty2, cx1, cy1, cx2, cy2);
+};
+
+CollisionContainer.prototype.tick = function(obstacles)
+{
+    for(var i = 0; i < obstacles.length; i++)
+    {
+        if(obstacles[i].collisionContainer.isCollidingWith(this))
+        {
+            if(obstacles[i].collisionContainer.boxes.length == 1)
+            {
+                obstacles[i].onPlayerCollision(this.owner);
+            }
+            else
+            {
+                var boxes = obstacles[i].collisionContainer.boxes;
+                for(var j = 0; j < boxes.length; j++)
+                {
+                    if(boxes[j].isCollidingWith(this.boxes[0]))
+                    {
+                        obstacles[i].onPlayerCollision(this.owner);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+};
+
+CollisionContainer.prototype.draw = function(gfx)
 {
     if(this.boxes.length > 0)
     {
         for(var i = 0; i < this.boxes.length; i++)
         {
-            this.boxes[i].draw(gfx, x, y);
+            //this.boxes[i].draw(gfx);
         }
     }
 
-    //gfx.drawRect(x + this.x, y + this.y, this.width, this.height, "#FF0", 2);
+    if(this.isColliding == true)
+    {
+        this.isColliding = false;
+        //gfx.drawRect(this.owner.x + this.x, this.owner.y + this.y, this.width, this.height, "#00F", 2);
+    }
+    else
+    {
+        //gfx.drawRect(this.owner.x + this.x, this.owner.y + this.y, this.width, this.height, "#FF0", 2);
+    }
 };

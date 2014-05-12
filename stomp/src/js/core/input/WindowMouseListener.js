@@ -88,7 +88,7 @@ WindowMouseListener.prototype.onMouseDown = function(ev)
 
 WindowMouseListener.prototype.onMouseMove = function(ev)
 {
-    //ev.preventDefault();
+    ev.preventDefault();
 
     var id = parseInt(ev.button);
     var mouseEvent = this.mouseButtonToMouseEvent[id];
@@ -96,10 +96,6 @@ WindowMouseListener.prototype.onMouseMove = function(ev)
     if(mouseEvent != undefined)
     {
         this.setMousePosition(mouseEvent, ev.pageX, ev.pageY);
-    }
-    else
-    {
-        console.log("wut?");
     }
 };
 

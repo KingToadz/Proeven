@@ -7,6 +7,11 @@ ObstacleSpawner = function()
     this.curTick = 300;
 };
 
+ObstacleSpawner.prototype.initialize = function()
+{
+    this.sharedSpawnOptions = this.objectHandler.world.gameHandler.sharedSpawnOptions;
+};
+
 ObstacleSpawner.prototype.spawn = function()
 {
     this.curTick = 0;
@@ -22,9 +27,4 @@ ObstacleSpawner.prototype.tick = function()
     {
         this.spawn();
     }
-};
-
-ObstacleSpawner.prototype.draw = function(gfx)
-{
-
 };

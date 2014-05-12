@@ -23,6 +23,10 @@ WindowHandler = function()
     this.ticker.handler = this;
     this.itemHandler.setGotoItem(ItemInitialize);
 
+    // events
+    window.onfocus = function(){};
+    window.onblur = function(){};
+
     this.ticker.start();
 };
 
@@ -50,3 +54,6 @@ WindowHandler.prototype.tick = function()
     this.itemHandler.tick();
     this.itemHandler.draw(this.gfx);
 };
+
+// events
+

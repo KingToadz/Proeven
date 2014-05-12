@@ -39,6 +39,8 @@ ItemMainMenu = function()
     button.setSize(Files.PIC_MENU_BUTTON_CREDITS.obj.width - 50, Files.PIC_MENU_BUTTON_CREDITS.obj.height - 50);
     button.onClick = function(){this.item.itemHandler.setGotoItem(ItemCreditsMenu);};
     this.buttons.push(button);
+
+    SFX.setBackgroundSound(Files.SND_MENU_BACKGROUND);
 };
 
 ItemMainMenu.prototype.initialize = function()
@@ -71,7 +73,7 @@ ItemMainMenu.prototype.tick = function()
 ItemMainMenu.prototype.draw = function(gfx)
 {
     gfx.clear("black");
-    //gfx.drawTexture(this.backgroundTexture, 0, 0, Align.width, Align.height);
+    gfx.drawTexture(this.backgroundTexture, 0, 0, Align.width, Align.height);
 
     var mouses = this.itemHandler.windowHandler.getMousesDown();
     for(var i = 0; i < mouses.length; i++)
@@ -83,4 +85,6 @@ ItemMainMenu.prototype.draw = function(gfx)
     {
         this.buttons[i].draw(gfx);
     }
+
+    gfx.drawString("Navigator: " + navigator.isCocoonJS, 10, 40, "#FF0", "30px Arial");
 };
