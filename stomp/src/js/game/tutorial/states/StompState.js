@@ -20,11 +20,11 @@ StompState.prototype.start = function()
 
 StompState.prototype.handleJump = function()
 {
-    if(this.innerState >= 1){
+    if(this.innerState >= 0){
         if(this.innerState == 1)
         {
             this.world.worldPaused = false;
-            this.nextInnerState();
+            //this.nextInnerState();
         }
         return true;
     } else {
@@ -51,13 +51,19 @@ StompState.prototype.tick = function()
 
     if(this.innerState == 1)
     {
-        if(distToPlayer > 0 && distToPlayer < 200)
+        if(distToPlayer > 0 && distToPlayer < 350)
         {
             this.world.worldPaused = true;
             // After the jump the innerState will be incremented to 2
         }
-
-        this.done = true;
+    }
+    else if(this.innerState == 2)
+    {
+        if(this.world.objectHandler.player.y < Align.height / 2 - 600)
+        {
+            this.world.worldPaused = true;
+            this.world.otherWorld.worldPaused = true;
+        }
     }
 };
 
@@ -71,14 +77,14 @@ StompState.prototype.draw = function(gfx)
     }
     if(this.innerState == 0)
     {
-        gfx.drawCenteredString("Tutorial time", 800, 400, "#FFF", "20pt Arial");
+        gfx.drawCenteredString("stomp tutorial", 800, 400, "#FFF", "20pt Arial");
     }
     else if(this.innerState == 1)
     {
-        gfx.drawCenteredString("Springen", 800, 400, "#FFF", "20pt Arial");
+        gfx.drawCenteredString("inner state 1", 800, 400, "#FFF", "20pt Arial");
     }
     else if(this.innerState == 2)
     {
-        gfx.drawCenteredString("SPRINGEN", 800, 400, "#FFF", "20pt Arial");
+        gfx.drawCenteredString("inner state 2 ", 800, 400, "#FFF", "20pt Arial");
     }
 };

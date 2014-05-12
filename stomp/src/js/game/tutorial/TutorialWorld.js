@@ -67,7 +67,7 @@ TutorialWorld = function(dir, tutorialHandler)
 
     this.states.push(jumpState);
 
-    jumpState = new JumpState(this);
+    jumpState = new StompState(this, this.otherWorld);
     jumpState.start();
     this.states.push(jumpState);
 
@@ -88,7 +88,15 @@ TutorialWorld.prototype.initialize = function()
 TutorialWorld.prototype.nextState = function()
 {
     this.currentState++;
-    this.states[this.currentState].start();
+    if(this.states.length > this.currentState){
+        this.states[this.currentState].start();
+    }
+    else
+    {
+        // GOTO MENU
+        console.log("Tutorial done");
+        this.gameHandler.item.itemHandler.setGotoItem(ItemMainMenu);
+    }
 };
 
 TutorialWorld.prototype.currentStateDone = function()
@@ -113,7 +121,9 @@ TutorialWorld.prototype.tick = function()
         this.buttons[i].tick();
     }
 
-    this.states[this.currentState].tick();
+    if(this.states.length > this.currentState){
+        this.states[this.currentState].tick();
+    }
 
     if(!this.worldPaused){
         this.objectHandler.tick();
@@ -156,7 +166,9 @@ TutorialWorld.prototype.draw = function(gfx)
 
     this.objectHandler.draw(gfx);
 
-    this.states[this.currentState].draw(gfx);
+    if(this.states.length > this.currentState){
+        this.states[this.currentState].draw(gfx);
+    }
 
     gfx.gfx.restore();
 
