@@ -17,7 +17,7 @@ ItemMainMenu = function()
     button.setTexture(Files.PIC_MENU_BUTTON_PLAY.obj);
     button.setPosition(0, -350);
     button.setSize(Files.PIC_MENU_BUTTON_PLAY.obj.width - 50, Files.PIC_MENU_BUTTON_PLAY.obj.height - 50);
-    button.onClick = function(){this.item.itemHandler.setGotoItem(ItemTutorial);};
+    button.onClick = function(){this.item.itemHandler.setGotoItem(ItemGame);};
     this.buttons.push(button);
 
     // Options button

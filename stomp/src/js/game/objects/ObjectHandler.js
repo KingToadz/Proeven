@@ -6,14 +6,14 @@ ObjectHandler = function(world)
 {
     this.world = world;
 
-    // player
-    this.player = new Player(this.world.dir);
-    this.player.objectHandler = this;
-
     // obstacles
     this.obstacleSpawner = new ObstacleSpawner();
     this.obstacleSpawner.objectHandler = this;
     this.obstacles = [];
+
+    // player
+    this.player = new Player(this.world.dir);
+    this.player.objectHandler = this;
 };
 
 ObjectHandler.prototype.initialize = function()
