@@ -4,18 +4,14 @@
 
 TutorialObjectHandler = function(world)
 {
-    this.state = 0;
-    this.waitCount = 0;
-
     this.world = world;
+
+    // obstacles
+    this.obstacles = [];
 
     // player
     this.player = new Player(this.world.dir);
-
-    // obstacles
-    this.obstacleSpawner = new ObstacleSpawner();
-    this.obstacleSpawner.objectHandler = this;
-    this.obstacles = [];
+    this.player.objectHandler = this;
 };
 
 TutorialObjectHandler.prototype.initialize = function()
@@ -30,9 +26,6 @@ TutorialObjectHandler.prototype.addObstacle = function(obj)
 
 TutorialObjectHandler.prototype.tick = function()
 {
-    this.player.tick();
-    //this.obstacleSpawner.tick();
-
     for(var i = 0; i < this.obstacles.length; i++)
     {
         this.obstacles[i].tick();
@@ -42,15 +35,15 @@ TutorialObjectHandler.prototype.tick = function()
             i -= 1;
         }
     }
+    this.player.tick();
 };
 
 TutorialObjectHandler.prototype.draw = function(gfx)
 {
-    this.player.draw(gfx);
-    //this.obstacleSpawner.draw(gfx);
-
     for(var i = 0; i < this.obstacles.length; i++)
     {
         this.obstacles[i].draw(gfx);
     }
+
+    this.player.draw(gfx);
 };

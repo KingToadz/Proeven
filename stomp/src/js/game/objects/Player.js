@@ -81,10 +81,15 @@ Player.prototype.tick = function()
         this.x -= 10;
         if(this.x < 0 - this.width)
         {
-            this.x = (Align.width / 2) - (this.width / 2);
-            this.hasCollided = false;
+            this.respawn();
         }
     }
+};
+
+Player.prototype.respawn = function()
+{
+    this.x = (Align.width / 2) - (this.width / 2);
+    this.hasCollided = false;
 };
 
 Player.prototype.draw = function(gfx)

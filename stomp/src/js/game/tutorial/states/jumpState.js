@@ -1,4 +1,4 @@
-JumpState = function(pWorld)
+JumpState = function(pWorld, objHandle)
 {
     this.world = pWorld;
     this.objectHandler = this.world.objectHandler;
@@ -9,6 +9,7 @@ JumpState = function(pWorld)
 JumpState.prototype.nextInnerState = function()
 {
     this.innerState++;
+    console.log("Next inner state " + this.innerState);
 };
 
 JumpState.prototype.start = function()
@@ -29,12 +30,12 @@ JumpState.prototype.handleJump = function()
     } else {
         return false;
     }
-}
+};
 
 JumpState.prototype.spawnBlock = function()
 {
-    this.world.currentObstacle = new Obstacle(this.world.dir);
-    this.world.objectHandler.addObstacle(this.world.currentObstacle);
+    this.world.objectHandler.obstacles = [];
+    this.world.objectHandler.addObstacle(new Obstacle(this.world.dir));
 };
 
 JumpState.prototype.reset = function()
@@ -46,7 +47,7 @@ JumpState.prototype.reset = function()
 
 JumpState.prototype.tick = function()
 {
-    var distToPlayer = this.world.currentObatacleFromPlayer();
+    var distToPlayer = this.world.currentObstacleFromPlayer();
 
     if(this.innerState == 1)
     {
@@ -58,26 +59,29 @@ JumpState.prototype.tick = function()
     }
     else if(this.innerState == 2)
     {
-        if(distToPlayer < -200)
+        if(distToPlayer < -200 && distToPlayer > -1000)
         {
             this.spawnBlock();
             this.nextInnerState();
         }
         else if(this.objectHandler.player.x < Align.width / 2 - 300)
         {
-            this.objectHandler.player.x = Align.width / 2;
+            this.objectHandler.player.respawn();
+            this.objectHandler.obstacles = [];
             this.spawnBlock();
+            this.innerState--;
         }
     }
     else if(this.innerState == 3)
     {
-        if(distToPlayer < -200)
+        if(distToPlayer < -200 && distToPlayer > -1000)
         {
             this.nextInnerState();
         }
-        else if(this.objectHandler.player.x < Align.width / 2 - 300)
+        else if(this.objectHandler.player.x < Align.width / 2 - 600)
         {
-            this.objectHandler.player.x = Align.width / 2;
+            this.objectHandler.player.respawn();
+            this.objectHandler.obstacles = [];
             this.spawnBlock();
         }
     }
@@ -85,6 +89,9 @@ JumpState.prototype.tick = function()
     {
         this.done = true;
     }
+
+    // Players aren't allowed to jump
+    this.objectHandler.player.shouldStomp = false;
 };
 
 JumpState.prototype.draw = function(gfx)

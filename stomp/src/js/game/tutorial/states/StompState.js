@@ -14,23 +14,40 @@ StompState.prototype.nextInnerState = function()
 
 StompState.prototype.start = function()
 {
+    this.innerState = 0;
     this.spawnBlock();
-    this.innerState++;
+    this.otherWorld.objectHandler.obstacles = [];
+    this.nextInnerState();
 };
 
 StompState.prototype.handleJump = function()
 {
-    if(this.innerState >= 0){
+    if(this.innerState >= 1){
         if(this.innerState == 1)
         {
-            this.world.worldPaused = false;
-            //this.nextInnerState();
+            return true;
         }
-        return true;
+        else if(this.innerState == 2)
+        {
+            this.world.worldPaused = false;
+            this.world.otherWorld.worldPaused = false;
+            this.nextInnerState();
+            this.world.otherWorld.forceNextInnerState();
+            return true;
+        }
+        else if(this.innerState == 3)
+        {
+            this.world.worldPaused = false;
+            this.world.otherWorld.worldPaused = false;
+            this.nextInnerState();
+            this.world.otherWorld.forceNextInnerState();
+            return true;
+        }
+        //return true;
     } else {
         return false;
     }
-}
+};
 
 StompState.prototype.spawnBlock = function()
 {
@@ -47,23 +64,31 @@ StompState.prototype.reset = function()
 
 StompState.prototype.tick = function()
 {
-    var distToPlayer = this.world.currentObatacleFromPlayer();
+    var distToPlayer = this.world.otherWorld.currentObstacleFromPlayer();
 
     if(this.innerState == 1)
     {
         if(distToPlayer > 0 && distToPlayer < 350)
         {
-            this.world.worldPaused = true;
+            this.world.otherWorld.worldPaused = true;
+            this.nextInnerState();
+            this.world.otherWorld.forceNextInnerState();
+
             // After the jump the innerState will be incremented to 2
         }
     }
-    else if(this.innerState == 2)
+    else if(this.innerState == 3)
     {
-        if(this.world.objectHandler.player.y < Align.height / 2 - 600)
+        console.log("Distance state 3: " + distToPlayer);
+        if(distToPlayer > 0 && distToPlayer < 200)
         {
             this.world.worldPaused = true;
             this.world.otherWorld.worldPaused = true;
         }
+    }
+    else if(this.innerState == 4)
+    {
+        this.done = true;
     }
 };
 
@@ -81,10 +106,10 @@ StompState.prototype.draw = function(gfx)
     }
     else if(this.innerState == 1)
     {
-        gfx.drawCenteredString("inner state 1", 800, 400, "#FFF", "20pt Arial");
+        gfx.drawCenteredString("Block should wait", 800, 400, "#FFF", "20pt Arial");
     }
-    else if(this.innerState == 2)
+    else if(this.innerState == 3)
     {
-        gfx.drawCenteredString("inner state 2 ", 800, 400, "#FFF", "20pt Arial");
+        gfx.drawCenteredString("Spring ofzo ", 800, 400, "#FFF", "20pt Arial");
     }
 };

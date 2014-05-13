@@ -4,7 +4,7 @@
 
 SFX = function(){};
 
-SFX.volume = 1.0;
+SFX.volume = 0.0;
 
 SFX.setVolume = function(volume)
 {
@@ -22,6 +22,7 @@ SFX.setBackgroundSound = function(src)
     SFX.stopBackgroundSound();
 
     var audio = new Audio();
+    audio.volume = 0.0;
 
     audio.addEventListener("canplay", function()
     {

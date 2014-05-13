@@ -17,6 +17,8 @@ TutorialWorld = function(dir, tutorialHandler)
     this.waitCount = 0;
     this.innerState = 0;
 
+    this.logThisFrame = false;
+
     // Jump button
     button = new RotatableButton();
     button.alignx = Align.LEFT;
@@ -58,19 +60,6 @@ TutorialWorld = function(dir, tutorialHandler)
     this.buttons.push(button);
 
     this.objectHandler = new TutorialObjectHandler(this);
-
-    this.currentState = 0;
-    this.states = [];
-
-    var jumpState = new JumpState(this);
-    jumpState.start();
-
-    this.states.push(jumpState);
-
-    jumpState = new StompState(this, this.otherWorld);
-    jumpState.start();
-    this.states.push(jumpState);
-
     this.worldPaused = false;
 };
 
@@ -83,6 +72,26 @@ TutorialWorld.prototype.initialize = function()
     }
 
     this.objectHandler.initialize();
+
+    this.currentState = 0;
+    this.states = [];
+
+    var jumpState = new JumpState(this);
+    jumpState.start();
+    this.states.push(jumpState);
+
+    var stompState = new StompState(this, this.otherWorld);
+    this.states.push(stompState);
+
+    var stompState2 = new StompState(this.otherWorld, this);
+    this.states.push(stompState2);
+};
+
+TutorialWorld.prototype.forceNextInnerState = function()
+{
+  if(this.states.length > this.currentState){
+      this.states[this.currentState].innerState++;
+  }
 };
 
 TutorialWorld.prototype.nextState = function()
@@ -104,9 +113,14 @@ TutorialWorld.prototype.currentStateDone = function()
     return this.states[this.currentState].done;
 };
 
-TutorialWorld.prototype.currentObatacleFromPlayer = function()
+TutorialWorld.prototype.currentObstacleFromPlayer = function()
 {
-    return this.currentObstacle.x - this.objectHandler.player.x;
+    if(this.objectHandler.obstacles[0] === undefined)
+    {
+        return -77777;
+    }
+
+    return this.objectHandler.obstacles[0].x - this.objectHandler.player.x;
 };
 
 TutorialWorld.prototype.continueJump = function()
@@ -127,6 +141,8 @@ TutorialWorld.prototype.tick = function()
 
     if(!this.worldPaused){
         this.objectHandler.tick();
+
+        this.logThisFrame = !this.logThisFrame;
     }
 };
 
@@ -153,7 +169,7 @@ TutorialWorld.prototype.TouchDownInWorld = function()
         }
     }
     return false;
-}
+};
 
 TutorialWorld.prototype.draw = function(gfx)
 {
