@@ -16,42 +16,38 @@ SFX.setVolume = function(volume)
 };
 
 SFX.backgroundSound = undefined;
+SFX.backgroundSoundSrc = undefined;
 
 SFX.setBackgroundSound = function(src)
 {
     SFX.stopBackgroundSound();
 
-    var audio = new Audio();
+    SFX.backgroundSound = new Audio();
+    SFX.backgroundSound.volume = SFX.volume;
 
-    audio.addEventListener("canplay", function()
+    SFX.backgroundSound.addEventListener("canplay", function()
     {
-        audio.loop = true;
-
         console.log("Play BackgroundSound " + src + ".");
 
-        audio.addEventListener("ended", function()
+        SFX.backgroundSound.play();
+
+        SFX.backgroundSound.addEventListener("ended", function()
         {
             console.log("Ended BackgroundSound " + src + ".");
-            audio.currentTime = 0;
-            audio.play();
-            audio.loop = true;
-        }, false);
 
-        audio.play();
-        audio.loop = true;
+            SFX.setBackgroundSound(SFX.backgroundSoundSrc);
+        }, false);
     }, false);
 
-    audio.src = src;
-    audio.load();
-
-    SFX.backgroundSound = audio;
+    SFX.backgroundSoundSrc = src;
+    SFX.backgroundSound.src = src;
+    SFX.backgroundSound.load();
 };
 
 SFX.stopBackgroundSound = function()
 {
     if(SFX.backgroundSound != undefined)
     {
-        SFX.backgroundSound.stop();
         SFX.backgroundSound.pause();
         SFX.backgroundSound.currentTime = 0;
         SFX.backgroundSound.src = "";
@@ -63,6 +59,7 @@ SFX.stopBackgroundSound = function()
 SFX.playSound = function(src)
 {
     var audio = new Audio();
+    audio.volume = SFX.volume / 4;
 
     audio.addEventListener("canplay", function()
     {

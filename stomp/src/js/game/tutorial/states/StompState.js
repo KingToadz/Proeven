@@ -30,7 +30,7 @@ StompState.prototype.handleJump = function()
     } else {
         return false;
     }
-}
+};
 
 StompState.prototype.spawnBlock = function()
 {

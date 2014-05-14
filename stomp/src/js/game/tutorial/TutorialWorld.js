@@ -153,7 +153,7 @@ TutorialWorld.prototype.TouchDownInWorld = function()
         }
     }
     return false;
-}
+};
 
 TutorialWorld.prototype.draw = function(gfx)
 {

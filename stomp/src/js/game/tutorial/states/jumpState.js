@@ -29,7 +29,7 @@ JumpState.prototype.handleJump = function()
     } else {
         return false;
     }
-}
+};
 
 JumpState.prototype.spawnBlock = function()
 {

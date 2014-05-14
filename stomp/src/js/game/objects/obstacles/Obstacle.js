@@ -12,7 +12,7 @@ Obstacle = function()
     this.height = this.texture.height;
 
     this.x = Align.width;
-    this.y = (Align.height / 2) - (this.height + 1);
+    this.y = (Align.height / 2) - (this.height + 20);
 
     this.collisionContainer = new CollisionContainer();
     this.collisionContainer.addBox(0, 0, this.width, this.height);
