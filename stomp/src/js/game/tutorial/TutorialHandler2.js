@@ -19,6 +19,7 @@ TutorialHandler = function(item)
     this.world2.initialize();
 
     // For the stomp jump
+    this.stompTutStarted = false;
     this.world1Learning = true;
     this.world1Step = 0;
     this.world2Step = 0;
@@ -43,6 +44,14 @@ TutorialHandler.prototype.tryNextState = function()
         // state++
         this.world1.jumpDoing = false;
         this.world2.jumpDoing = false;
+
+        // Reset all the obstacles. To prevent weird bugs
+        if(!this.stompTutStarted)
+        {
+            this.stompTutStarted = true;
+            this.world1.objectHandler.obstacles = [];
+            this.world2.objectHandler.obstacles = [];
+        }
     }
 };
 
@@ -114,6 +123,8 @@ TutorialHandler.prototype.tick = function()
     this.world1.tick();
     this.world2.tick();
 
+    this.tryNextState();
+
     if(this.tutorialDone)
     {
         this.doneCounter++;
@@ -127,12 +138,6 @@ TutorialHandler.prototype.tick = function()
     {
         if(this.world1.jumpDone && this.world2.jumpDone)
         {
-            if(this.world1.jumpDoing || this.world2.jumpDoing)
-            {
-                this.world1.jumpDoing = false;
-                this.world2.jumpDoing = false;
-            }
-
             // Stomp tutorial hier
             if(this.world1Learning)
             {
@@ -141,7 +146,6 @@ TutorialHandler.prototype.tick = function()
                     this.world1.objectHandler.addObstacle(new Obstacle(this.world1.dir));
                     this.world1Step = 3;
                 }
-
 
                 if(this.world2Step == 0)
                 {
@@ -152,7 +156,6 @@ TutorialHandler.prototype.tick = function()
                         {
                             this.world1.worldPaused = true;
                             //this.world2.worldPaused = false;
-                            this.world2.canPlayerJump = true;
                             this.world2Step++;
                         }
                     }
@@ -245,8 +248,6 @@ TutorialHandler.prototype.tick = function()
             }
         }
     }
-
-    this.tryNextState();
 };
 
 TutorialHandler.prototype.draw = function(gfx)
@@ -268,32 +269,32 @@ TutorialHandler.prototype.draw = function(gfx)
             switch(this.world1Step)
             {
                 case 1:
-                    this.world1.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen");
+                    this.world1.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen ");
                 break;
                 case 4:
-                    this.world1.drawString(gfx, "Spring nu om extra hoog te komen");
+                    this.world1.drawString(gfx, "Spring nu om extra hoog te komen ");
                 break;
                 default:
-                    this.world1.drawString(gfx, "De andere speler is bezig met zijn deel");
+                    this.world1.drawString(gfx, "De andere speler is bezig met zijn deel ");
                     break;
             }
 
             switch(this.world2Step)
             {
                 case 0:
-                    this.world2.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen");
+                    this.world2.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen ");
                 break;
                 case 1:
-                    this.world2.drawString(gfx, "Spring");
+                    this.world2.drawString(gfx, "Spring ");
                 break;
                 case 2:
-                    this.world2.drawString(gfx, "Als je nu nog eens op spring drukt stomp je de andere omhoog");
+                    this.world2.drawString(gfx, "Als je nu nog eens op spring drukt stomp je de andere omhoog ");
                 break;
                 case 3:
-                    this.world2.drawString(gfx, "De andere speler is bezig met zijn deel");
+                    this.world2.drawString(gfx, "De andere speler is bezig met zijn deel ");
                 break;
                 default:
-                    this.world2.drawString(gfx, "De andere speler is bezig met zijn deel");
+                    this.world2.drawString(gfx, "De andere speler is bezig met zijn deel ");
                     break;
             }
         }

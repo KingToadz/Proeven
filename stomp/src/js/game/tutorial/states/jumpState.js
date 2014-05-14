@@ -59,14 +59,15 @@ JumpState.prototype.tick = function()
     }
     else if(this.innerState == 2)
     {
-        if(distToPlayer < -200 && distToPlayer > -1000)
+        if(distToPlayer < -400 && distToPlayer > -1000)
         {
             this.spawnBlock();
             this.nextInnerState();
         }
-        else if(this.objectHandler.player.x < Align.width / 2 - 300)
+        else if(this.objectHandler.player.hasCollided)
         {
-            this.objectHandler.player.respawn();
+            this.objectHandler.player.isImmuneFor = 0;
+            this.objectHandler.player.hasCollided = 0;
             this.objectHandler.obstacles = [];
             this.spawnBlock();
             this.innerState--;
@@ -74,13 +75,14 @@ JumpState.prototype.tick = function()
     }
     else if(this.innerState == 3)
     {
-        if(distToPlayer < -200 && distToPlayer > -1000)
+        if(distToPlayer < -400 && distToPlayer > -1000)
         {
             this.nextInnerState();
         }
-        else if(this.objectHandler.player.x < Align.width / 2 - 600)
+        else if(this.objectHandler.player.hasCollided)
         {
-            this.objectHandler.player.respawn();
+            this.objectHandler.player.isImmuneFor = 0;
+            this.objectHandler.player.hasCollided = 0;
             this.objectHandler.obstacles = [];
             this.spawnBlock();
         }
