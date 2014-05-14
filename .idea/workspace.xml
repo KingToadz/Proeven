@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffbc53fe-568c-4881-9183-c0e50ac30c9d" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/stomp/src/js/game/objects/obstacles/BigObstacle.js" />
+      <change type="DELETED" beforePath="C:\Users\YorickS\Documents\GitHub\Proeven\stomp\src\js\game\tutorial\TutorialState.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\YorickS\Documents\GitHub\Proeven\stomp\src\js\game\tutorial\states\StompState.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProjectHandler.exe" afterPath="$PROJECT_DIR$/ProjectHandler.exe" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stomp/bin/Source.min.js" afterPath="$PROJECT_DIR$/stomp/bin/Source.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialHandler2.js" afterPath="$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialHandler2.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialWorld.js" afterPath="$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialWorld.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stomp/src/js/game/tutorial/states/jumpState.js" afterPath="$PROJECT_DIR$/stomp/src/js/game/tutorial/states/jumpState.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -38,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TutorialHandler2.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TutorialHandler2.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialHandler2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4360" max-vertical-offset="5814">
-              <caret line="296" column="90" selection-start-line="296" selection-start-column="90" selection-end-line="296" selection-end-column="90" />
+            <state vertical-scroll-proportion="0.93098783" vertical-offset="3307" max-vertical-offset="5899">
+              <caret line="235" column="52" selection-start-line="235" selection-start-column="52" selection-end-line="235" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -51,18 +56,38 @@
       <file leaf-file-name="TutorialWorld.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialWorld.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2342" max-vertical-offset="3111">
-              <caret line="95" column="5" selection-start-line="95" selection-start-column="5" selection-end-line="95" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="852" max-vertical-offset="3077">
+              <caret line="80" column="27" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jumpState.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Obstacle.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/stomp/src/js/game/objects/obstacles/Obstacle.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
+              <caret line="23" column="55" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BigObstacle.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/stomp/src/js/game/objects/obstacles/BigObstacle.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.7857144" vertical-offset="109" max-vertical-offset="850">
+              <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jumpState.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stomp/src/js/game/tutorial/states/jumpState.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40189445" vertical-offset="876" max-vertical-offset="2159">
-              <caret line="69" column="54" selection-start-line="69" selection-start-column="54" selection-end-line="69" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1335" max-vertical-offset="2074">
+              <caret line="116" column="2" selection-start-line="116" selection-start-column="2" selection-end-line="116" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -127,9 +152,10 @@
         <option value="$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialObjectHandler.js" />
         <option value="$PROJECT_DIR$/stomp/src/js/game/tutorial/states/StompState.js" />
         <option value="$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialHandler.js" />
+        <option value="$PROJECT_DIR$/stomp/src/js/game/tutorial/states/jumpState.js" />
+        <option value="$PROJECT_DIR$/stomp/src/js/game/objects/obstacles/BigObstacle.js" />
         <option value="$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialWorld.js" />
         <option value="$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialHandler2.js" />
-        <option value="$PROJECT_DIR$/stomp/src/js/game/tutorial/states/jumpState.js" />
       </list>
     </option>
   </component>
@@ -531,6 +557,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FullScreen" value="false" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\YorickS\Documents\GitHub\Proeven\stomp\src\js\game\objects\obstacles" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
@@ -747,14 +778,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stomp/src/js/game/tutorial/states/StompState.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="787" max-vertical-offset="1615">
-          <caret line="61" column="70" selection-start-line="61" selection-start-column="70" selection-end-line="61" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stomp/src/js/core/graphics/GFX.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1206" max-vertical-offset="2023">
@@ -783,14 +806,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="1955">
           <caret line="43" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="109" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stomp/src/js/game/tutorial/states/StompState.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="1513">
-          <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
           <folding />
         </state>
       </provider>
@@ -1003,38 +1018,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stomp/src/js/game/objects/obstacles/Obstacle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7131258" vertical-offset="0" max-vertical-offset="850">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialState.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23743017" vertical-offset="0" max-vertical-offset="716">
-          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stomp/src/js/game/tutorial/states/StompState.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6721763" vertical-offset="2402" max-vertical-offset="3128">
-          <caret line="170" column="3" selection-start-line="168" selection-start-column="4" selection-end-line="170" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stomp/src/js/items/game/ItemTutorial.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialObjectHandler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="179" max-vertical-offset="935">
@@ -1059,22 +1042,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialHandler2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4360" max-vertical-offset="5814">
-          <caret line="296" column="90" selection-start-line="296" selection-start-column="90" selection-end-line="296" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialWorld.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1134" max-vertical-offset="3111">
-          <caret line="95" column="5" selection-start-line="95" selection-start-column="5" selection-end-line="95" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stomp/src/js/game/objects/Player.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1125" max-vertical-offset="2125">
@@ -1085,8 +1052,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stomp/src/js/game/tutorial/states/jumpState.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40189445" vertical-offset="876" max-vertical-offset="2159">
-          <caret line="69" column="54" selection-start-line="69" selection-start-column="54" selection-end-line="69" selection-end-column="54" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1335" max-vertical-offset="2074">
+          <caret line="116" column="2" selection-start-line="116" selection-start-column="2" selection-end-line="116" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stomp/src/js/game/objects/obstacles/BigObstacle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.7857144" vertical-offset="109" max-vertical-offset="850">
+          <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stomp/src/js/game/objects/obstacles/Obstacle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
+          <caret line="23" column="55" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stomp/src/js/items/game/ItemTutorial.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialWorld.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="852" max-vertical-offset="3077">
+          <caret line="80" column="27" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stomp/src/js/game/tutorial/TutorialHandler2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.93098783" vertical-offset="3307" max-vertical-offset="5899">
+          <caret line="235" column="52" selection-start-line="235" selection-start-column="52" selection-end-line="235" selection-end-column="52" />
           <folding />
         </state>
       </provider>

@@ -1,4 +1,4 @@
-JumpState = function(pWorld, objHandle)
+JumpState = function(pWorld)
 {
     this.world = pWorld;
     this.objectHandler = this.world.objectHandler;
@@ -100,23 +100,18 @@ JumpState.prototype.draw = function(gfx)
 {
     if(this.done == true)
     {
-        this.drawTutorialText(gfx, "Goedzo! Wacht nu op de andere speler!");
+        this.world.drawString(gfx, "Goedzo! Wacht nu op de andere speler!");
     }
     else if(this.innerState == 0)
     {
-        this.drawTutorialText(gfx, "Wacht tot het obstakel dicht bij is");
+        this.world.drawString(gfx, "Wacht tot het obstakel dicht bij is");
     }
     else if(this.innerState == 1)
     {
-        this.drawTutorialText(gfx, "Druk op springen om er over heen te komen");
+        this.world.drawString(gfx, "Druk op springen om er over heen te komen");
     }
     else if(this.innerState == 3)
     {
-        this.drawTutorialText(gfx, "Probeer het nu zonder hulp");
+        this.world.drawString(gfx, "Probeer het nu zonder hulp");
     }
-};
-
-JumpState.prototype.drawTutorialText = function(gfx, text)
-{
-    gfx.drawCenteredString(text, Align.width / 2, 300, "#FFF", "20pt Arial");
 };
