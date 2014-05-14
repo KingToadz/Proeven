@@ -6,7 +6,7 @@ World = function(dir)
 {
     this.dir = dir;
 
-    this.backgroudTexture = Files.PIC_GAME__BACKGROUND.obj;
+    this.backgroundHandler = new BackgroundHandler((-(this.dir - 1)));
 
     this.buttons = [];
 
@@ -73,6 +73,8 @@ World.prototype.tick = function()
         this.buttons[i].tick();
     }
 
+    this.backgroundHandler.tick();
+
     this.objectHandler.tick();
 };
 
@@ -83,8 +85,9 @@ World.prototype.draw = function(gfx)
     gfx.gfx.scale(1, this.dir);
     gfx.gfx.translate(0, (Align.height / 2) * (this.dir - 1));
 
-    gfx.drawTexture(this.backgroudTexture, 0, 0, Align.width, Align.height / 2);
+    this.backgroundHandler.draw(gfx);
     this.objectHandler.draw(gfx);
+
     gfx.gfx.restore();
 
     for(var i = 0; i < this.buttons.length; i++)

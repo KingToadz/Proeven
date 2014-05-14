@@ -48,26 +48,6 @@ GFX.prototype.fillCircle = function(x, y, radius, fillStyle)
     this.gfx.fill();
 };
 
-GFX.prototype.drawPath = function(path, len, strokeStyle, lineWidth)
-{
-    this.gfx.lineWidth = lineWidth;
-    this.gfx.strokeStyle = strokeStyle;
-
-    this.gfx.beginPath();
-
-    if(path.length > 1)
-    {
-        this.gfx.moveTo(path[0], path[1]);
-
-        for(var i = 1; i < len; i++)
-        {
-            this.gfx.lineTo(path[0 + (i * 2)], path[1 + (i * 2)]);
-        }
-    }
-
-    this.gfx.stroke();
-};
-
 GFX.prototype.drawRect = function(x, y, w, h, strokeStyle, lineWidth)
 {
     this.gfx.lineWidth = lineWidth;
@@ -110,4 +90,16 @@ GFX.prototype.drawRotatedTexture = function(texture, x, y, width, height, rotati
     this.gfx.drawImage(texture, -(width / 2), -(height / 2), width, height);
 
     this.gfx.restore();
+};
+
+GFX.prototype.drawTransparentTexture = function(texture, x, y, width, height, alpha)
+{
+    this.gfx.globalAlpha = alpha;
+    this.gfx.drawImage(texture, x, y, width, height);
+    this.gfx.globalAlpha = 1.0;
+};
+
+GFX.prototype.drawClippedTexture = function(texture, x, y, width, height, cx, cy, cwidth, cheight)
+{
+    this.gfx.drawImage(texture, cx, cy, cwidth, cheight, x, y, width, height);
 };

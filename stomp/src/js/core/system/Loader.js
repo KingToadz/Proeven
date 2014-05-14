@@ -8,6 +8,7 @@ Loader = function(fileComponents)
 
     this.fileComponents = fileComponents;
     this.index = 0;
+    this.length = this.fileComponents.length;
     this.done = false;
 };
 
@@ -30,7 +31,7 @@ Loader.prototype.stringEndsWidth = function(text, suffix)
 
 Loader.prototype.hasNext = function()
 {
-    return this.index < this.fileComponents.length;
+    return this.index < this.length;
 };
 
 Loader.prototype.loadImage = function(path)

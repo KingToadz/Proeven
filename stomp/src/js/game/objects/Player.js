@@ -16,9 +16,10 @@ Player = function()
     this.collisionContainer.initialize();
 
     this.hasCollided = false;
+    this.isImmuneFor = 0;
 
     this.x = (Align.width / 2) - (this.width / 2);
-    this.y = (Align.height / 2) - ((this.collisionContainer.height + 1) + this.collisionContainer.y);
+    this.y = (Align.height / 2) - ((this.collisionContainer.height + 20) + this.collisionContainer.y);
     this.groundy = this.y;
 
     this.gravity = 0.8;
@@ -35,6 +36,7 @@ Player.prototype.tryJump = function()
         {
             this.speedy = -20;
             this.hasJumped = true;
+            SFX.playSound(Files.SND_GAME_PLAYER_JUMP);
         }
         else
         {
@@ -57,6 +59,9 @@ Player.prototype.onCollision = function()
     this.collisionContainer.isColliding = true;
     this.hasCollided = true;
     this.shouldStomp = false;
+
+    this.isImmuneFor = 180;
+    SFX.playSound(Files.SND_GAME_PLAYER_DEATH);
 };
 
 Player.prototype.tick = function()
@@ -72,16 +77,23 @@ Player.prototype.tick = function()
         {
             this.shouldStomp = false;
             this.otherPlayer.tryStomp();
+            SFX.playSound(Files.SND_GAME_PLAYER_STOMP);
         }
     }
 
-    this.collisionContainer.tick(this.objectHandler.obstacles);
-    if(this.hasCollided == true)
+    if(this.isImmuneFor > 0)
     {
-        this.x -= 10;
-        if(this.x < 0 - this.width)
+        this.isImmuneFor--;
+        if(this.isImmuneFor == 0)
         {
-            this.respawn();
+            this.hasCollided = false;
+        }
+    }
+    else
+    {
+        if(this.hasCollided == false)
+        {
+            this.collisionContainer.tick(this.objectHandler.obstacles);
         }
     }
 };
@@ -94,7 +106,14 @@ Player.prototype.respawn = function()
 
 Player.prototype.draw = function(gfx)
 {
-    gfx.drawTexture(this.texture, this.x, this.y, this.width, this.height);
+    if(this.isImmuneFor > 0)
+    {
+        gfx.drawTransparentTexture(this.texture, this.x, this.y, this.width, this.height, 0.3);
+    }
+    else
+    {
+        gfx.drawTexture(this.texture, this.x, this.y, this.width, this.height);
+    }
 
     this.collisionContainer.draw(gfx);
 };

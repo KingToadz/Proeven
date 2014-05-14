@@ -35,8 +35,7 @@ ItemLoader.prototype.tick = function()
 
 ItemLoader.prototype.draw = function(gfx)
 {
-    gfx.clear("black");
     gfx.drawTexture(this.backgroundTexture, 0, 0, Align.width, Align.height);
 
-    gfx.drawCenteredString("Loading...", Align.width / 2, Align.height / 2, "black", "120px Arial");
+
 };
