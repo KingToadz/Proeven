@@ -12,12 +12,10 @@ TutorialWorld = function(dir, tutorialHandler)
 
     var button = undefined;
 
-    this.state = 0;
-    this.stateDone = false;
-    this.waitCount = 0;
-    this.innerState = 0;
-
-    this.logThisFrame = false;
+    this.jumpDone = true;
+    this.jumpDoing = false;
+    this.canPlayerJump = false;
+    this.handler = tutorialHandler;
 
     // Jump button
     button = new RotatableButton();
@@ -72,45 +70,19 @@ TutorialWorld.prototype.initialize = function()
     }
 
     this.objectHandler.initialize();
-
-    this.currentState = 0;
-    this.states = [];
-
-    var jumpState = new JumpState(this);
-    jumpState.start();
-    this.states.push(jumpState);
+    /*
+    var stompState2 = new StompState(this.otherWorld, this);
+    this.states.push(stompState2);
 
     var stompState = new StompState(this, this.otherWorld);
     this.states.push(stompState);
+    */
 
-    var stompState2 = new StompState(this.otherWorld, this);
-    this.states.push(stompState2);
-};
-
-TutorialWorld.prototype.forceNextInnerState = function()
-{
-  if(this.states.length > this.currentState){
-      this.states[this.currentState].innerState++;
-  }
-};
-
-TutorialWorld.prototype.nextState = function()
-{
-    this.currentState++;
-    if(this.states.length > this.currentState){
-        this.states[this.currentState].start();
-    }
-    else
+    if(!this.jumpDone)
     {
-        // GOTO MENU
-        console.log("Tutorial done");
-        this.gameHandler.item.itemHandler.setGotoItem(ItemMainMenu);
+        this.jumpState = new JumpState(this);
+        this.jumpState.start();
     }
-};
-
-TutorialWorld.prototype.currentStateDone = function()
-{
-    return this.states[this.currentState].done;
 };
 
 TutorialWorld.prototype.currentObstacleFromPlayer = function()
@@ -125,7 +97,12 @@ TutorialWorld.prototype.currentObstacleFromPlayer = function()
 
 TutorialWorld.prototype.continueJump = function()
 {
-    return this.states[this.currentState].handleJump();
+    if(this.jumpDoing)
+    {
+        return this.jumpState.handleJump();
+    }
+
+    return this.handler.handleJump(this.dir);
 };
 
 TutorialWorld.prototype.tick = function()
@@ -135,14 +112,12 @@ TutorialWorld.prototype.tick = function()
         this.buttons[i].tick();
     }
 
-    if(this.states.length > this.currentState){
-        this.states[this.currentState].tick();
+    if(this.jumpDoing){
+        this.jumpState.tick();
     }
 
     if(!this.worldPaused){
         this.objectHandler.tick();
-
-        this.logThisFrame = !this.logThisFrame;
     }
 };
 
@@ -178,12 +153,10 @@ TutorialWorld.prototype.draw = function(gfx)
     gfx.gfx.scale(1, this.dir);
     gfx.gfx.translate(0, (Align.height / 2) * (this.dir - 1));
 
-    gfx.drawCenteredString("State = " + this.currentState, Align.width / 2, 300, "#FFF", "20pt Arial");
-
     this.objectHandler.draw(gfx);
 
-    if(this.states.length > this.currentState){
-        this.states[this.currentState].draw(gfx);
+    if(this.jumpDoing){
+        this.jumpState.draw(gfx);
     }
 
     gfx.gfx.restore();
@@ -192,4 +165,15 @@ TutorialWorld.prototype.draw = function(gfx)
     {
         this.buttons[i].draw(gfx);
     }
+};
+
+TutorialWorld.prototype.drawString = function(gfx, text)
+{
+    gfx.gfx.save();
+    gfx.gfx.scale(1, this.dir);
+    gfx.gfx.translate(0, (Align.height / 2) * (this.dir - 1));
+
+    gfx.drawCenteredString(text, Align.width / 2, 100, "#FFF", "20pt Arial");
+
+    gfx.gfx.restore();
 };

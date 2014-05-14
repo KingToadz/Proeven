@@ -15,7 +15,6 @@ JumpState.prototype.nextInnerState = function()
 JumpState.prototype.start = function()
 {
     this.spawnBlock();
-    this.innerState++;
 };
 
 JumpState.prototype.handleJump = function()
@@ -49,11 +48,12 @@ JumpState.prototype.tick = function()
 {
     var distToPlayer = this.world.currentObstacleFromPlayer();
 
-    if(this.innerState == 1)
+    if(this.innerState == 0)
     {
         if(distToPlayer > 0 && distToPlayer < 200)
         {
             this.world.worldPaused = true;
+            this.nextInnerState();
             // After the jump the innerState will be incremented to 2
         }
     }
@@ -100,18 +100,23 @@ JumpState.prototype.draw = function(gfx)
 
     if(this.done == true)
     {
-        gfx.drawCenteredString("Wacht op de andere speler!", 800, 400, "#FFF", "20pt Arial");
+        this.drawTutorialText(gfx, "Goedzo! Wacht nu op de andere speler!");
     }
-    if(this.innerState == 0)
+    else if(this.innerState == 0)
     {
-        gfx.drawCenteredString("Tutorial time", 800, 400, "#FFF", "20pt Arial");
+        this.drawTutorialText(gfx, "Wacht tot het obstakel dicht bij is");
     }
     else if(this.innerState == 1)
     {
-        gfx.drawCenteredString("Springen", 800, 400, "#FFF", "20pt Arial");
+        this.drawTutorialText(gfx, "Druk op springen om er over heen te komen");
     }
-    else if(this.innerState == 2)
+    else if(this.innerState == 3)
     {
-        gfx.drawCenteredString("SPRINGEN", 800, 400, "#FFF", "20pt Arial");
+        this.drawTutorialText(gfx, "Probeer het nu zonder hulp");
     }
+};
+
+JumpState.prototype.drawTutorialText = function(gfx, text)
+{
+    gfx.drawCenteredString(text, Align.width / 2, 300, "#FFF", "20pt Arial");
 };
