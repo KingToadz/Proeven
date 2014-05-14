@@ -6,14 +6,14 @@ TutorialWorld = function(dir, tutorialHandler)
 {
     this.dir = dir;
 
-    this.backgroudTexture = Files.PIC_GAME__BACKGROUND.obj;
+    this.backgroundHandler = new BackgroundHandler((-(this.dir - 1)));
 
     this.buttons = [];
 
     var button = undefined;
 
-    this.jumpDone = true;
-    this.jumpDoing = false;
+    this.jumpDone = false;
+    this.jumpDoing = true;
     this.canPlayerJump = false;
     this.handler = tutorialHandler;
 
@@ -70,13 +70,6 @@ TutorialWorld.prototype.initialize = function()
     }
 
     this.objectHandler.initialize();
-    /*
-    var stompState2 = new StompState(this.otherWorld, this);
-    this.states.push(stompState2);
-
-    var stompState = new StompState(this, this.otherWorld);
-    this.states.push(stompState);
-    */
 
     if(!this.jumpDone)
     {
@@ -107,6 +100,8 @@ TutorialWorld.prototype.continueJump = function()
 
 TutorialWorld.prototype.tick = function()
 {
+    this.jumpDone = this.jumpState.done;
+
     for(var i = 0; i < this.buttons.length; i++)
     {
         this.buttons[i].tick();
@@ -117,6 +112,7 @@ TutorialWorld.prototype.tick = function()
     }
 
     if(!this.worldPaused){
+        this.backgroundHandler.tick();
         this.objectHandler.tick();
     }
 };
@@ -152,6 +148,8 @@ TutorialWorld.prototype.draw = function(gfx)
     gfx.gfx.save();
     gfx.gfx.scale(1, this.dir);
     gfx.gfx.translate(0, (Align.height / 2) * (this.dir - 1));
+
+    this.backgroundHandler.draw(gfx);
 
     this.objectHandler.draw(gfx);
 

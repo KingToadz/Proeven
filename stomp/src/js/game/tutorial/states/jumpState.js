@@ -96,8 +96,6 @@ JumpState.prototype.tick = function()
 
 JumpState.prototype.draw = function(gfx)
 {
-    gfx.drawCenteredString("INNERSTATE: " + this.innerState, Align.width / 2, 200, "#FFF", "20pt Arial");
-
     if(this.done == true)
     {
         this.drawTutorialText(gfx, "Goedzo! Wacht nu op de andere speler!");

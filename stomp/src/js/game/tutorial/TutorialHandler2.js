@@ -261,72 +261,75 @@ TutorialHandler.prototype.draw = function(gfx)
         this.world1.drawString(gfx, "Goed gedaan je bent klaar voor het echte werk!");
         this.world2.drawString(gfx, "Goed gedaan je bent klaar voor het echte werk!");
     }
-    else if(this.world1Learning)
+    else if(this.world1.jumpDone == true && this.world2.jumpDone == true)
     {
-        switch(this.world1Step)
+        if(this.world1Learning)
         {
-            case 1:
-                this.world1.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen");
-            break;
-            case 4:
-                this.world1.drawString(gfx, "Spring nu om extra hoog te komen");
-            break;
-            default:
-                this.world1.drawString(gfx, "De andere speler is bezig met zijn deel");
+            switch(this.world1Step)
+            {
+                case 1:
+                    this.world1.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen");
                 break;
-        }
+                case 4:
+                    this.world1.drawString(gfx, "Spring nu om extra hoog te komen");
+                break;
+                default:
+                    this.world1.drawString(gfx, "De andere speler is bezig met zijn deel");
+                    break;
+            }
 
-        switch(this.world2Step)
-        {
-            case 0:
-                this.world2.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen");
-            break;
-            case 1:
-                this.world2.drawString(gfx, "Spring");
-            break;
-            case 2:
-                this.world2.drawString(gfx, "Als je nu nog eens op spring drukt stomp je de andere omhoog");
-            break;
-            case 3:
-                this.world2.drawString(gfx, "De andere speler is bezig met zijn deel");
-            break;
-            default:
-                this.world2.drawString(gfx, "De andere speler is bezig met zijn deel");
+            switch(this.world2Step)
+            {
+                case 0:
+                    this.world2.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen");
                 break;
-        }
-    }
-    else
-    {
-        switch(this.world2Step)
-        {
-            case 1:
-                this.world2.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen");
-            break;
-            case 4:
-                this.world2.drawString(gfx, "Spring nu om extra hoog te komen");
-            break;
-            default:
-                this.world2.drawString(gfx, "Wacht op andere speler");
+                case 1:
+                    this.world2.drawString(gfx, "Spring");
                 break;
+                case 2:
+                    this.world2.drawString(gfx, "Als je nu nog eens op spring drukt stomp je de andere omhoog");
+                break;
+                case 3:
+                    this.world2.drawString(gfx, "De andere speler is bezig met zijn deel");
+                break;
+                default:
+                    this.world2.drawString(gfx, "De andere speler is bezig met zijn deel");
+                    break;
+            }
         }
+        else
+        {
+            switch(this.world2Step)
+            {
+                case 1:
+                    this.world2.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen");
+                break;
+                case 4:
+                    this.world2.drawString(gfx, "Spring nu om extra hoog te komen");
+                break;
+                default:
+                    this.world2.drawString(gfx, "Wacht op andere speler");
+                    break;
+            }
 
-        switch(this.world1Step)
-        {
-            case 0:
-                this.world1.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen");
-            break;
-            case 1:
-                this.world1.drawString(gfx, "Spring");
-            break;
-            case 2:
-                this.world1.drawString(gfx, "Als je nu nog eens op spring drukt stomp je de andere omhoog");
-            break;
-            case 3:
-                this.world1.drawString(gfx, "Wacht op de andere speler");
-            break;
-            default:
-                this.world1.drawString(gfx, "Wacht op andere speler");
+            switch(this.world1Step)
+            {
+                case 0:
+                    this.world1.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen");
                 break;
+                case 1:
+                    this.world1.drawString(gfx, "Spring");
+                break;
+                case 2:
+                    this.world1.drawString(gfx, "Als je nu nog eens op spring drukt stomp je de andere omhoog");
+                break;
+                case 3:
+                    this.world1.drawString(gfx, "Wacht op de andere speler");
+                break;
+                default:
+                    this.world1.drawString(gfx, "Wacht op andere speler");
+                    break;
+            }
         }
     }
 };
