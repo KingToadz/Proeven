@@ -54,6 +54,3 @@ WindowHandler.prototype.tick = function()
     this.itemHandler.tick();
     this.itemHandler.draw(this.gfx);
 };
-
-// events
-

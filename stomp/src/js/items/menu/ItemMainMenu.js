@@ -72,7 +72,7 @@ ItemMainMenu.prototype.tick = function()
 
 ItemMainMenu.prototype.draw = function(gfx)
 {
-    gfx.clear("black");
+    gfx.clear("#000");
     gfx.drawTexture(this.backgroundTexture, 0, 0, Align.width, Align.height);
 
     var mouses = this.itemHandler.windowHandler.getMousesDown();

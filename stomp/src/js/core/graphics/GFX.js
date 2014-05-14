@@ -74,6 +74,19 @@ GFX.prototype.drawCenteredString = function(text, x, y, fillstyle, font)
     this.drawString(text, (x - (metrics.width / 2)), y, fillstyle, font);
 };
 
+GFX.prototype.drawReversedCenteredString = function(text, x, y, fillstyle, font)
+{
+    var metrics = this.gfx.measureText(text);
+
+    this.gfx.save();
+
+    this.gfx.scale(-1, -1);
+
+    this.drawString(text, -(x - (-metrics.width / 2)), -((Align.height / 2) + y), fillstyle, font);
+
+    this.gfx.restore();
+};
+
 GFX.prototype.drawTexture = function(texture, x, y, width, height)
 {
     this.gfx.drawImage(texture, x, y, width, height);
