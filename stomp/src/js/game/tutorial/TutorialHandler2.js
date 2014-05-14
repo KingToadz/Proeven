@@ -116,6 +116,7 @@ TutorialHandler.prototype.handleJump = function(worldDir)
             {
                 this.world2.worldPaused = false;
                 this.world1.worldPaused = false;
+                this.world2Step++;
                 return true;
             }
             return false;
@@ -202,7 +203,7 @@ TutorialHandler.prototype.tick = function()
                 if(this.world2Step == 0)
                 {
                     this.world2.objectHandler.addObstacle(new BigObstacle(this.world2.dir));
-                    this.world2Step = 4;
+                    this.world2Step = 3;
                 }
 
 

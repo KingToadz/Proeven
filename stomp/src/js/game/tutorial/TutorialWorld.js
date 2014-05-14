@@ -171,5 +171,9 @@ TutorialWorld.prototype.draw = function(gfx)
 
 TutorialWorld.prototype.drawString = function(gfx, text)
 {
+    gfx.gfx.save();
+    gfx.gfx.scale(1, this.dir);
+    gfx.gfx.translate(0, (Align.height / 2) * (this.dir - 1));
     gfx.drawCenteredString(text, Align.width / 2, 200, "#FFF", "20pt Arial");
+    gfx.gfx.restore();
 };
