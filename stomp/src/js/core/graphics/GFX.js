@@ -116,3 +116,10 @@ GFX.prototype.drawClippedTexture = function(texture, x, y, width, height, cx, cy
 {
     this.gfx.drawImage(texture, cx, cy, cwidth, cheight, x, y, width, height);
 };
+
+GFX.prototype.drawTransparentClippedTexture = function(texture, x, y, width, height, cx, cy, cwidth, cheight, alpha)
+{
+    this.gfx.globalAlpha = alpha;
+    this.gfx.drawImage(texture, cx, cy, cwidth, cheight, x, y, width, height);
+    this.gfx.globalAlpha = 1.0;
+};

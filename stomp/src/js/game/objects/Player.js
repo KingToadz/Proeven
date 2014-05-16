@@ -6,8 +6,16 @@ Player = function()
 {
     this.texture = Files.PIC_GAME_OBJECT_PLAYER.obj;
 
-    this.width = this.texture.width;
-    this.height = this.texture.height;
+    this.runAnimation = new AnimationHandler(this.texture, 97, 91, 1, 5, 5);
+    this.runAnimation.setFPS(15);
+
+    this.jumpAnimation = new AnimationHandler(Files.PIC_GAME_OBJECT_PLAYER_JUMP.obj, 107, 101, 1, 5, 5)
+    this.jumpAnimation.setFPS(15);
+
+    this.showJumpAnimation = false;
+
+    this.width = this.runAnimation.width;
+    this.height = this.runAnimation.height;
 
     this.collisionContainer = new CollisionContainer();
     this.collisionContainer.addBox(0, 0, this.width, this.height);
@@ -34,6 +42,9 @@ Player.prototype.tryJump = function()
     {
         if(this.hasJumped == false)
         {
+            this.showJumpAnimation = true;
+            this.jumpAnimation.reset();
+
             this.speedy = -20;
             this.hasJumped = true;
             SFX.playSound(Files.SND_GAME_PLAYER_JUMP);
@@ -66,6 +77,8 @@ Player.prototype.onCollision = function()
 
 Player.prototype.tick = function()
 {
+    this.runAnimation.tick();
+
     this.speedy += this.gravity;
     this.y += this.speedy;
 
@@ -73,6 +86,7 @@ Player.prototype.tick = function()
     {
         this.y = this.groundy;
         this.hasJumped = false;
+        this.showJumpAnimation = false;
         if(this.shouldStomp)
         {
             this.shouldStomp = false;
@@ -98,21 +112,32 @@ Player.prototype.tick = function()
     }
 };
 
-Player.prototype.respawn = function()
-{
-    this.x = (Align.width / 2) - (this.width / 2);
-    this.hasCollided = false;
-};
-
 Player.prototype.draw = function(gfx)
 {
+
     if(this.isImmuneFor > 0)
     {
-        gfx.drawTransparentTexture(this.texture, this.x, this.y, this.width, this.height, 0.3);
+        //gfx.drawTransparentTexture(this.texture, this.x, this.y, this.width, this.height, 0.3);
+        if(this.showJumpAnimation)
+        {
+            this.jumpAnimation.drawTransparent(gfx, this.x, this.y, 0.3);
+        }
+        else
+        {
+            this.runAnimation.drawTransparent(gfx, this.x, this.y, 0.3);
+        }
     }
     else
     {
-        gfx.drawTexture(this.texture, this.x, this.y, this.width, this.height);
+        //gfx.drawTexture(this.texture, this.x, this.y, this.width, this.height);
+        if(this.showJumpAnimation)
+        {
+            this.jumpAnimation.draw(gfx, this.x, this.y);
+        }
+        else
+        {
+            this.runAnimation.draw(gfx, this.x, this.y);
+        }
     }
 
     this.collisionContainer.draw(gfx);

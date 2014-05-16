@@ -2,6 +2,10 @@
  * Created by Yorick on 5/9/2014.
  */
 
+// The constructor
+// Args:
+// Dir:             The direction of the world. Should be 1 or -1
+// tutorialHandler: The parent of this world.
 TutorialWorld = function(dir, tutorialHandler)
 {
     this.dir = dir;
@@ -12,6 +16,8 @@ TutorialWorld = function(dir, tutorialHandler)
 
     var button = undefined;
 
+    // Vars for the jump tutorial
+    // This is handled sperated per world
     this.jumpDone = false;
     this.jumpDoing = true;
     this.canPlayerJump = false;
@@ -61,6 +67,7 @@ TutorialWorld = function(dir, tutorialHandler)
     this.worldPaused = false;
 };
 
+// this will initialize the tutorial world
 TutorialWorld.prototype.initialize = function()
 {
     for(var i = 0; i < this.buttons.length; i++)
@@ -72,6 +79,7 @@ TutorialWorld.prototype.initialize = function()
     this.objectHandler.initialize();
 
     this.jumpState = new JumpState(this);
+    // If it's set to true before the initialize it will skip the jump tutorial
     if(!this.jumpDone)
     {
         this.jumpState.start();
@@ -82,6 +90,9 @@ TutorialWorld.prototype.initialize = function()
     }
 };
 
+// Get the distance between the player and the first obstacle in the object handler.
+// All the tutorials only use 1 object
+// Returns: if the first obstacle is undefined it will return -77777 else it will return the distance
 TutorialWorld.prototype.currentObstacleFromPlayer = function()
 {
     if(this.objectHandler.obstacles[0] === undefined)
@@ -92,8 +103,11 @@ TutorialWorld.prototype.currentObstacleFromPlayer = function()
     return this.objectHandler.obstacles[0].x - this.objectHandler.player.x;
 };
 
+// Check if the player can jump
+// Returns: if the player can jump
 TutorialWorld.prototype.continueJump = function()
 {
+    // if the jump tutorial is busy check that one
     if(this.jumpDoing)
     {
         return this.jumpState.handleJump();
