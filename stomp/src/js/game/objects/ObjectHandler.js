@@ -27,6 +27,16 @@ ObjectHandler.prototype.addObstacle = function(obj)
     this.obstacles.push(obj);
 };
 
+ObjectHandler.prototype.onPlayerSucces = function()
+{
+    this.world.backgroundHandler.onPlayerSucces();
+};
+
+ObjectHandler.prototype.onPlayerDead = function()
+{
+    this.world.backgroundHandler.onPlayerDead();
+};
+
 ObjectHandler.prototype.tick = function()
 {
     this.obstacleSpawner.tick();

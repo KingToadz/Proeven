@@ -70,6 +70,7 @@ Player.prototype.onCollision = function()
     this.collisionContainer.isColliding = true;
     this.hasCollided = true;
     this.shouldStomp = false;
+    this.objectHandler.onPlayerDead();
 
     this.isImmuneFor = 180;
     SFX.playSound(Files.SND_GAME_PLAYER_DEATH);

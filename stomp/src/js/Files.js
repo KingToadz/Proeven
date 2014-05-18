@@ -50,7 +50,10 @@ Files.PIC_MENU_BUTTON_BACK = Files.addFile("Assets/Menu/BackButton.png");
 
 Files.SND_MENU_BACKGROUND = "Assets/Audio/Background_mid.ogg";
 
-Files.PIC_GAME__BACKGROUND = Files.addFile("Assets/Game/Themes/Theme_01/bg_01.png");
+Files.PIC_GAME__BACKGROUND_GREEN = Files.addFile("Assets/Game/Themes/Theme_01/bg_01_green.png");
+Files.PIC_GAME__BACKGROUND_ORANGE = Files.addFile("Assets/Game/Themes/Theme_01/bg_01_orange.png");
+Files.PIC_GAME__BACKGROUND_RED = Files.addFile("Assets/Game/Themes/Theme_01/bg_01_red.png");
+
 Files.PIC_GAME__BACKGROUND_01 = Files.addFile("Assets/Game/Themes/Theme_01/bg_02.png");
 Files.PIC_GAME__BACKGROUND_02 = Files.addFile("Assets/Game/Themes/Theme_01/bg_03.png");
 Files.PIC_GAME__BACKGROUND_03 = Files.addFile("Assets/Game/Themes/Theme_01/bg_04.png");
