@@ -53,7 +53,7 @@ Button.prototype.tick = function()
         {
             if(mousesdown[i].ticksAlive == 1 && mousesdown[i].x >= this.alignx.sx() + this.x && mousesdown[i].y >= this.aligny.sy() + this.y && mousesdown[i].x < this.alignx.sx() + this.x + this.width && mousesdown[i].y < this.aligny.sy() + this.y + this.height)
             {
-                this.onClick();
+                this.onClick(this);
                 break;
             }
         }
@@ -62,8 +62,11 @@ Button.prototype.tick = function()
 
 Button.prototype.draw = function(gfx)
 {
-    gfx.drawTexture(this.texture, this.alignx.sx() + this.x, this.aligny.sy() + this.y, this.width, this.height);
+    if(this.texture != undefined)
+    {
+        gfx.drawTexture(this.texture, this.item.x + this.alignx.sx() + this.x, this.item.y + this.aligny.sy() + this.y, this.width, this.height);
+    }
 };
 
 // events
-Button.prototype.onClick = function(){};
+Button.prototype.onClick = function(sender){};

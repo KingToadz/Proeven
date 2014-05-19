@@ -57,6 +57,8 @@ SlideButton.prototype.initialize = function()
 
     this.x -= parseInt(this.width / 2);
     this.y -= parseInt(this.height / 2);
+
+    this.widths = (this.width / 100.0) * this.value;
 };
 
 SlideButton.prototype.tick = function()
@@ -66,7 +68,7 @@ SlideButton.prototype.tick = function()
         if(this.selectedMouse.remove == true)
         {
             this.selectedMouse = undefined;
-            this.onClick();
+            this.onClick(this);
         }
         else
         {
@@ -87,7 +89,6 @@ SlideButton.prototype.tick = function()
             {
                 if(mousesdown[i].ticksAlive == 1 && mousesdown[i].x >= this.alignx.sx() + this.x && mousesdown[i].y >= this.aligny.sy() + this.y && mousesdown[i].x < this.alignx.sx() + this.x + this.width && mousesdown[i].y < this.aligny.sy() + this.y + this.height)
                 {
-                    //this.onClick();
                     this.selectedMouse = mousesdown[i];
                     break;
                 }
@@ -98,11 +99,8 @@ SlideButton.prototype.tick = function()
 
 SlideButton.prototype.draw = function(gfx)
 {
-    gfx.drawTexture(this.texture, this.alignx.sx() + this.x, this.aligny.sy() + this.y, this.width, this.height);
-    gfx.drawClippedTexture(this.texture2, this.alignx.sx() + this.x, this.aligny.sy() + this.y, this.widths, this.height, 0, 0, (this.widths / this.width) * this.texture2.width, this.texture2.height);
+    gfx.drawClippedTexture(this.texture, this.item.x + this.alignx.sx() + this.x + this.widths, this.item.y + this.aligny.sy() + this.y, this.width, this.height, this.widths, 0, this.width, this.height);
+    gfx.drawClippedTexture(this.texture2, this.item.x + this.alignx.sx() + this.x, this.item.y + this.aligny.sy() + this.y, this.widths, this.height, 0, 0, this.widths, this.height);
 };
 
-SlideButton.prototype.onClick = function()
-{
-
-};
+SlideButton.prototype.onClick = function(sender){};

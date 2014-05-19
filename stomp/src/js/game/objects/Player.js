@@ -9,7 +9,7 @@ Player = function()
     this.runAnimation = new AnimationHandler(this.texture, 97, 91, 1, 5, 5);
     this.runAnimation.setFPS(15);
 
-    this.jumpAnimation = new AnimationHandler(Files.PIC_GAME_OBJECT_PLAYER_JUMP.obj, 107, 101, 1, 5, 5)
+    this.jumpAnimation = new AnimationHandler(Files.PIC_GAME_OBJECT_PLAYER_JUMP.obj, 107, 101, 1, 5, 5);
     this.jumpAnimation.setFPS(15);
 
     this.showJumpAnimation = false;
@@ -67,12 +67,17 @@ Player.prototype.tryStomp = function()
 
 Player.prototype.onCollision = function()
 {
-    this.collisionContainer.isColliding = true;
-    this.hasCollided = true;
-    this.shouldStomp = false;
+    if(this.hasCollided == false)
+    {
+        this.collisionContainer.isColliding = true;
+        this.hasCollided = true;
+        this.shouldStomp = false;
 
-    this.isImmuneFor = 180;
-    SFX.playSound(Files.SND_GAME_PLAYER_DEATH);
+        this.isImmuneFor = 180;
+        this.objectHandler.canSpawnItems = false;
+        //this.objectHandler.obstacleSpawner.nextSpawn = ((Align.width / 2) / 10) + 100;
+        SFX.playSound(Files.SND_GAME_PLAYER_DEATH);
+    }
 };
 
 Player.prototype.tick = function()
@@ -101,6 +106,7 @@ Player.prototype.tick = function()
         if(this.isImmuneFor == 0)
         {
             this.hasCollided = false;
+            this.objectHandler.canSpawnItems = true;
         }
     }
     else
@@ -114,7 +120,6 @@ Player.prototype.tick = function()
 
 Player.prototype.draw = function(gfx)
 {
-
     if(this.isImmuneFor > 0)
     {
         //gfx.drawTransparentTexture(this.texture, this.x, this.y, this.width, this.height, 0.3);

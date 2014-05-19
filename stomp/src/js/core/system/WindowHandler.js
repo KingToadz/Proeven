@@ -21,7 +21,7 @@ WindowHandler = function()
     this.itemHandler.windowHandler = this;
 
     this.ticker.handler = this;
-    this.itemHandler.setGotoItem(ItemInitialize);
+    this.itemHandler.switchItem(ItemInitialize);
 
     // events
     window.onfocus = function(){};

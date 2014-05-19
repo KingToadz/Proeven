@@ -9,5 +9,7 @@ Main = function()
 {
     console.log("Starting...");
     Arguments.initialize();
+    SFX.initialize();
+
     var mywindow = new WindowHandler();
 };

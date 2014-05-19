@@ -6,6 +6,8 @@ ObjectHandler = function(world)
 {
     this.world = world;
 
+    this.canSpawnItems = true;
+
     // obstacles
     this.obstacleSpawner = new ObstacleSpawner();
     this.obstacleSpawner.objectHandler = this;

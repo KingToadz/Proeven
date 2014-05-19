@@ -6,7 +6,7 @@ Obstacle = function()
 {
     this.remove = false;
 
-    this.texture = Files.PIC_GAME_OBJECT_OBSTACLEWALLNORMAL.obj;
+    this.texture = Files.PIC_GAME_OBJECT_OBSTACLENORMAL.obj;
 
     this.width = this.texture.width;
     this.height = this.texture.height;

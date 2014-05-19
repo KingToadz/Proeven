@@ -4,7 +4,8 @@
 
 ObstacleSpawner = function()
 {
-    this.curTick = 300;
+    this.curTick = 0;
+    this.nextSpawn = 0;
 };
 
 ObstacleSpawner.prototype.initialize = function()
@@ -15,15 +16,20 @@ ObstacleSpawner.prototype.initialize = function()
 ObstacleSpawner.prototype.spawn = function()
 {
     this.curTick = 0;
+    this.nextSpawn = 3 + (Math.random() * 0);
+
     var obstacle = new Obstacle(this.objectHandler.world.dir);
     this.objectHandler.addObstacle(obstacle);
 };
 
 ObstacleSpawner.prototype.tick = function()
 {
-    this.curTick++;
+    if(this.objectHandler.canSpawnItems == true)
+    {
+        this.curTick++;
+    }
 
-    if(this.curTick > 300)
+    if(this.curTick > this.nextSpawn)
     {
         this.spawn();
     }

@@ -4,7 +4,7 @@
 
 ItemMainMenu = function()
 {
-    this.backgroundTexture = Files.PIC_MENU_BACKGROUND.obj;
+    this.backgroundTexture = Files.PIC_MAINMENU_BACKGROUND.obj;
 
     this.buttons = [];
 
@@ -14,30 +14,29 @@ ItemMainMenu = function()
     button = new Button();
     button.alignx = Align.CENTER;
     button.aligny = Align.CENTER;
-    button.setTexture(Files.PIC_MENU_BUTTON_PLAY.obj);
-    button.setPosition(0, -350);
-    button.setSize(Files.PIC_MENU_BUTTON_PLAY.obj.width - 50, Files.PIC_MENU_BUTTON_PLAY.obj.height - 50);
-    button.onClick = function(){this.item.itemHandler.setGotoItem(ItemTutorial);};
+    button.setPosition(0, 200);
+    button.setSize(Align.width, 1000);
+    button.onClick = function(){this.item.itemHandler.switchItem(ItemTutorial);};
     this.buttons.push(button);
 
     // Options button
     button = new Button();
-    button.alignx = Align.CENTER;
-    button.aligny = Align.CENTER;
-    button.setTexture(Files.PIC_MENU_BUTTON_OPTIONS.obj);
-    button.setPosition(0, 0);
-    button.setSize(Files.PIC_MENU_BUTTON_OPTIONS.obj.width - 50, Files.PIC_MENU_BUTTON_OPTIONS.obj.height - 50);
-    button.onClick = function(){this.item.itemHandler.setGotoItem(ItemOptionsMenu);};
+    button.alignx = Align.LEFT;
+    button.aligny = Align.TOP;
+    button.setTexture(Files.PIC_MAINMENU_BUTTON_OPTIONS.obj);
+    button.setPosition(120, 120);
+    button.setSize(Files.PIC_MAINMENU_BUTTON_OPTIONS.obj.width, Files.PIC_MAINMENU_BUTTON_OPTIONS.obj.height);
+    button.onClick = function(){this.item.itemHandler.switchItem(ItemOptionsMenu, "down");};
     this.buttons.push(button);
 
     // Credits button
     button = new Button();
-    button.alignx = Align.CENTER;
-    button.aligny = Align.CENTER;
-    button.setTexture(Files.PIC_MENU_BUTTON_CREDITS.obj);
-    button.setPosition(0, 350);
-    button.setSize(Files.PIC_MENU_BUTTON_CREDITS.obj.width - 50, Files.PIC_MENU_BUTTON_CREDITS.obj.height - 50);
-    button.onClick = function(){this.item.itemHandler.setGotoItem(ItemCreditsMenu);};
+    button.alignx = Align.RIGHT;
+    button.aligny = Align.TOP;
+    button.setTexture(Files.PIC_MAINMENU_BUTTON_CREDITS.obj);
+    button.setPosition(-120, 120);
+    button.setSize(Files.PIC_MAINMENU_BUTTON_CREDITS.obj.width, Files.PIC_MAINMENU_BUTTON_CREDITS.obj.height);
+    button.onClick = function(){this.item.itemHandler.switchItem(ItemCreditsMenu, "down");};
     this.buttons.push(button);
 
     SFX.setBackgroundSound(Files.SND_MENU_BACKGROUND);
@@ -72,19 +71,10 @@ ItemMainMenu.prototype.tick = function()
 
 ItemMainMenu.prototype.draw = function(gfx)
 {
-    gfx.clear("#000");
-    gfx.drawTexture(this.backgroundTexture, 0, 0, Align.width, Align.height);
-
-    var mouses = this.itemHandler.windowHandler.getMousesDown();
-    for(var i = 0; i < mouses.length; i++)
-    {
-        gfx.fillRect(mouses[i].x - 10, mouses[i].y - 10, 20, 20, "yellow");
-    }
+    gfx.drawTexture(this.backgroundTexture, this.x, this.y, Align.width, Align.height);
 
     for(var i = 0; i < this.buttons.length; i++)
     {
         this.buttons[i].draw(gfx);
     }
-
-    gfx.drawString("Navigator: " + navigator.isCocoonJS, 10, 40, "#FF0", "30px Arial");
 };

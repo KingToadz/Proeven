@@ -31,8 +31,6 @@ GameHandler.prototype.tick = function()
 
 GameHandler.prototype.draw = function(gfx)
 {
-    gfx.clear("#000");
-
     this.world1.draw(gfx);
     this.world2.draw(gfx);
 };

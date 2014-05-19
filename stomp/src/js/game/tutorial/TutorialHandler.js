@@ -137,7 +137,7 @@ TutorialHandler.prototype.tick = function()
 
         if(this.doneCounter > 50)
         {
-            this.item.itemHandler.setGotoItem(ItemGame);
+            this.item.itemHandler.switchItem(ItemGame);
         }
     }
     else
@@ -258,8 +258,6 @@ TutorialHandler.prototype.tick = function()
 
 TutorialHandler.prototype.draw = function(gfx)
 {
-    gfx.clear("#000");
-
     this.world1.draw(gfx);
     this.world2.draw(gfx);
 

@@ -23,6 +23,8 @@ GameHandler = function(item)
 
 GameHandler.prototype.tick = function()
 {
+    this.sharedSpawnOptions.tick();
+
     this.world1.tick();
     this.world2.tick();
 };

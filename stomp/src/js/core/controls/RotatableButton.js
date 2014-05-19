@@ -54,7 +54,7 @@ RotatableButton.prototype.tick = function()
         {
             if(mousesdown[i].ticksAlive == 1 && mousesdown[i].x >= this.alignx.sx() + this.x && mousesdown[i].y >= this.aligny.sy() + this.y && mousesdown[i].x < this.alignx.sx() + this.x + this.width && mousesdown[i].y < this.aligny.sy() + this.y + this.height)
             {
-                this.onClick();
+                this.onClick(this);
                 break;
             }
         }
@@ -63,8 +63,8 @@ RotatableButton.prototype.tick = function()
 
 RotatableButton.prototype.draw = function(gfx)
 {
-    gfx.drawRotatedTexture(this.texture, this.alignx.sx() + this.x, this.aligny.sy() + this.y, this.width, this.height, this.rotation);
+    gfx.drawRotatedTexture(this.texture, this.item.x + this.alignx.sx() + this.x, this.item.y + this.aligny.sy() + this.y, this.width, this.height, this.rotation);
 };
 
 // events
-RotatableButton.prototype.onClick = function(){};
+RotatableButton.prototype.onClick = function(sender){};
