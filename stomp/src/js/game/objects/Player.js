@@ -177,11 +177,11 @@ Player.prototype.draw = function(gfx)
     else
     {
         //gfx.drawTexture(this.texture, this.x, this.y, this.width, this.height);
-        if(this.isStomping)
+        /*if(this.isStomping)
         {
             this.stompAnimation.draw(gfx, this.x, this.y);
         }
-        else if(this.showJumpAnimation)
+        else */if(this.showJumpAnimation)
         {
             this.jumpAnimation.draw(gfx, this.x, this.y);
             this.jumpAnimationDust.draw(gfx, this.x - 50, this.groundy);
