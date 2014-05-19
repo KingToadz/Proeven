@@ -21,14 +21,21 @@ GameHandler = function(item)
 
     this.world1.initialize();
     this.world2.initialize();
+
+    this.score = 0;
 };
 
 GameHandler.prototype.tick = function()
 {
-    if(!this.popup.show)
+    if(!this.popup.isPopupShowing())
     {
         this.world1.tick();
         this.world2.tick();
+
+        this.score++;
+
+        // if worlds are dead
+        // this.popup.showEnd(this.score);
     }
     else
     {

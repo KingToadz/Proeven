@@ -65,8 +65,12 @@ Files.PIC_GAME__BACKGROUND_03 = Files.addFile("Assets/Game/Themes/Theme_01/bg_04
 Files.PIC_GAME_BUTTON_JUMP = Files.addFile("Assets/Game/JumpButton.png");
 Files.PIC_GAME_BUTTON_BACK = Files.addFile("Assets/Game/BackButton.png");
 
-Files.PIC_GAME_OBJECT_PLAYER      = Files.addFile("Assets/Game/Objects/Player.png");
-Files.PIC_GAME_OBJECT_PLAYER_JUMP = Files.addFile("Assets/Game/Objects/PlayerJump.png");
+Files.PIC_GAME_OBJECT_PLAYER            = Files.addFile("Assets/Game/Objects/Player.png");
+Files.PIC_GAME_OBJECT_PLAYER_STOMP      = Files.addFile("Assets/Game/Objects/character_stomp.png");
+Files.PIC_GAME_OBJECT_PLAYER_STOMP_DUST = Files.addFile("Assets/Game/Objects/stomp_dust.png");
+Files.PIC_GAME_OBJECT_PLAYER_RUN_DUST   = Files.addFile("Assets/Game/Objects/run_dust.png");
+Files.PIC_GAME_OBJECT_PLAYER_JUMP       = Files.addFile("Assets/Game/Objects/PlayerJump.png");
+Files.PIC_GAME_OBJECT_PLAYER_JUMP_DUST  = Files.addFile("Assets/Game/Objects/jump_dust.png");
 Files.PIC_GAME_OBJECT_OBSTACLEWALLNORMAL = Files.addFile("Assets/Game/Objects/ObstacleWallNormal.png");
 
 Files.SND_GAME_BACKGROUND = "Assets/Audio/Background_mid.ogg";
