@@ -4,5 +4,10 @@
 
 SharedSpawnOptions = function()
 {
+    this.lastBigObstacle = 200;
+};
 
+SharedSpawnOptions.prototype.tick = function()
+{
+    this.lastBigObstacle -= 1;
 };

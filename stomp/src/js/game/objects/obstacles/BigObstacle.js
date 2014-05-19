@@ -6,10 +6,10 @@ BigObstacle = function()
 {
     this.remove = false;
 
-    this.texture = Files.PIC_GAME_OBJECT_OBSTACLEWALLNORMAL.obj;
+    this.texture = Files.PIC_GAME_OBJECT_OBSTACLEBIG.obj;
 
     this.width = this.texture.width;
-    this.height = this.texture.height * 2;
+    this.height = this.texture.height;
 
     this.x = Align.width;
     this.y = (Align.height / 2) - (this.height + 20);

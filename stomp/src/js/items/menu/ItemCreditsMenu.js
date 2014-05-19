@@ -4,24 +4,30 @@
 
 ItemCreditsMenu = function()
 {
-    this.backgroundTexture = Files.PIC_MENU_BACKGROUND.obj;
+    this.backgroundTexture = Files.PIC_CREDITSMENU_BACKGROUND.obj;
 
-    this.lastMouseX = 0;
-    this.lastMouseY = 0;
+    this.buttons = [];
 
-    this.backButton = new Button();
-    this.backButton.alignx = Align.CENTER;
-    this.backButton.aligny = Align.CENTER;
-    this.backButton.setTexture(Files.PIC_MENU_BUTTON_BACK.obj);
-    this.backButton.setPosition(0, 0);
-    this.backButton.setSize(Files.PIC_MENU_BUTTON_BACK.obj.width, Files.PIC_MENU_BUTTON_BACK.obj.height);
-    this.backButton.onClick = function(){this.item.itemHandler.setGotoItem(ItemMainMenu);};
+    var button = undefined;
+
+    // BackButton
+    button = new Button();
+    button.alignx = Align.LEFT;
+    button.aligny = Align.TOP;
+    button.setTexture(Files.PIC_MENU_BUTTON_BACK.obj);
+    button.setPosition(120, 120);
+    button.setSize(Files.PIC_MENU_BUTTON_BACK.obj.width, Files.PIC_MENU_BUTTON_BACK.obj.height);
+    button.onClick = function(){this.item.itemHandler.switchItem(ItemMainMenu, "up");};
+    this.buttons.push(button);
 };
 
 ItemCreditsMenu.prototype.initialize = function()
 {
-    this.backButton.item = this;
-    this.backButton.initialize();
+    for(var i = 0; i < this.buttons.length; i++)
+    {
+        this.buttons[i].item = this;
+        this.buttons[i].initialize();
+    }
 };
 
 ItemCreditsMenu.prototype.activate = function()
@@ -34,13 +40,18 @@ ItemCreditsMenu.prototype.deActivate = function()
 
 ItemCreditsMenu.prototype.tick = function()
 {
-    this.backButton.tick();
+    for(var i = 0; i < this.buttons.length; i++)
+    {
+        this.buttons[i].tick();
+    }
 };
 
 ItemCreditsMenu.prototype.draw = function(gfx)
 {
-    gfx.clear("black");
-    //gfx.drawTexture(this.backgroundTexture, 0, 0, Align.width, Align.height);
+    gfx.drawTexture(this.backgroundTexture, this.x, this.y, Align.width, Align.height);
 
-    this.backButton.draw(gfx);
+    for(var i = 0; i < this.buttons.length; i++)
+    {
+        this.buttons[i].draw(gfx);
+    }
 };

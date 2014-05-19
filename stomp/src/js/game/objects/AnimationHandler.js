@@ -1,3 +1,4 @@
+
 AnimationHandler = function(spritesheet, width, height, rows, cols, totalFrames)
 {
     if(totalFrames == undefined)

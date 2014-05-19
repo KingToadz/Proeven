@@ -29,6 +29,8 @@ GameHandler.prototype.tick = function()
 {
     if(!this.popup.isPopupShowing())
     {
+        this.sharedSpawnOptions.tick();
+
         this.world1.tick();
         this.world2.tick();
 

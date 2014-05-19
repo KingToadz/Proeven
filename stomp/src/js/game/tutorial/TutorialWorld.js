@@ -60,7 +60,7 @@ TutorialWorld = function(dir, tutorialHandler)
 
     button.rotation = (dir + 1) * 90;
     button.world = this;
-    button.onClick = function(){this.world.gameHandler.item.itemHandler.setGotoItem(ItemMainMenu)};
+    button.onClick = function(){this.world.gameHandler.item.itemHandler.switchItem(ItemMainMenu)};
     this.buttons.push(button);
 
     this.objectHandler = new TutorialObjectHandler(this);

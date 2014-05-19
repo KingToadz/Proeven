@@ -24,7 +24,7 @@ ItemInitialize.prototype.tick = function()
 {
     if(this.loader.done == true)
     {
-        this.itemHandler.setGotoItem(ItemLoader);
+        this.itemHandler.switchItem(ItemLoader);
     }
 };
 
