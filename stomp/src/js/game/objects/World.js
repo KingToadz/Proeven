@@ -49,7 +49,7 @@ World = function(dir)
 
     button.rotation = (dir + 1) * 90;
     button.world = this;
-    button.onClick = function(){this.world.gameHandler.item.itemHandler.setGotoItem(ItemMainMenu)};
+    button.onClick = function(){this.world.gameHandler.popup.show = true;};
     this.buttons.push(button);
 
     this.objectHandler = new ObjectHandler(this);

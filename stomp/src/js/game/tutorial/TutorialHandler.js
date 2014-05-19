@@ -27,7 +27,7 @@ TutorialHandler = function(item)
     this.world1Step = 0;
     this.world2Step = 0;
 
-    this.tutorialDone = false;
+    this.tutorialDone = true;
     this.doneCounter = 0;
 };
 

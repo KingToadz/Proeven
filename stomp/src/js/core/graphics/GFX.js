@@ -61,6 +61,14 @@ GFX.prototype.fillRect = function(x, y, w, h, fillStyle)
     this.gfx.fillRect(x, y, w, h);
 };
 
+GFX.prototype.fillTransparentRect = function(x, y, w, h, fillStyle, alpha)
+{
+    this.gfx.globalAlpha = alpha;
+    this.gfx.fillStyle = fillStyle;
+    this.gfx.fillRect(x, y, w, h);
+    this.gfx.globalAlpha = 1.0;
+};
+
 GFX.prototype.drawString = function(text, x, y, fillstyle, font)
 {
     this.gfx.fillStyle = fillstyle;

@@ -9,7 +9,7 @@ Player = function()
     this.runAnimation = new AnimationHandler(this.texture, 97, 91, 1, 5, 5);
     this.runAnimation.setFPS(15);
 
-    this.jumpAnimation = new AnimationHandler(Files.PIC_GAME_OBJECT_PLAYER_JUMP.obj, 107, 101, 1, 5, 5)
+    this.jumpAnimation = new AnimationHandler(Files.PIC_GAME_OBJECT_PLAYER_JUMP.obj, 107, 101, 1, 5, 5);
     this.jumpAnimation.setFPS(15);
 
     this.showJumpAnimation = false;

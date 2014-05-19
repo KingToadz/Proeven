@@ -8,6 +8,8 @@ GameHandler = function(item)
 
     this.sharedSpawnOptions = new SharedSpawnOptions();
 
+    this.popup = new PopupHandler(item, Align.width * 0.8, Align.height * 0.8);
+
     this.world1 = new World(1);
     this.world2 = new World(-1);
 
@@ -23,8 +25,15 @@ GameHandler = function(item)
 
 GameHandler.prototype.tick = function()
 {
-    this.world1.tick();
-    this.world2.tick();
+    if(!this.popup.show)
+    {
+        this.world1.tick();
+        this.world2.tick();
+    }
+    else
+    {
+        this.popup.tick();
+    }
 };
 
 GameHandler.prototype.draw = function(gfx)
@@ -33,4 +42,6 @@ GameHandler.prototype.draw = function(gfx)
 
     this.world1.draw(gfx);
     this.world2.draw(gfx);
+
+    this.popup.draw(gfx);
 };
