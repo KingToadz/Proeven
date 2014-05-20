@@ -300,29 +300,40 @@ TutorialHandler.prototype.draw = function(gfx)
             switch(this.colorTutState[0])
             {
                 case 0:
-                    this.world1.drawString(gfx, "Met een groene lucht zit je veilig ");
+                    this.world1.drawString(gfx, "De lucht geeft aan hoe goed het gaat. Druk om door te gaan ");
                     break;
                 case 1:
-                    this.world1.drawString(gfx, "Met een oranje lucht Moet je oppassen ");
+                    this.world1.drawString(gfx, "De groene lucht is goed");
                     break;
                 case 2:
-                     this.world1.drawString(gfx, "Met een rode lucht ben je bijna dood ");
+                    this.world1.drawString(gfx, "Met een oranje lucht Moet je oppassen");
+                    break;
+                case 3:
+                     this.world1.drawString(gfx, "Met een rode lucht ben je bijna dood");
                      break;
+                case 4:
+                    this.world1.drawString(gfx, "Goed gedaan je bent klaar voor het echte werk! ");
+                    break;
 
             }
 
             switch(this.colorTutState[1])
             {
                 case 0:
-                    this.world2.drawString(gfx, "Met een groene lucht zit je veilig ");
+                    this.world2.drawString(gfx, "De lucht geeft aan hoe goed het gaat. Druk om door te gaan ");
                     break;
                 case 1:
-                    this.world2.drawString(gfx, "Met een oranje lucht Moet je oppassen ");
+                    this.world2.drawString(gfx, "De groene lucht is goed");
                     break;
                 case 2:
-                     this.world2.drawString(gfx, "Met een rode lucht ben je bijna dood ");
+                    this.world2.drawString(gfx, "Met een oranje lucht Moet je oppassen");
+                    break;
+                case 3:
+                     this.world2.drawString(gfx, "Met een rode lucht ben je bijna dood");
                      break;
-
+                case 4:
+                    this.world2.drawString(gfx, "Goed gedaan je bent klaar voor het echte werk! ");
+                    break;
             }
         }
         else if(this.world1Learning)
