@@ -27,6 +27,9 @@ TutorialHandler = function(item)
     this.world1Step = 0;
     this.world2Step = 0;
 
+    this.colorTutDone = false;
+    this.colorTutState
+
     this.tutorialDone = false;
     this.doneCounter = 0;
 };
@@ -159,7 +162,7 @@ TutorialHandler.prototype.tick = function()
                     if(this.world1.objectHandler.obstacles[0] != undefined)
                     {
                         var distance = this.world1.currentObstacleFromPlayer();
-                        if(distance > 0 && distance < 450)
+                        if(distance > 0 && distance < 480)
                         {
                             this.world1.worldPaused = true;
                             //this.world2.worldPaused = false;
@@ -170,7 +173,7 @@ TutorialHandler.prototype.tick = function()
                 else if(this.world2Step == 1)
                 {
                     var distance = this.world1.currentObstacleFromPlayer();
-                    if(distance > 0 && distance < 300)
+                    if(distance > 0 && distance < 330)
                     {
                         this.world2.worldPaused = true;
                         this.world1.worldPaused = true;
@@ -180,7 +183,7 @@ TutorialHandler.prototype.tick = function()
                 else if(this.world2Step == 2)
                 {
                     var distance = this.world1.currentObstacleFromPlayer();
-                    if(distance > 0 && distance < 200)
+                    if(distance > 0 && distance < 230)
                     {
                         this.world2.worldPaused = true;
                         this.world1.worldPaused = true;
@@ -213,7 +216,7 @@ TutorialHandler.prototype.tick = function()
                     if(this.world2.objectHandler.obstacles[0] != undefined)
                     {
                         var distance = this.world2.currentObstacleFromPlayer();
-                        if(distance > 0 && distance < 450)
+                        if(distance > 0 && distance < 480)
                         {
                             this.world2.worldPaused = true;
                             //this.world2.worldPaused = false;
@@ -225,7 +228,7 @@ TutorialHandler.prototype.tick = function()
                 else if(this.world1Step == 1)
                 {
                     var distance = this.world2.currentObstacleFromPlayer();
-                    if(distance > 0 && distance < 300)
+                    if(distance > 0 && distance < 330)
                     {
                         this.world2.worldPaused = true;
                         this.world1.worldPaused = true;
@@ -235,7 +238,7 @@ TutorialHandler.prototype.tick = function()
                 else if(this.world1Step == 2)
                 {
                     var distance = this.world2.currentObstacleFromPlayer();
-                    if(distance > 0 && distance < 200)
+                    if(distance > 0 && distance < 230)
                     {
                         this.world2.worldPaused = true;
                         this.world1.worldPaused = true;
