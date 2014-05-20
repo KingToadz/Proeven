@@ -23,6 +23,7 @@ TutorialHandler = function(item)
     this.world1.initialize();
     this.world2.initialize();
 
+    this.popup.showSkipPopup();
 
     // For the stomp jump
     this.stompTutStarted = false;
