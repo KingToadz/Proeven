@@ -40,7 +40,6 @@ TutorialWorld = function(dir, tutorialHandler)
 
     button.rotation = (dir + 1) * 90;
     button.world = this;
-    button.onClick = function(){if(this.world.otherWorld.continueJump()){ this.world.otherWorld.objectHandler.player.tryJump();}};
     this.buttons.push(button);
 
     // Back button
@@ -123,6 +122,13 @@ TutorialWorld.prototype.tick = function()
     for(var i = 0; i < this.buttons.length; i++)
     {
         this.buttons[i].tick();
+    }
+
+    if(this.TouchDownInWorld())
+    {
+        if(this.otherWorld.continueJump()){
+            this.otherWorld.objectHandler.player.tryJump();
+        }
     }
 
     if(this.jumpDoing){

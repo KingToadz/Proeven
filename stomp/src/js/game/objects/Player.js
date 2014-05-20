@@ -95,6 +95,7 @@ Player.prototype.onCollision = function()
         this.collisionContainer.isColliding = true;
         this.hasCollided = true;
         this.shouldStomp = false;
+        this.objectHandler.world.backgroundHandler.onPlayerDead();
 
         this.isImmuneFor = 180;
         this.objectHandler.canSpawnItems = false;
@@ -171,7 +172,7 @@ Player.prototype.draw = function(gfx)
         else
         {
             this.runAnimation.drawTransparent(gfx, this.x, this.y, 0.3);
-            this.runAnimationDust.drawTransparent(gfx, this.x - this.width + 10, this.y, 0.3);
+            this.runAnimationDust.drawTransparent(gfx, this.x - this.width + 10, this.y + 20, 0.3);
         }
     }
     else
@@ -189,7 +190,7 @@ Player.prototype.draw = function(gfx)
         else
         {
             this.runAnimation.draw(gfx, this.x, this.y);
-            this.runAnimationDust.draw(gfx, this.x - this.width + 10, this.y);
+            this.runAnimationDust.draw(gfx, this.x - this.width + 10, this.y + 20);
         }
 
         if(!this.stompAnimationDust.paused){
