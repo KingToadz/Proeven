@@ -2,11 +2,11 @@
  * Created by Jelle on 5/7/2014.
  */
 
-Obstacle = function()
+SmallObstacle = function()
 {
     this.remove = false;
 
-    this.texture = Files.PIC_GAME_OBJECT_OBSTACLENORMAL.obj;
+    this.texture = Files.PIC_GAME_OBJECT_OBSTACLESMALL.obj;
 
     this.width = this.texture.width;
     this.height = this.texture.height;
@@ -21,13 +21,13 @@ Obstacle = function()
     this.collisionContainer.initialize();
 };
 
-Obstacle.prototype.onPlayerCollision = function(player)
+SmallObstacle.prototype.onPlayerCollision = function(player)
 {
     this.collisionContainer.isColliding = true;
     player.onCollision();
 };
 
-Obstacle.prototype.tick = function()
+SmallObstacle.prototype.tick = function()
 {
     this.x -= 10;
     if(this.x < 0 - this.width)
@@ -36,7 +36,7 @@ Obstacle.prototype.tick = function()
     }
 };
 
-Obstacle.prototype.draw = function(gfx)
+SmallObstacle.prototype.draw = function(gfx)
 {
     gfx.drawTexture(this.texture, this.x, this.y, this.width, this.height);
 

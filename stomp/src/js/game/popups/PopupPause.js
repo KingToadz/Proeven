@@ -27,7 +27,7 @@ PopupPause = function(width, height)
     button.setTexture(Files.PIC_GAME_MENU_BUTTON_OPTION.obj);
     button.setPosition(Align.width / 2, this.y  + this.height / 2);
     button.setSize(Files.PIC_GAME_MENU_BUTTON_OPTION.obj.width - 50, Files.PIC_GAME_MENU_BUTTON_OPTION.obj.height - 50);
-    button.onClick = function(){this.item.itemHandler.switchItem(ItemOptionsMenu);};
+    //button.onClick = function(){this.item.itemHandler.switchItem(ItemOptionsMenu);};
     this.buttons.push(button);
 
     // menu button

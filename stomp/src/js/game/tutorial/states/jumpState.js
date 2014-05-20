@@ -34,7 +34,7 @@ JumpState.prototype.handleJump = function()
 JumpState.prototype.spawnBlock = function()
 {
     this.world.objectHandler.obstacles = [];
-    this.world.objectHandler.addObstacle(new Obstacle(this.world.dir));
+    this.world.objectHandler.addObstacle(new SmallObstacle(this.world.dir));
 };
 
 JumpState.prototype.reset = function()

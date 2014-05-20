@@ -5,7 +5,7 @@
 ObstacleSpawner = function()
 {
     this.curTick = 0;
-    this.nextSpawn = 0;
+    this.nextSpawn = 50;
 };
 
 ObstacleSpawner.prototype.initialize = function()
@@ -32,7 +32,7 @@ ObstacleSpawner.prototype.spawn = function()
 
     if(obstacle == undefined)
     {
-        obstacle = new Obstacle(this.objectHandler.world.dir);
+        obstacle = new SmallObstacle(this.objectHandler.world.dir);
     }
 
     this.objectHandler.addObstacle(obstacle);

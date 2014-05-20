@@ -83,6 +83,7 @@ Files.PIC_GAME_OBJECT_PLAYER_JUMP_DUST  = Files.addFile("Assets/Game/Objects/jum
 Files.PIC_GAME_OBJECT_PLAYER = Files.addFile("Assets/Game/Objects/character_run.png");
 Files.PIC_GAME_OBJECT_PLAYER_JUMP = Files.addFile("Assets/Game/Objects/character_jump.png");
 
+Files.PIC_GAME_OBJECT_OBSTACLESMALL = Files.addFile("Assets/Game/Objects/ObstacleSmall.png");
 Files.PIC_GAME_OBJECT_OBSTACLENORMAL = Files.addFile("Assets/Game/Objects/ObstacleNormal.png");
 Files.PIC_GAME_OBJECT_OBSTACLEBIG = Files.addFile("Assets/Game/Objects/ObstacleBig.png");
 

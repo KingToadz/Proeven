@@ -5,15 +5,13 @@
 GameHandler = function(item)
 {
     this.item = item;
-
-    this.popup = new PopupHandler(item, Align.width * 0.8, Align.height * 0.8);
-
-    this.startNewGame();
 };
 
 GameHandler.prototype.startNewGame = function()
 {
     this.score = 0;
+
+    this.popup = new PopupHandler(this.item, Align.width * 0.8, Align.height * 0.8);
 
     this.sharedSpawnOptions = new SharedSpawnOptions();
 
