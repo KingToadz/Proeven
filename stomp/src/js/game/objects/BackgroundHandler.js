@@ -51,25 +51,31 @@ BackgroundHandler.prototype.tick = function()
 
 BackgroundHandler.prototype.onPlayerDead = function()
 {
-    this.timer = 0;
-    if(this.fails < 7)
+    if(!this.backgroundColor.manualOverride)
     {
-        this.fails++;
-        this.checkBackground();
+        this.timer = 0;
+        if(this.fails < 7)
+        {
+            this.fails++;
+            this.checkBackground();
+        }
     }
 };
 
 BackgroundHandler.prototype.onPlayerSucces = function()
 {
-    this.fails--;
-    console.log(this.fails);
-
-    if(this.fails < 0)
+    if(!this.backgroundColor.manualOverride)
     {
-        this.fails = 0 ;
-    }
+        this.fails--;
+        console.log(this.fails);
 
-    this.checkBackground();
+        if(this.fails < 0)
+        {
+            this.fails = 0 ;
+        }
+
+        this.checkBackground();
+    }
 };
 
 BackgroundHandler.prototype.checkBackground = function()
