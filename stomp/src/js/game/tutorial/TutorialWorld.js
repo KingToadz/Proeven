@@ -171,11 +171,12 @@ TutorialWorld.prototype.draw = function(gfx)
 
     this.objectHandler.draw(gfx);
 
-    if(this.jumpDoing){
+    gfx.gfx.restore();
+
+    if(this.jumpDoing)
+    {
         this.jumpState.draw(gfx);
     }
-
-    gfx.gfx.restore();
 
     for(var i = 0; i < this.buttons.length; i++)
     {

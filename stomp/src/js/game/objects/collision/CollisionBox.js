@@ -28,5 +28,5 @@ CollisionBox.prototype.isCollidingWith = function(box)
 CollisionBox.prototype.draw = function(gfx)
 {
     //gfx.fillRect(this.container.owner.x + this.x, this.container.owner.y + this.y, this.width, this.height, "#F00");
-    //gfx.drawRect(this.container.owner.x + this.x, this.container.owner.y + this.y, this.width, this.height, "#000", 1);
+    //gfx.drawRect(this.container.owner.x + this.x, this.container.owner.y + this.y, this.width, this.height, "#FF0", 1);
 };

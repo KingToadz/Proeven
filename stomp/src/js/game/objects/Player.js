@@ -46,7 +46,7 @@ Player = function()
     this.y = (Align.height / 2) - ((this.collisionContainer.height + 20) + this.collisionContainer.y);
     this.groundy = this.y;
 
-    this.gravity = 0.8;
+    this.gravity = 0.9;
     this.speedy = 0;
     this.shouldStomp = false;
     this.hasJumped = false;

@@ -15,8 +15,8 @@ TutorialHandler = function(item)
     this.world1.otherWorld = this.world2;
     this.world2.otherWorld = this.world1;
 
-    this.world1.jumpDone = true;
-    this.world2.jumpDone = true;
+    this.world1.jumpDone = false;
+    this.world2.jumpDone = false;
 
     this.world1.initialize();
     this.world2.initialize();
@@ -138,6 +138,7 @@ TutorialHandler.prototype.tick = function()
         if(this.doneCounter > 50)
         {
             this.item.itemHandler.switchItem(ItemGame);
+            this.item.itemHandler.gotoItem.gameHandler.startGameFromTutorial(this);
         }
     }
     else

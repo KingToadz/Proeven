@@ -10,6 +10,22 @@ World = function(dir)
 
     this.buttons = [];
 
+    // world position
+    this.x1 = 0;
+    this.x2 = Align.width;
+    this.y2 = Align.height / 2;
+    this.y1 = this.y2 + ((Align.height / 2) * -this.dir);
+
+    this.ry1 = this.y1;
+    this.ry2 = this.y2;
+
+    if(this.y1 > this.y2)
+    {
+        var y1 = this.y1;
+        this.y1 = this.y2;
+        this.y2 = y1;
+    }
+
     var button = undefined;
 
     // Jump button
@@ -29,7 +45,7 @@ World = function(dir)
 
     button.rotation = (dir + 1) * 90;
     button.world = this;
-    button.onClick = function(){this.world.otherWorld.objectHandler.player.tryJump();};
+    //button.onClick = function(){this.world.otherWorld.objectHandler.player.tryJump();};
     this.buttons.push(button);
 
     // Back button
@@ -49,7 +65,7 @@ World = function(dir)
 
     button.rotation = (dir + 1) * 90;
     button.world = this;
-    button.onClick = function(){this.world.gameHandler.popup.show = true;};
+    button.onClick = function(){this.world.gameHandler.popup.popups[0].show = true;};
     this.buttons.push(button);
 
     this.objectHandler = new ObjectHandler(this);
@@ -71,6 +87,19 @@ World.prototype.tick = function()
     for(var i = 0; i < this.buttons.length; i++)
     {
         this.buttons[i].tick();
+    }
+
+    if(this.gameHandler.item.itemHandler.windowHandler.isMouseDown())
+    {
+        var mousesdown = this.gameHandler.item.itemHandler.windowHandler.getMousesDown();
+        for (var i = 0; i < mousesdown.length; i++)
+        {
+            if (mousesdown[i].ticksAlive == 1 && mousesdown[i].y > this.y1 && mousesdown[i].y < this.y2)
+            {
+                this.otherWorld.objectHandler.player.tryJump();
+                break;
+            }
+        }
     }
 
     this.backgroundHandler.tick();

@@ -8,6 +8,8 @@ PopupPause = function(width, height)
 
     this.buttons = [];
 
+    var button;
+
      // Back button
     button = new Button();
     button.alignx = Align.LEFT;
@@ -25,7 +27,7 @@ PopupPause = function(width, height)
     button.setTexture(Files.PIC_GAME_MENU_BUTTON_OPTION.obj);
     button.setPosition(Align.width / 2, this.y  + this.height / 2);
     button.setSize(Files.PIC_GAME_MENU_BUTTON_OPTION.obj.width - 50, Files.PIC_GAME_MENU_BUTTON_OPTION.obj.height - 50);
-    button.onClick = function(){this.item.itemHandler.setGotoItem(ItemOptionsMenu);};
+    button.onClick = function(){this.item.itemHandler.switchItem(ItemOptionsMenu);};
     this.buttons.push(button);
 
     // menu button
@@ -35,7 +37,7 @@ PopupPause = function(width, height)
     button.setTexture(Files.PIC_GAME_MENU_BUTTON_HELP.obj);
     button.setPosition(Align.width / 2, this.y  + this.height / 2 + button.texture.height * 2);
     button.setSize(Files.PIC_GAME_MENU_BUTTON_HELP.obj.width - 50, Files.PIC_GAME_MENU_BUTTON_HELP.obj.height - 50);
-    button.onClick = function(){this.item.itemHandler.setGotoItem(ItemMainMenu);};
+    button.onClick = function(){this.item.itemHandler.switchItem(ItemMainMenu);};
     this.buttons.push(button);
 };
 
@@ -53,7 +55,7 @@ PopupPause.prototype.tick = function()
 {
     for(var i = 0; i < this.buttons.length; i++)
     {
-        buttons[i].tick();
+        this.buttons[i].tick();
     }
 };
 
@@ -61,6 +63,6 @@ PopupPause.prototype.draw = function(gfx)
 {
     for(var i = 0; i < this.buttons.length; i++)
     {
-        buttons[i].draw(gfx);
+        this.buttons[i].draw(gfx);
     }
 };

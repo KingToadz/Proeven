@@ -16,9 +16,25 @@ ObstacleSpawner.prototype.initialize = function()
 ObstacleSpawner.prototype.spawn = function()
 {
     this.curTick = 0;
-    this.nextSpawn = 3 + (Math.random() * 0);
+    this.nextSpawn = 50 + (Math.random() * 200);
 
-    var obstacle = new Obstacle(this.objectHandler.world.dir);
+    var obstacle = undefined;
+
+    if(this.sharedSpawnOptions.canSpawnBigObstacle() == true)
+    {
+        var r = Math.random() * 5;
+        if(r <= 1)
+        {
+            obstacle = new BigObstacle(this.objectHandler.world.dir);
+            this.sharedSpawnOptions.onSpawnBigObstacle();
+        }
+    }
+
+    if(obstacle == undefined)
+    {
+        obstacle = new Obstacle(this.objectHandler.world.dir);
+    }
+
     this.objectHandler.addObstacle(obstacle);
 };
 

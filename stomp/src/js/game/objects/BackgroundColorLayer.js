@@ -4,7 +4,7 @@
 
 BackgroundColorLayer = function()
 {
-    this.layers = [Files.PIC_GAME__BACKGROUND_GREEN.obj, Files.PIC_GAME__BACKGROUND_ORANGE.obj, Files.PIC_GAME__BACKGROUND_RED.obj]
+    this.layers = [Files.PIC_GAME__BACKGROUND_GREEN.obj, Files.PIC_GAME__BACKGROUND_ORANGE.obj, Files.PIC_GAME__BACKGROUND_RED.obj];
     this.alpha = [1.0, 0.0, 0.0];
     this.currentLayer = 0;
     this.nextLayer = 0;

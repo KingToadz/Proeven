@@ -10,7 +10,7 @@ ItemMainMenu = function()
 
     var button = undefined;
 
-    // Play button
+    // Real PlayButton
     button = new Button();
     button.alignx = Align.CENTER;
     button.aligny = Align.CENTER;
@@ -19,7 +19,16 @@ ItemMainMenu = function()
     button.onClick = function(){this.item.itemHandler.switchItem(ItemTutorial);};
     this.buttons.push(button);
 
-    // Options button
+    // Fake PlayButton
+    button = new Button();
+    button.alignx = Align.CENTER;
+    button.aligny = Align.CENTER;
+    button.setTexture(Files.PIC_MAINMENU_BUTTON_PLAY.obj);
+    button.setPosition(0, 400);
+    button.setSize(Files.PIC_MAINMENU_BUTTON_PLAY.obj.width, Files.PIC_MAINMENU_BUTTON_PLAY.obj.height);
+    this.buttons.push(button);
+
+    // OptionsButton
     button = new Button();
     button.alignx = Align.LEFT;
     button.aligny = Align.TOP;
@@ -29,7 +38,7 @@ ItemMainMenu = function()
     button.onClick = function(){this.item.itemHandler.switchItem(ItemOptionsMenu, "down");};
     this.buttons.push(button);
 
-    // Credits button
+    // CreditsButton
     button = new Button();
     button.alignx = Align.RIGHT;
     button.aligny = Align.TOP;

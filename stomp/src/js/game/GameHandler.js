@@ -6,9 +6,16 @@ GameHandler = function(item)
 {
     this.item = item;
 
-    this.sharedSpawnOptions = new SharedSpawnOptions();
-
     this.popup = new PopupHandler(item, Align.width * 0.8, Align.height * 0.8);
+
+    this.startNewGame();
+};
+
+GameHandler.prototype.startNewGame = function()
+{
+    this.score = 0;
+
+    this.sharedSpawnOptions = new SharedSpawnOptions();
 
     this.world1 = new World(1);
     this.world2 = new World(-1);
@@ -21,8 +28,33 @@ GameHandler = function(item)
 
     this.world1.initialize();
     this.world2.initialize();
+};
 
-    this.score = 0;
+GameHandler.prototype.startGameFromTutorial = function(tutorialHandler)
+{
+    this.startNewGame();
+
+    // sync backgrounds
+    for(var i = 0; i < tutorialHandler.world1.backgroundHandler.layers.length; i++)
+    {
+        this.world1.backgroundHandler.layers[i].x = tutorialHandler.world1.backgroundHandler.layers[i].x;
+    }
+
+    for(var i = 0; i < tutorialHandler.world2.backgroundHandler.layers.length; i++)
+    {
+        this.world2.backgroundHandler.layers[i].x = tutorialHandler.world2.backgroundHandler.layers[i].x;
+    }
+
+    // sync obstacles
+    for(var i = 0; i < tutorialHandler.world1.objectHandler.obstacles.length; i++)
+    {
+        this.world1.objectHandler.obstacles.push(tutorialHandler.world1.objectHandler.obstacles[i]);
+    }
+
+    for(var i = 0; i < tutorialHandler.world2.objectHandler.obstacles.length; i++)
+    {
+        this.world2.objectHandler.obstacles.push(tutorialHandler.world2.objectHandler.obstacles[i]);
+    }
 };
 
 GameHandler.prototype.tick = function()

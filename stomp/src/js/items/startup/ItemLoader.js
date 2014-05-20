@@ -40,8 +40,8 @@ ItemLoader.prototype.draw = function(gfx)
 {
     gfx.drawTexture(this.backgroundTexture, 0, 0, Align.width, Align.height);
 
-    gfx.drawTexture(this.loadingBarOutline, (Align.width / 2) - (this.loadingBarOutline.width / 2), Align.height - 200, this.loadingBarOutline.width, this.loadingBarOutline.height);
+    gfx.drawTexture(this.loadingBarOutline, (Align.width / 2) - (this.loadingBarOutline.width / 2), Align.height - 400, this.loadingBarOutline.width, this.loadingBarOutline.height);
     var w = (this.loadingBar.width / this.loader.length) * this.loader.index;
 
-    gfx.drawClippedTexture(this.loadingBar, (Align.width / 2) - (this.loadingBar.width / 2), Align.height - 200, w, this.loadingBar.height, 0, 0, w, this.loadingBar.height);
+    gfx.drawClippedTexture(this.loadingBar, (Align.width / 2) - (this.loadingBar.width / 2), Align.height - 400, w, this.loadingBar.height, 0, 0, w, this.loadingBar.height);
 };

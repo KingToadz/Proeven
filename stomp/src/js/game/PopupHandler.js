@@ -11,6 +11,12 @@ PopupHandler = function(item2, width, height)
     endPopup.initialize();
     this.popups.push(endPopup);
 
+    for(var i = 0; i < this.popups.length; i++)
+    {
+        this.popups[i].item = item2;
+        this.popups[i].initialize();
+    }
+
     //this.ShowEnd(10000);
 };
 

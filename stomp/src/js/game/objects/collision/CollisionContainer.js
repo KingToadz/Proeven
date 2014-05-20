@@ -105,13 +105,5 @@ CollisionContainer.prototype.draw = function(gfx)
         }
     }
 
-    if(this.isColliding == true)
-    {
-        this.isColliding = false;
-        //gfx.drawRect(this.owner.x + this.x, this.owner.y + this.y, this.width, this.height, "#00F", 2);
-    }
-    else
-    {
-        //gfx.drawRect(this.owner.x + this.x, this.owner.y + this.y, this.width, this.height, "#FF0", 2);
-    }
+    gfx.drawRect(this.owner.x + this.x, this.owner.y + this.y, this.width, this.height, "#FF0", 2);
 };

@@ -44,6 +44,7 @@ Files.PIC_LOADER_LOADINGBAROUTLINE = Files.addPreFile("PreAssets/LoadingBarOutli
 Files.PIC_MENU_BUTTON_BACK = Files.addFile("Assets/Menu/BackButton.png");
 
 Files.PIC_MAINMENU_BACKGROUND = Files.addFile("Assets/Menu/Main/Background.png");
+Files.PIC_MAINMENU_BUTTON_PLAY = Files.addFile("Assets/Menu/Main/PlayButton.png");
 Files.PIC_MAINMENU_BUTTON_OPTIONS = Files.addFile("Assets/Menu/Main/OptionsButton.png");
 Files.PIC_MAINMENU_BUTTON_CREDITS = Files.addFile("Assets/Menu/Main/CreditsButton.png");
 
