@@ -30,6 +30,9 @@ TutorialHandler = function(item)
     this.colorTutStarted = false;
     this.colorTutDone = false;
     this.colorTutState = [0, 0];
+
+    this.world1.backgroundHandler.backgroundColor.manualOverride = true;
+    this.world2.backgroundHandler.backgroundColor.manualOverride = true;
     this.world1.backgroundHandler.backgroundColor.transitSpeed = 0.05;
     this.world2.backgroundHandler.backgroundColor.transitSpeed = 0.05;
 
@@ -150,8 +153,16 @@ TutorialHandler.prototype.tick = function()
             {
                 if(!this.world1.backgroundHandler.backgroundColor.switchLayer)
                 {
-                    this.colorTutState[0]++;
-                    this.world1.backgroundHandler.backgroundColor.changeLayer(1);
+                    if(this.colorTutState[0] < 2)
+                    {
+                        this.colorTutState[0]++;
+                        this.world1.backgroundHandler.backgroundColor.changeLayer(1);
+                    }
+                    else if(this.colorTutState[0] == 2)
+                    {
+                        this.colorTutState[0]++;
+                        this.world1.backgroundHandler.backgroundColor.greenLayer();
+                    }
                 }
             }
 
@@ -159,14 +170,22 @@ TutorialHandler.prototype.tick = function()
             {
                 if(!this.world2.backgroundHandler.backgroundColor.switchLayer)
                 {
-                    this.colorTutState[1]++;
-                    this.world2.backgroundHandler.backgroundColor.changeLayer(1);
+                    if(this.colorTutState[1] < 2)
+                    {
+                        this.colorTutState[1]++;
+                        this.world2.backgroundHandler.backgroundColor.changeLayer(1);
+                    }
+                    else if(this.colorTutState[1] == 2)
+                    {
+                        this.colorTutState[1]++;
+                        this.world2.backgroundHandler.backgroundColor.greenLayer();
+                    }
                 }
             }
 
-            if(this.colorTutState[0] == 3 && this.colorTutState[0] == 3)
+            if(this.colorTutState[0] == 3 && this.colorTutState[1] == 3)
             {
-                this.tutorialDone;
+                this.tutorialDone = true;
             }
         }
         else if(this.world1.jumpDone && this.world2.jumpDone)

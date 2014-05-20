@@ -10,6 +10,8 @@ BackgroundColorLayer = function()
     this.nextLayer = 0;
     this.switchLayer = false;
     this.transitSpeed = 0.005;
+
+    this.manualOverride = false;
 };
 
 BackgroundColorLayer.prototype.changeLayer = function(dir)
