@@ -40,7 +40,6 @@ TutorialWorld = function(dir, tutorialHandler)
 
     button.rotation = (dir + 1) * 90;
     button.world = this;
-    button.onClick = function(){if(this.world.otherWorld.continueJump()){ this.world.otherWorld.objectHandler.player.tryJump();}};
     this.buttons.push(button);
 
     // Back button
