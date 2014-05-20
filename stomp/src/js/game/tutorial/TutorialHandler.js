@@ -153,16 +153,15 @@ TutorialHandler.prototype.tick = function()
             {
                 if(!this.world1.backgroundHandler.backgroundColor.switchLayer)
                 {
-                    if(this.colorTutState[0] < 2)
+                    if(this.colorTutState[0] < 3 && this.colorTutState[0] > 0)
                     {
-                        this.colorTutState[0]++;
                         this.world1.backgroundHandler.backgroundColor.changeLayer(1);
                     }
-                    else if(this.colorTutState[0] == 2)
+                    else if(this.colorTutState[0] == 3)
                     {
-                        this.colorTutState[0]++;
                         this.world1.backgroundHandler.backgroundColor.greenLayer();
                     }
+                    this.colorTutState[0]++;
                 }
             }
 
@@ -170,20 +169,19 @@ TutorialHandler.prototype.tick = function()
             {
                 if(!this.world2.backgroundHandler.backgroundColor.switchLayer)
                 {
-                    if(this.colorTutState[1] < 2)
+                    if(this.colorTutState[1] < 3 && this.colorTutState[1] > 0)
                     {
-                        this.colorTutState[1]++;
                         this.world2.backgroundHandler.backgroundColor.changeLayer(1);
                     }
-                    else if(this.colorTutState[1] == 2)
+                    else if(this.colorTutState[1] == 3)
                     {
-                        this.colorTutState[1]++;
                         this.world2.backgroundHandler.backgroundColor.greenLayer();
                     }
+                    this.colorTutState[1]++;
                 }
             }
 
-            if(this.colorTutState[0] == 3 && this.colorTutState[1] == 3)
+            if(this.colorTutState[0] == 4 && this.colorTutState[1] == 4)
             {
                 this.tutorialDone = true;
             }
