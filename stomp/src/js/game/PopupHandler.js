@@ -9,13 +9,21 @@ PopupHandler = function(item2, width, height)
     var endPopup = new PopupEnd(width, height);
     this.popups.push(endPopup);
 
+    var popupSkip = new PopupSkipTutorial(width, height);
+    this.popups.push(popupSkip);
+
+
     for(var i = 0; i < this.popups.length; i++)
     {
         this.popups[i].item = item2;
         this.popups[i].initialize();
     }
-
     //this.ShowEnd(10000);
+};
+
+PopupHandler.prototype.showSkipPopup = function()
+{
+    this.popups[2].show = true;
 };
 
 PopupHandler.prototype.isPopupShowing = function()
@@ -51,7 +59,7 @@ PopupHandler.prototype.draw = function(gfx)
     for(var i = 0; i < this.popups.length; i++)
     {
         if(this.popups[i].show){
-            gfx.fillTransparentRect(0,0, Align.width, Align.height, "#000", 0.25);
+            gfx.fillTransparentRect(0,0, Align.width, Align.height, "#000", 0.6);
             this.popups[i].draw(gfx);
         }
     }
