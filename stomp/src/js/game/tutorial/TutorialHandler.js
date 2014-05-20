@@ -18,8 +18,11 @@ TutorialHandler = function(item)
     this.world1.jumpDone = false;
     this.world2.jumpDone = false;
 
+    this.popup = new PopupHandler(this.item, Align.width, Align.height);
+
     this.world1.initialize();
     this.world2.initialize();
+
 
     // For the stomp jump
     this.stompTutStarted = false;
@@ -130,173 +133,180 @@ TutorialHandler.prototype.handleJump = function(worldDir)
 
 TutorialHandler.prototype.tick = function()
 {
-    this.world1.tick();
-    this.world2.tick();
-
-    this.tryNextState();
-
-    if(this.tutorialDone)
+    if(!this.popup.isPopupShowing())
     {
-        this.doneCounter++;
+        this.world1.tick();
+        this.world2.tick();
 
-        if(this.doneCounter > 50)
+        this.tryNextState();
+
+        if(this.tutorialDone)
         {
-            this.item.itemHandler.switchItem(ItemGame);
-            this.item.itemHandler.gotoItem.gameHandler.startGameFromTutorial(this);
+            this.doneCounter++;
+
+            if(this.doneCounter > 50)
+            {
+                this.item.itemHandler.switchItem(ItemGame);
+                this.item.itemHandler.gotoItem.gameHandler.startGameFromTutorial(this);
+            }
+        }
+        else
+        {
+            if(this.colorTutStarted)
+            {
+                if(this.world1.TouchDownInWorld())
+                {
+                    if(!this.world1.backgroundHandler.backgroundColor.switchLayer)
+                    {
+                        if(this.colorTutState[0] < 3 && this.colorTutState[0] > 0)
+                        {
+                            this.world1.backgroundHandler.backgroundColor.changeLayer(1);
+                        }
+                        else if(this.colorTutState[0] == 3)
+                        {
+                            this.world1.backgroundHandler.backgroundColor.greenLayer();
+                        }
+                        this.colorTutState[0]++;
+                    }
+                }
+
+                if(this.world2.TouchDownInWorld())
+                {
+                    if(!this.world2.backgroundHandler.backgroundColor.switchLayer)
+                    {
+                        if(this.colorTutState[1] < 3 && this.colorTutState[1] > 0)
+                        {
+                            this.world2.backgroundHandler.backgroundColor.changeLayer(1);
+                        }
+                        else if(this.colorTutState[1] == 3)
+                        {
+                            this.world2.backgroundHandler.backgroundColor.greenLayer();
+                        }
+                        this.colorTutState[1]++;
+                    }
+                }
+
+                if(this.colorTutState[0] > 3 && this.colorTutState[1] > 3)
+                {
+                    this.tutorialDone = true;
+                }
+            }
+            else if(this.world1.jumpDone && this.world2.jumpDone)
+            {
+                // Stomp tutorial hier
+                if(this.world1Learning)
+                {
+                    if(this.world1Step == 0)
+                    {
+                        this.world1.objectHandler.addObstacle(new BigObstacle(this.world1.dir));
+                        this.world1Step = 3;
+                    }
+
+                    if(this.world2Step == 0)
+                    {
+                        if(this.world1.objectHandler.obstacles[0] != undefined)
+                        {
+                            var distance = this.world1.currentObstacleFromPlayer();
+                            if(distance > 0 && distance < 450)
+                            {
+                                this.world1.worldPaused = true;
+                                //this.world2.worldPaused = false;
+                                this.world2Step++;
+                            }
+                        }
+                    }
+                    else if(this.world2Step == 1)
+                    {
+                        var distance = this.world1.currentObstacleFromPlayer();
+                        if(distance > 0 && distance < 320)
+                        {
+                            this.world2.worldPaused = true;
+                            this.world1.worldPaused = true;
+                            this.world2Step++;
+                        }
+                    }
+                    else if(this.world2Step == 2)
+                    {
+                        var distance = this.world1.currentObstacleFromPlayer();
+                        if(distance > 0 && distance < 200)
+                        {
+                            this.world2.worldPaused = true;
+                            this.world1.worldPaused = true;
+                            this.world2Step++;
+                        }
+                    }
+
+                    if(this.world1Step == 5 && this.world2Step == 3)
+                    {
+                        var distance = this.world1.currentObstacleFromPlayer();
+                        if(distance < -100)
+                        {
+                            this.world1Learning = false;
+                            this.world1Step = 0;
+                            this.world2Step = 0;
+                        }
+                    }
+                }
+                else // Switch world1 with world2
+                {
+                    if(this.world2Step == 0)
+                    {
+                        this.world2.objectHandler.addObstacle(new BigObstacle(this.world2.dir));
+                        this.world2Step = 3;
+                    }
+
+
+                    if(this.world1Step == 0)
+                    {
+                        if(this.world2.objectHandler.obstacles[0] != undefined)
+                        {
+                            var distance = this.world2.currentObstacleFromPlayer();
+                            if(distance > 0 && distance < 450)
+                            {
+                                this.world2.worldPaused = true;
+                                //this.world2.worldPaused = false;
+                                this.world1.canPlayerJump = true;
+                                this.world1Step++;
+                            }
+                        }
+                    }
+                    else if(this.world1Step == 1)
+                    {
+                        var distance = this.world2.currentObstacleFromPlayer();
+                        if(distance > 0 && distance < 320)
+                        {
+                            this.world2.worldPaused = true;
+                            this.world1.worldPaused = true;
+                            this.world1Step++;
+                        }
+                    }
+                    else if(this.world1Step == 2)
+                    {
+                        var distance = this.world2.currentObstacleFromPlayer();
+                        if(distance > 0 && distance < 200)
+                        {
+                            this.world2.worldPaused = true;
+                            this.world1.worldPaused = true;
+                            this.world1Step++;
+                        }
+                    }
+
+                    if(this.world1Step == 3 && this.world2Step == 5)
+                    {
+                        var distance = this.world2.currentObstacleFromPlayer();
+                        console.log(distance);
+                        if(distance < -100)
+                        {
+                            this.colorTutStarted = true;
+                        }
+                    }
+                }
+            }
         }
     }
     else
     {
-        if(this.colorTutStarted)
-        {
-            if(this.world1.TouchDownInWorld())
-            {
-                if(!this.world1.backgroundHandler.backgroundColor.switchLayer)
-                {
-                    if(this.colorTutState[0] < 3 && this.colorTutState[0] > 0)
-                    {
-                        this.world1.backgroundHandler.backgroundColor.changeLayer(1);
-                    }
-                    else if(this.colorTutState[0] == 3)
-                    {
-                        this.world1.backgroundHandler.backgroundColor.greenLayer();
-                    }
-                    this.colorTutState[0]++;
-                }
-            }
-
-            if(this.world2.TouchDownInWorld())
-            {
-                if(!this.world2.backgroundHandler.backgroundColor.switchLayer)
-                {
-                    if(this.colorTutState[1] < 3 && this.colorTutState[1] > 0)
-                    {
-                        this.world2.backgroundHandler.backgroundColor.changeLayer(1);
-                    }
-                    else if(this.colorTutState[1] == 3)
-                    {
-                        this.world2.backgroundHandler.backgroundColor.greenLayer();
-                    }
-                    this.colorTutState[1]++;
-                }
-            }
-
-            if(this.colorTutState[0] == 4 && this.colorTutState[1] == 4)
-            {
-                this.tutorialDone = true;
-            }
-        }
-        else if(this.world1.jumpDone && this.world2.jumpDone)
-        {
-            // Stomp tutorial hier
-            if(this.world1Learning)
-            {
-                if(this.world1Step == 0)
-                {
-                    this.world1.objectHandler.addObstacle(new BigObstacle(this.world1.dir));
-                    this.world1Step = 3;
-                }
-
-                if(this.world2Step == 0)
-                {
-                    if(this.world1.objectHandler.obstacles[0] != undefined)
-                    {
-                        var distance = this.world1.currentObstacleFromPlayer();
-                        if(distance > 0 && distance < 450)
-                        {
-                            this.world1.worldPaused = true;
-                            //this.world2.worldPaused = false;
-                            this.world2Step++;
-                        }
-                    }
-                }
-                else if(this.world2Step == 1)
-                {
-                    var distance = this.world1.currentObstacleFromPlayer();
-                    if(distance > 0 && distance < 320)
-                    {
-                        this.world2.worldPaused = true;
-                        this.world1.worldPaused = true;
-                        this.world2Step++;
-                    }
-                }
-                else if(this.world2Step == 2)
-                {
-                    var distance = this.world1.currentObstacleFromPlayer();
-                    if(distance > 0 && distance < 200)
-                    {
-                        this.world2.worldPaused = true;
-                        this.world1.worldPaused = true;
-                        this.world2Step++;
-                    }
-                }
-
-                if(this.world1Step == 5 && this.world2Step == 3)
-                {
-                    var distance = this.world1.currentObstacleFromPlayer();
-                    if(distance < -100)
-                    {
-                        this.world1Learning = false;
-                        this.world1Step = 0;
-                        this.world2Step = 0;
-                    }
-                }
-            }
-            else // Switch world1 with world2
-            {
-                if(this.world2Step == 0)
-                {
-                    this.world2.objectHandler.addObstacle(new BigObstacle(this.world2.dir));
-                    this.world2Step = 3;
-                }
-
-
-                if(this.world1Step == 0)
-                {
-                    if(this.world2.objectHandler.obstacles[0] != undefined)
-                    {
-                        var distance = this.world2.currentObstacleFromPlayer();
-                        if(distance > 0 && distance < 450)
-                        {
-                            this.world2.worldPaused = true;
-                            //this.world2.worldPaused = false;
-                            this.world1.canPlayerJump = true;
-                            this.world1Step++;
-                        }
-                    }
-                }
-                else if(this.world1Step == 1)
-                {
-                    var distance = this.world2.currentObstacleFromPlayer();
-                    if(distance > 0 && distance < 320)
-                    {
-                        this.world2.worldPaused = true;
-                        this.world1.worldPaused = true;
-                        this.world1Step++;
-                    }
-                }
-                else if(this.world1Step == 2)
-                {
-                    var distance = this.world2.currentObstacleFromPlayer();
-                    if(distance > 0 && distance < 200)
-                    {
-                        this.world2.worldPaused = true;
-                        this.world1.worldPaused = true;
-                        this.world1Step++;
-                    }
-                }
-
-                if(this.world1Step == 3 && this.world2Step == 5)
-                {
-                    var distance = this.world2.currentObstacleFromPlayer();
-                    console.log(distance);
-                    if(distance < -100)
-                    {
-                        this.colorTutStarted = true;
-                    }
-                }
-            }
-        }
+        this.popup.tick();
     }
 };
 
@@ -422,4 +432,6 @@ TutorialHandler.prototype.draw = function(gfx)
             }
         }
     }
+
+    this.popup.draw(gfx);
 };

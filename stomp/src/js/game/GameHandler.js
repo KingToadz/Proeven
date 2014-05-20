@@ -65,9 +65,6 @@ GameHandler.prototype.tick = function()
         this.world2.tick();
 
         this.score++;
-
-        // if worlds are dead
-        // this.popup.showEnd(this.score);
     }
     else
     {
