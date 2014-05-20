@@ -125,6 +125,13 @@ TutorialWorld.prototype.tick = function()
         this.buttons[i].tick();
     }
 
+    if(this.TouchDownInWorld())
+    {
+        if(this.otherWorld.continueJump()){
+            this.otherWorld.objectHandler.player.tryJump();
+        }
+    }
+
     if(this.jumpDoing){
         this.jumpState.tick();
     }
