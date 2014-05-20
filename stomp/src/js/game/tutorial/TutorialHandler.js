@@ -27,16 +27,14 @@ TutorialHandler = function(item)
     this.world1Step = 0;
     this.world2Step = 0;
 
+    this.colorTutStarted = false;
     this.colorTutDone = false;
-    this.colorTutState = false;
+    this.colorTutState = [0, 0];
+    this.world1.backgroundHandler.backgroundColor.transitSpeed = 0.05;
+    this.world2.backgroundHandler.backgroundColor.transitSpeed = 0.05;
 
     this.tutorialDone = false;
     this.doneCounter = 0;
-};
-
-TutorialHandler.prototype.pauseWorld = function()
-{
-
 };
 
 TutorialHandler.prototype.tryNextState = function()
@@ -146,7 +144,32 @@ TutorialHandler.prototype.tick = function()
     }
     else
     {
-        if(this.world1.jumpDone && this.world2.jumpDone)
+        if(this.colorTutStarted)
+        {
+            if(this.world1.TouchDownInWorld())
+            {
+                if(!this.world1.backgroundHandler.backgroundColor.switchLayer)
+                {
+                    this.colorTutState[0]++;
+                    this.world1.backgroundHandler.backgroundColor.changeLayer(1);
+                }
+            }
+
+            if(this.world2.TouchDownInWorld())
+            {
+                if(!this.world2.backgroundHandler.backgroundColor.switchLayer)
+                {
+                    this.colorTutState[1]++;
+                    this.world2.backgroundHandler.backgroundColor.changeLayer(1);
+                }
+            }
+
+            if(this.colorTutState[0] == 3 && this.colorTutState[0] == 3)
+            {
+                this.tutorialDone;
+            }
+        }
+        else if(this.world1.jumpDone && this.world2.jumpDone)
         {
             // Stomp tutorial hier
             if(this.world1Learning)
@@ -252,7 +275,7 @@ TutorialHandler.prototype.tick = function()
                     console.log(distance);
                     if(distance < -100)
                     {
-                        this.tutorialDone = true;
+                        this.colorTutStarted = true;
                     }
                 }
             }
@@ -272,7 +295,37 @@ TutorialHandler.prototype.draw = function(gfx)
     }
     else if(this.world1.jumpDone == true && this.world2.jumpDone == true)
     {
-        if(this.world1Learning)
+        if(this.colorTutStarted)
+        {
+            switch(this.colorTutState[0])
+            {
+                case 0:
+                    this.world1.drawString(gfx, "Met een groene lucht zit je veilig ");
+                    break;
+                case 1:
+                    this.world1.drawString(gfx, "Met een oranje lucht Moet je oppassen ");
+                    break;
+                case 2:
+                     this.world1.drawString(gfx, "Met een rode lucht ben je bijna dood ");
+                     break;
+
+            }
+
+            switch(this.colorTutState[1])
+            {
+                case 0:
+                    this.world2.drawString(gfx, "Met een groene lucht zit je veilig ");
+                    break;
+                case 1:
+                    this.world2.drawString(gfx, "Met een oranje lucht Moet je oppassen ");
+                    break;
+                case 2:
+                     this.world2.drawString(gfx, "Met een rode lucht ben je bijna dood ");
+                     break;
+
+            }
+        }
+        else if(this.world1Learning)
         {
             switch(this.world1Step)
             {
@@ -306,7 +359,7 @@ TutorialHandler.prototype.draw = function(gfx)
                     break;
             }
         }
-        else
+        else if(!this.world1Learning)
         {
             switch(this.world2Step)
             {
