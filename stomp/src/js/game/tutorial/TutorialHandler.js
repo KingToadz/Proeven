@@ -30,7 +30,7 @@ TutorialHandler = function(item)
     this.colorTutDone = false;
     this.colorTutState = false;
 
-    this.tutorialDone = false;
+    this.tutorialDone = true;
     this.doneCounter = 0;
 };
 

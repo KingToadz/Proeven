@@ -82,5 +82,8 @@ GameHandler.prototype.draw = function(gfx)
     this.world1.draw(gfx);
     this.world2.draw(gfx);
 
+    gfx.drawCenteredString("Score: " + this.score, Align.width / 2, 50, "#FFF", "30pt Arial");
+    gfx.drawReversedCenteredString("Score: " + this.score, Align.width / 2, 480, "#FFF", "30pt Arial");
+
     this.popup.draw(gfx);
 };
