@@ -12,31 +12,31 @@ PopupPause = function(width, height)
 
      // Back button
     button = new Button();
-    button.alignx = Align.LEFT;
-    button.aligny = Align.TOP;
+    button.alignx = Align.CENTER;
+    button.aligny = Align.CENTER;
     button.setTexture(Files.PIC_GAME_MENU_BUTTON_BACK.obj);
-    button.setPosition(Align.width / 2, this.y  + this.height / 2 - button.texture.height * 2);
-    button.setSize(Files.PIC_GAME_MENU_BUTTON_BACK.obj.width - 50, Files.PIC_GAME_MENU_BUTTON_BACK.obj.height - 50);
+    button.setPosition(0, -(button.texture.height + 10));
+    button.setSize(Files.PIC_GAME_MENU_BUTTON_BACK.obj.width, Files.PIC_GAME_MENU_BUTTON_BACK.obj.height);
     button.onClick = function(){this.popup.show = false;};
     this.buttons.push(button);
 
     // Option button
     button = new Button();
-    button.alignx = Align.LEFT;
-    button.aligny = Align.TOP;
+    button.alignx = Align.CENTER;
+    button.aligny = Align.CENTER;
     button.setTexture(Files.PIC_GAME_MENU_BUTTON_OPTION.obj);
-    button.setPosition(Align.width / 2, this.y  + this.height / 2);
-    button.setSize(Files.PIC_GAME_MENU_BUTTON_OPTION.obj.width - 50, Files.PIC_GAME_MENU_BUTTON_OPTION.obj.height - 50);
+    button.setPosition(0, 0);
+    button.setSize(Files.PIC_GAME_MENU_BUTTON_OPTION.obj.width, Files.PIC_GAME_MENU_BUTTON_OPTION.obj.height);
     //button.onClick = function(){this.item.itemHandler.switchItem(ItemOptionsMenu);};
     this.buttons.push(button);
 
     // menu button
     button = new Button();
-    button.alignx = Align.LEFT;
-    button.aligny = Align.TOP;
+    button.alignx = Align.CENTER;
+    button.aligny = Align.CENTER;
     button.setTexture(Files.PIC_GAME_MENU_BUTTON_HELP.obj);
-    button.setPosition(Align.width / 2, this.y  + this.height / 2 + button.texture.height * 2);
-    button.setSize(Files.PIC_GAME_MENU_BUTTON_HELP.obj.width - 50, Files.PIC_GAME_MENU_BUTTON_HELP.obj.height - 50);
+    button.setPosition(0, button.texture.height + 10);
+    button.setSize(Files.PIC_GAME_MENU_BUTTON_HELP.obj.width, Files.PIC_GAME_MENU_BUTTON_HELP.obj.height);
     button.onClick = function(){this.item.itemHandler.switchItem(ItemMainMenu);};
     this.buttons.push(button);
 };

@@ -62,7 +62,9 @@ ItemMainMenu.prototype.initialize = function()
 
 ItemMainMenu.prototype.activate = function()
 {
-
+    this.highScore = 0;
+    var data = Database.getItem("Stomp_HighScore");
+    if(data != undefined) {this.highScore = Number(data);}
 };
 
 ItemMainMenu.prototype.deActivate = function()
@@ -86,4 +88,6 @@ ItemMainMenu.prototype.draw = function(gfx)
     {
         this.buttons[i].draw(gfx);
     }
+
+    gfx.drawString("HighScore: " + this.highScore, this.x + 50, this.y + (Align.height / 2) - 50, "#FFF", "30pt Arial");
 };

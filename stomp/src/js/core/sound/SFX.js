@@ -105,7 +105,7 @@ SFX.playSound = function(src)
     }
 
     var audio = new Audio();
-    audio.volume =
+    audio.volume = v;
 
     audio.addEventListener("canplay", function()
     {

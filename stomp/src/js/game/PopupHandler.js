@@ -7,8 +7,6 @@ PopupHandler = function(item2, width, height)
     this.popups.push(popupPause);
 
     var endPopup = new PopupEnd(width, height);
-    endPopup.item = item2;
-    endPopup.initialize();
     this.popups.push(endPopup);
 
     for(var i = 0; i < this.popups.length; i++)
@@ -32,7 +30,7 @@ PopupHandler.prototype.isPopupShowing = function()
     return false;
 };
 
-PopupHandler.prototype.ShowEnd = function(score)
+PopupHandler.prototype.showEnd = function(score)
 {
     this.popups[1].score = score;
     this.popups[1].show = true;

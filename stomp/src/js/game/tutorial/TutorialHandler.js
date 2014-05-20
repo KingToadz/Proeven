@@ -5,7 +5,11 @@
 TutorialHandler = function(item)
 {
     this.item = item;
+    this.startNewGame();
+};
 
+TutorialHandler.prototype.startNewGame = function()
+{
     this.world1 = new TutorialWorld(1, this);
     this.world2 = new TutorialWorld(-1, this);
 
@@ -36,7 +40,7 @@ TutorialHandler = function(item)
     this.world1.backgroundHandler.backgroundColor.transitSpeed = 0.05;
     this.world2.backgroundHandler.backgroundColor.transitSpeed = 0.05;
 
-    this.tutorialDone = false;
+    this.tutorialDone = true;
     this.doneCounter = 0;
 };
 
@@ -181,7 +185,7 @@ TutorialHandler.prototype.tick = function()
                 }
             }
 
-            if(this.colorTutState[0] == 4 && this.colorTutState[1] == 4)
+            if(this.colorTutState[0] > 3 && this.colorTutState[1] > 3)
             {
                 this.tutorialDone = true;
             }
@@ -328,7 +332,7 @@ TutorialHandler.prototype.draw = function(gfx)
                 case 3:
                      this.world1.drawString(gfx, "Met een rode lucht ben je bijna dood");
                      break;
-                case 4:
+                default:
                     this.world1.drawString(gfx, "Goed gedaan je bent klaar voor het echte werk! ");
                     break;
 
@@ -348,7 +352,7 @@ TutorialHandler.prototype.draw = function(gfx)
                 case 3:
                      this.world2.drawString(gfx, "Met een rode lucht ben je bijna dood");
                      break;
-                case 4:
+                default:
                     this.world2.drawString(gfx, "Goed gedaan je bent klaar voor het echte werk! ");
                     break;
             }

@@ -5,6 +5,10 @@
 GameHandler = function(item)
 {
     this.item = item;
+
+    this.highScore = 0;
+    var data = Database.getItem("Stomp_HighScore");
+    if(data != undefined) {this.highScore = Number(data);}
 };
 
 GameHandler.prototype.startNewGame = function()
@@ -55,6 +59,21 @@ GameHandler.prototype.startGameFromTutorial = function(tutorialHandler)
     }
 };
 
+GameHandler.prototype.newHighScore = function(score)
+{
+    this.highScore = score;
+    Database.setItem("Stomp_HighScore", this.highScore);
+};
+
+GameHandler.prototype.endCurrentGame = function()
+{
+    if(this.score > this.highScore)
+    {
+        this.newHighScore(this.score);
+    }
+    this.popup.showEnd(this.score);
+};
+
 GameHandler.prototype.tick = function()
 {
     if(!this.popup.isPopupShowing())
@@ -66,8 +85,10 @@ GameHandler.prototype.tick = function()
 
         this.score++;
 
-        // if worlds are dead
-        // this.popup.showEnd(this.score);
+        if(this.world1.backgroundHandler.fails > 6 || this.world2.backgroundHandler.fails > 6)
+        {
+            this.endCurrentGame();
+        }
     }
     else
     {
