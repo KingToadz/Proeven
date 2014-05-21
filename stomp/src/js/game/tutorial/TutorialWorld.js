@@ -198,10 +198,10 @@ TutorialWorld.prototype.drawString = function(gfx, text)
 {
     if(this.dir == -1)
     {
-        gfx.drawReversedCenteredString(text, Align.width / 2, 200, "#FFF", "52pt Arial");
+        gfx.drawReversedCenteredString(text, Align.width / 2, 200, "#FFF", "40pt " + Files.FNT_TUTORIAL_FONT.obj);
     }
     else
     {
-        gfx.drawCenteredString(text, Align.width / 2, 200, "#FFF", "52pt Arial");
+        gfx.drawCenteredString(text, Align.width / 2, 200, "#FFF", "40pt " + Files.FNT_TUTORIAL_FONT.obj);
     }
 };

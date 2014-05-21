@@ -12,12 +12,34 @@ GFX = function(canvas)
     this.gfx.webkitImageSmoothingEnabled = false;
 
     this.gfx.save();
+
+    this.scaleX = 1.0;
+    this.scaleY = 1.0;
+
+    this.offsetX = 0;
+    this.offsetY = 0;
+
+    this.rotation = 0.0;
+};
+
+GFX.prototype.tick = function()
+{
+    this.gfx.setTransform(1, 0, 0, 1, 0, 0);
+
+    this.gfx.scale(this.scaleX, this.scaleY);
+    this.gfx.translate(this.offsetX, this.offsetY);
+    this.gfx.rotate(this.rotation);
 };
 
 GFX.prototype.clear = function(style)
 {
     this.gfx.fillStyle = style;
     this.gfx.fillRect(0, 0, Align.width, Align.height);
+};
+
+GFX.prototype.scale = function(scaleX, scaleY)
+{
+
 };
 
 GFX.prototype.drawLine = function(x, y, w, h, strokeStyle, lineWidth)
@@ -78,12 +100,14 @@ GFX.prototype.drawString = function(text, x, y, fillstyle, font)
 
 GFX.prototype.drawCenteredString = function(text, x, y, fillstyle, font)
 {
+    this.gfx.font = font;
     var metrics = this.gfx.measureText(text);
     this.drawString(text, (x - (metrics.width / 2)), y, fillstyle, font);
 };
 
 GFX.prototype.drawReversedCenteredString = function(text, x, y, fillstyle, font)
 {
+    this.gfx.font = font;
     var metrics = this.gfx.measureText(text);
 
     this.gfx.save();

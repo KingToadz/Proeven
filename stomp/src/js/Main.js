@@ -8,6 +8,7 @@ window.onload = function(){new Main();};
 Main = function()
 {
     console.log("Starting...");
+    Util.initialize();
     Arguments.initialize();
     SFX.initialize();
 

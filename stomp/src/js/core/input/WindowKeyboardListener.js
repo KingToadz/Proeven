@@ -43,9 +43,12 @@ WindowKeyboardListener.prototype.onKeyDown = function(ev)
 
     var keyCode = ev.keyCode;
     var keyEvent = this.keys[keyCode];
-    this.keysDown.push(keyEvent);
 
-    keyEvent.isDown = true;
+    if(keyEvent.isDown == false)
+    {
+        this.keysDown.push(keyEvent);
+        keyEvent.isDown = true;
+    }
 };
 
 WindowKeyboardListener.prototype.onKeyUp = function(ev)

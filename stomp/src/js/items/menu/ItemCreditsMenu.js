@@ -48,7 +48,7 @@ ItemCreditsMenu.prototype.tick = function()
 
 ItemCreditsMenu.prototype.draw = function(gfx)
 {
-    gfx.drawTexture(this.backgroundTexture, this.x, this.y, Align.width, Align.height);
+    gfx.drawTexture(this.backgroundTexture, 0, 0, Align.width, Align.height);
 
     for(var i = 0; i < this.buttons.length; i++)
     {

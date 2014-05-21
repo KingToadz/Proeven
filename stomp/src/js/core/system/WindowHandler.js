@@ -51,6 +51,8 @@ WindowHandler.prototype.tick = function()
     this.mouseListener.tick();
     this.keyboardListener.tick();
 
+    this.gfx.tick();
+
     this.itemHandler.tick();
     this.itemHandler.draw(this.gfx);
 };

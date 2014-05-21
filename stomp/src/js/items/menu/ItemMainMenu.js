@@ -82,12 +82,12 @@ ItemMainMenu.prototype.tick = function()
 
 ItemMainMenu.prototype.draw = function(gfx)
 {
-    gfx.drawTexture(this.backgroundTexture, this.x, this.y, Align.width, Align.height);
+    gfx.drawTexture(this.backgroundTexture, 0, 0, Align.width, Align.height);
 
     for(var i = 0; i < this.buttons.length; i++)
     {
         this.buttons[i].draw(gfx);
     }
 
-    gfx.drawString("HighScore: " + this.highScore, this.x + 50, this.y + (Align.height / 2) - 50, "#FFF", "30pt Arial");
+    gfx.drawString("HighScore: " + this.highScore, 50, (Align.height / 2) - 50, "#FFF", "80pt " + Files.FNT_DEFAULT_FONT.obj);
 };

@@ -52,7 +52,7 @@ PopupSkipTutorial.prototype.tick = function()
 
 PopupSkipTutorial.prototype.draw = function(gfx)
 {
-    gfx.drawCenteredString("Wil je de tutorial spelen?", Align.width / 2, 200, "#FFF", "52pt arial");
+    gfx.drawCenteredString("Wil je de tutorial spelen?", Align.width / 2, 200, "#FFF", "120pt " + Files.FNT_DEFAULT_FONT.obj);
     for(var i = 0; i < this.buttons.length; i++)
     {
         this.buttons[i].draw(gfx);

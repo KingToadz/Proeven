@@ -41,6 +41,9 @@ Files.PIC_LOADER_LOADINGBAR = Files.addPreFile("PreAssets/LoadingBar.png");
 Files.PIC_LOADER_LOADINGBAROUTLINE = Files.addPreFile("PreAssets/LoadingBarOutline.png");
 
 //////// ----- File list ----- ////////
+Files.FNT_DEFAULT_FONT = Files.addFile("fonts/sing.ttf");
+Files.FNT_TUTORIAL_FONT = Files.FNT_DEFAULT_FONT;
+
 Files.PIC_MENU_BUTTON_BACK = Files.addFile("Assets/Menu/BackButton.png");
 
 Files.PIC_MAINMENU_BACKGROUND = Files.addFile("Assets/Menu/Main/Background.png");
