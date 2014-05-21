@@ -5,6 +5,7 @@ PopupSkipTutorial = function(width, height)
     this.x = Align.width / 2 - this.width / 2;
     this.y = Align.height / 2 - this.height / 2;
     this.show = false;
+    this.alpha = 0.8;
 
     this.buttons = [];
 
@@ -17,7 +18,7 @@ PopupSkipTutorial = function(width, height)
     button.setTexture(Files.PIC_POPUP_MENU_YES_BUTTON.obj);
     button.setPosition(0, 0);
     button.setSize(Files.PIC_POPUP_MENU_YES_BUTTON.obj.width, Files.PIC_POPUP_MENU_YES_BUTTON.obj.height);
-    button.onClick = function(){this.popup.show = false; this.item.itemHandler.curItem.tutHandler.startNewGame();};
+    button.onClick = function(){this.popup.show = false; this.item.itemHandler.curItem.tutHandler.startTutorial(); this.item.itemHandler.curItem.tutHandler.startNewGame();};
     this.buttons.push(button);
 
     // NEE button
@@ -51,7 +52,7 @@ PopupSkipTutorial.prototype.tick = function()
 
 PopupSkipTutorial.prototype.draw = function(gfx)
 {
-    gfx.drawCenteredString("Wil je de tutorial spelen?", Align.width / 2, 200, "#FFF", "40pt arial");
+    gfx.drawCenteredString("Wil je de tutorial spelen?", Align.width / 2, 200, "#FFF", "52pt arial");
     for(var i = 0; i < this.buttons.length; i++)
     {
         this.buttons[i].draw(gfx);

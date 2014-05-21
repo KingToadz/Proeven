@@ -26,7 +26,7 @@ TutorialHandler.prototype.startNewGame = function()
 
     this.world1.jumpDone = false;
     this.world2.jumpDone = false;
-
+    
     this.world1.initialize();
     this.world2.initialize();
 
@@ -47,6 +47,12 @@ TutorialHandler.prototype.startNewGame = function()
 
     this.tutorialDone = false;
     this.doneCounter = 0;
+};
+
+TutorialHandler.prototype.startTutorial = function()
+{
+    this.world1.startJumpTutorial();
+    this.world2.startJumpTutorial();
 };
 
 TutorialHandler.prototype.tryNextState = function()

@@ -67,7 +67,7 @@ PopupHandler.prototype.draw = function(gfx)
     for(var i = 0; i < this.popups.length; i++)
     {
         if(this.popups[i].show){
-            gfx.fillTransparentRect(0,0, Align.width, Align.height, "#000", 0.6);
+            gfx.fillTransparentRect(0,0, Align.width, Align.height, "#000", this.popups[i].alpha);
             this.popups[i].draw(gfx);
         }
     }

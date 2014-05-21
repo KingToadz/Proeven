@@ -78,10 +78,14 @@ TutorialWorld.prototype.initialize = function()
     this.objectHandler.initialize();
 
     this.jumpState = new JumpState(this);
+};
+
+TutorialWorld.prototype.startJumpTutorial = function()
+{
     // If it's set to true before the initialize it will skip the jump tutorial
     if(!this.jumpDone)
     {
-        this.jumpState.start();
+        this.jumpState.reset();
     }
     else
     {
@@ -194,10 +198,10 @@ TutorialWorld.prototype.drawString = function(gfx, text)
 {
     if(this.dir == -1)
     {
-        gfx.drawReversedCenteredString(text, Align.width / 2, 200, "#FFF", "40pt Arial");
+        gfx.drawReversedCenteredString(text, Align.width / 2, 200, "#FFF", "52pt Arial");
     }
     else
     {
-        gfx.drawCenteredString(text, Align.width / 2, 200, "#FFF", "40pt Arial");
+        gfx.drawCenteredString(text, Align.width / 2, 200, "#FFF", "52pt Arial");
     }
 };

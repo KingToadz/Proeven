@@ -6,6 +6,8 @@ PopupEnd = function(width, height)
     this.y = Align.height / 2 - this.height / 2;
     this.score = 0;
     this.show = false;
+    
+    this.alpha = 0.6;
 
     this.buttons = [];
     var button = undefined;

@@ -2,7 +2,7 @@ JumpState = function(pWorld)
 {
     this.world = pWorld;
     this.objectHandler = this.world.objectHandler;
-    this.innerState = 0;
+    this.innerState = -1;
     this.done = false;
 };
 
@@ -47,6 +47,11 @@ JumpState.prototype.reset = function()
 JumpState.prototype.tick = function()
 {
     var distToPlayer = this.world.currentObstacleFromPlayer();
+    
+    if(this.innerState == -1)
+    {
+        this.reset();
+    }
 
     if(this.innerState == 0)
     {
