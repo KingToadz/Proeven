@@ -18,15 +18,6 @@ Player = function()
     this.stompAnimation = new Animation(Files.PIC_GAME_OBJECT_PLAYER_STOMP.obj, 158, 300, 3, 4, 11);
     this.stompAnimation.setFPS(15);
     this.stompAnimation.visibleForOneLoop = true;
-    
-    //this.stompGroundAnimation = new Animation(Files.PIC_GAME_OBJECT_GROUND_STOMP.obj, 177, 41, 6, 4, 24);
-    //this.stompGroundAnimation.visibleForOneLoop = true;
-    //this.stompGroundAnimation.setFPS(30);
-
-    //this.stompAnimationDust = new Animation(Files.PIC_GAME_OBJECT_PLAYER_STOMP_DUST.obj, 251, 192, 2, 5, 10);
-    //this.stompAnimationDust.visible = false;
-    //this.stompAnimationDust.setFPS(15);
-    //this.stompAnimationDust.visibleForOneLoop = true;
 
     this.jumpAnimationDust = new Animation(Files.PIC_GAME_OBJECT_PLAYER_JUMP_DUST.obj, 112, 92, 2, 5, 10);
     this.jumpAnimationDust.setFPS(30);
@@ -117,8 +108,6 @@ Player.prototype.tick = function()
 {
     this.runAnimation.tick();
     this.runAnimationDust.tick();
-    //this.stompAnimationDust.tick();
-    //this.stompGroundAnimation.tick();
     
     this.animationHandler.tick();
 
@@ -171,11 +160,9 @@ Player.prototype.draw = function(gfx)
 {
     if(this.isImmuneFor > 0)
     {
-        //gfx.drawTransparentTexture(this.texture, this.x, this.y, this.width, this.height, 0.3);
         if(this.showJumpAnimation)
         {
             this.jumpAnimation.drawTransparent(gfx, this.x, this.y, 0.3);
-            //this.jumpAnimationDust.drawTransparent(gfx, this.x - 50, this.groundy, 0.3);
         }
         else
         {
@@ -185,7 +172,6 @@ Player.prototype.draw = function(gfx)
     }
     else
     {
-        //gfx.drawTexture(this.texture, this.x, this.y, this.width, this.height);
         /*if(this.isStomping)
         {
             this.stompAnimation.draw(gfx, this.x, this.y);
@@ -201,7 +187,6 @@ Player.prototype.draw = function(gfx)
         }
     }
     this.animationHandler.draw(gfx);
-    //this.stompGroundAnimation.draw(gfx, this.x - this.width / 2, this.groundy + 65);
 
     this.collisionContainer.draw(gfx);
 };
