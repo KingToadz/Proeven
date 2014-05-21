@@ -4,7 +4,7 @@
 
 Ground = function()
 {
-    this.color = "#191919";
+    this.color = "#000000";//"#191919";
     this.width = Align.width;
     this.height = 20;
 };

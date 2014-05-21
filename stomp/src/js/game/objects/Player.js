@@ -18,6 +18,10 @@ Player = function()
     this.stompAnimation = new AnimationHandler(Files.PIC_GAME_OBJECT_PLAYER_STOMP.obj, 158, 300, 3, 4, 11);
     this.stompAnimation.setFPS(15);
     this.stompAnimation.visibleForOneLoop = true;
+    
+    this.stompGroundAnimation = new AnimationHandler(Files.PIC_GAME_OBJECT_GROUND_STOMP.obj, 177, 41, 6, 4, 24);
+    this.stompGroundAnimation.visibleForOneLoop = true;
+    this.stompGroundAnimation.setFPS(30);
 
     this.stompAnimationDust = new AnimationHandler(Files.PIC_GAME_OBJECT_PLAYER_STOMP_DUST.obj, 251, 192, 2, 5, 10);
     this.stompAnimationDust.visible = false;
@@ -86,6 +90,7 @@ Player.prototype.tryStomp = function()
         this.speedy = -20;
         this.showJumpAnimation = true;
         this.jumpAnimation.reset();
+        this.stompGroundAnimation.reset();
     }
 };
 
@@ -110,6 +115,7 @@ Player.prototype.tick = function()
     this.runAnimation.tick();
     this.runAnimationDust.tick();
     this.stompAnimationDust.tick();
+    this.stompGroundAnimation.tick();
 
     this.speedy += this.gravity;
     this.y += this.speedy;
@@ -119,6 +125,7 @@ Player.prototype.tick = function()
         this.y = this.groundy;
         this.hasJumped = false;
         this.showJumpAnimation = false;
+        this.stompGroundAnimation.visible = false;
         if(this.shouldStomp)
         {
             this.shouldStomp = false;
@@ -198,6 +205,7 @@ Player.prototype.draw = function(gfx)
             this.stompAnimationDust.draw(gfx, this.x - 50, this.groundy - this.stompAnimationDust.height / 2);
         }
     }
+    this.stompGroundAnimation.draw(gfx, this.x - this.width / 2, this.groundy + 60);
 
     this.collisionContainer.draw(gfx);
 };

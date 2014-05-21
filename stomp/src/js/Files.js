@@ -83,6 +83,7 @@ Files.PIC_GAME_OBJECT_PLAYER_STOMP      = Files.addFile("Assets/Game/Objects/cha
 Files.PIC_GAME_OBJECT_PLAYER_STOMP_DUST = Files.addFile("Assets/Game/Objects/stomp_dust.png");
 Files.PIC_GAME_OBJECT_PLAYER_RUN_DUST   = Files.addFile("Assets/Game/Objects/run_dust.png");
 Files.PIC_GAME_OBJECT_PLAYER_JUMP_DUST  = Files.addFile("Assets/Game/Objects/jump_dust.png");
+Files.PIC_GAME_OBJECT_GROUND_STOMP      = Files.addFile("Assets/Game/objects/grond_animatie.png");
 
 Files.PIC_GAME_OBJECT_PLAYER = Files.addFile("Assets/Game/Objects/character_run.png");
 Files.PIC_GAME_OBJECT_PLAYER_JUMP = Files.addFile("Assets/Game/Objects/character_jump.png");
