@@ -1,97 +1,66 @@
-
-AnimationHandler = function(spritesheet, width, height, rows, cols, totalFrames)
+AnimationHandler = function()
 {
-    if(totalFrames == undefined)
-    {
-        totalFrames = rows * cols;
-    }
-
-    this.width = width;
-    this.height = height;
-    this.totalFrames = totalFrames - 1; // -1 because first frame will be 0
-    this.rows = rows;
-    this.cols = cols;
-    this.currentRow = 0;
-    this.currentCol = 0;
-    this.sheet = spritesheet;
-    this.currentFrame = 0;
-    this.timePerFrame = 1000 / 5;
-    this.startFrameTime = Date.now();
-    this.paused = false;
-    this.visible = true;
-    this.visibleForOneLoop = false;
+    this.animations = [];
+    this.yPositions = [];
+    this.xPositions = [];
+    this.speed = 10;
 };
 
-AnimationHandler.prototype.setFPS = function(fps)
+AnimationHandler.prototype.addAnimation = function(anim, x, y)
 {
-    this.timePerFrame = 1000 / fps;
+    this.animations.push(anim);
+    this.xPositions.push(x);
+    this.yPositions.push(y);
 };
 
-AnimationHandler.prototype.reset = function()
+AnimationHandler.prototype.addGroundStomp = function(x, y)
 {
-    this.currentFrame = 0;
-    this.visible = true;
-    this.paused = false;
+    var stompGroundAnimation = new Animation(Files.PIC_GAME_OBJECT_GROUND_STOMP.obj, 177, 41, 6, 4, 24);
+    stompGroundAnimation.stopAfterLastFrame = true;
+    stompGroundAnimation.setFPS(30);
+    this.addAnimation(stompGroundAnimation, x, y);
 };
 
-AnimationHandler.prototype.pause = function()
+AnimationHandler.prototype.addStompSmoke = function(x, y)
 {
-    this.paused = true;
+    var stompAnimationDust = new Animation(Files.PIC_GAME_OBJECT_PLAYER_STOMP_DUST.obj, 251, 192, 2, 4, 8);
+    stompAnimationDust.visible = true;
+    stompAnimationDust.setFPS(15);
+    stompAnimationDust.visibleForOneLoop = true;
+    
+    this.addAnimation(stompAnimationDust, x, y - stompAnimationDust.height / 2);
 };
 
-AnimationHandler.prototype.resume = function()
+AnimationHandler.prototype.addJumpSmoke = function(x, y)
 {
-    this.paused = false;
+    var jumpAnimationDust = new Animation(Files.PIC_GAME_OBJECT_PLAYER_JUMP_DUST.obj, 112, 92, 2, 5, 10);
+    jumpAnimationDust.setFPS(30);
+    jumpAnimationDust.visibleForOneLoop = true;
+    
+    this.addAnimation(jumpAnimationDust, x - 50, y);
 };
 
 AnimationHandler.prototype.tick = function()
 {
-    // check if it's time to go to next frame
-
-    if(!this.paused)
+    for(var i = 0; i < this.animations.length; i++)
     {
-        var timeNow = Date.now();
-
-        if(timeNow - this.startFrameTime > this.timePerFrame)
+        this.animations[i].tick();
+        this.xPositions[i] -= this.speed;
+        
+        if(this.xPositions[i] + this.animations[i].width < 0)
         {
-            //console.log("Old Frame: " + this.currentFrame);
-            this.currentFrame++;
-            this.startFrameTime = timeNow;
-
-            if(this.currentFrame > this.totalFrames - 1)
-            {
-                this.currentFrame = 0;
-
-                if(this.visibleForOneLoop)
-                {
-                    this.visible = false;
-                    this.paused = true;
-                }
-            }
-
-            if(this.rows > 1){
-                this.currentRow = Math.floor(this.currentFrame / this.cols);
-            }else{ this.currentRow = 0; }
-
-            this.currentCol = this.currentFrame % this.cols;
-
-            //console.log("CurrentRow: " + this.currentRow + " CurrentCol: " + this.currentCol);
+            this.animations.splice(i, 1);
+            this.xPositions.splice(i, 1);
+            this.yPositions.splice(i, 1);
         }
     }
 };
 
-AnimationHandler.prototype.draw = function(gfx, x, y)
+AnimationHandler.prototype.draw = function(gfx)
 {
-    // draw animation frame
-    if(this.visible){
-        gfx.drawClippedTexture(this.sheet, x, y, this.width, this.height, this.currentCol * this.width, this.currentRow * this.height, this.width, this.height);
+    for(var i = 0; i < this.animations.length; i++)
+    {
+        this.animations[i].draw(gfx, this.xPositions[i], this.yPositions[i]);
     }
 };
 
-AnimationHandler.prototype.drawTransparent = function(gfx, x, y, alpha)
-{
-    // draw animation frame
-    if(this.visible){
-        gfx.drawTransparentClippedTexture(this.sheet, x, y, this.width, this.height, this.currentCol * this.width, this.currentRow * this.height, this.width, this.height, alpha);
-    }
-};
