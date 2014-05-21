@@ -99,8 +99,8 @@ SlideButton.prototype.tick = function()
 
 SlideButton.prototype.draw = function(gfx)
 {
-    gfx.drawClippedTexture(this.texture, this.item.x + this.alignx.sx() + this.x + this.widths, this.item.y + this.aligny.sy() + this.y, this.width, this.height, this.widths, 0, this.width, this.height);
-    gfx.drawClippedTexture(this.texture2, this.item.x + this.alignx.sx() + this.x, this.item.y + this.aligny.sy() + this.y, this.widths, this.height, 0, 0, this.widths, this.height);
+    gfx.drawClippedTexture(this.texture, this.alignx.sx() + this.x + this.widths, this.aligny.sy() + this.y, this.width, this.height, this.widths, 0, this.width, this.height);
+    gfx.drawClippedTexture(this.texture2, this.alignx.sx() + this.x, this.aligny.sy() + this.y, this.widths, this.height, 0, 0, this.widths, this.height);
 };
 
 SlideButton.prototype.onClick = function(sender){};

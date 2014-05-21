@@ -63,7 +63,7 @@ RotatableButton.prototype.tick = function()
 
 RotatableButton.prototype.draw = function(gfx)
 {
-    gfx.drawRotatedTexture(this.texture, this.item.x + this.alignx.sx() + this.x, this.item.y + this.aligny.sy() + this.y, this.width, this.height, this.rotation);
+    gfx.drawRotatedTexture(this.texture, this.alignx.sx() + this.x, this.aligny.sy() + this.y, this.width, this.height, this.rotation);
 };
 
 // events

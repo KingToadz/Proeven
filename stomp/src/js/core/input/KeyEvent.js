@@ -12,5 +12,5 @@ KeyEvent = function()
 
 KeyEvent.prototype.tick = function()
 {
-    console.log("Key down: " + this.keyCode);
+    this.ticksAlive++;
 };

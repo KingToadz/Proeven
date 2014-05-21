@@ -82,7 +82,7 @@ Player.prototype.tryStomp = function()
 {
     if(this.hasCollided == false && this.y == this.groundy)
     {
-        this.speedy = -20;
+        this.speedy = -40;
         this.showJumpAnimation = true;
         this.jumpAnimation.reset();
     }

@@ -32,7 +32,7 @@ ItemLoader.prototype.tick = function()
 {
     if(this.loader.done == true)
     {
-        this.itemHandler.switchItem(ItemMainMenu);
+        this.itemHandler.switchItem(ItemMainMenu, "left");
     }
 };
 

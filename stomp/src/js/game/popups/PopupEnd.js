@@ -50,8 +50,8 @@ PopupEnd.prototype.tick = function()
 
 PopupEnd.prototype.draw = function(gfx)
 {
-    gfx.drawString("Score: " + this.score, Align.width / 2 - 250, 350, "#FFF", "50pt arial");
-    gfx.drawString("HighScore: " + this.item.gameHandler.highScore, Align.width / 2 - 250, 410, "#FFF", "50pt arial");
+    gfx.drawString("Score: " + this.score, Align.width / 2 - 250, 350, "#FFF", "50pt " + Files.FNT_DEFAULT_FONT.obj);
+    gfx.drawString("HighScore: " + this.item.gameHandler.highScore, Align.width / 2 - 250, 410, "#FFF", "50pt " + Files.FNT_DEFAULT_FONT.obj);
     for(var i = 0; i < this.buttons.length; i++)
     {
         this.buttons[i].draw(gfx);

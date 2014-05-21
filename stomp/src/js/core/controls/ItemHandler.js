@@ -217,10 +217,16 @@ ItemHandler.prototype.tick = function()
 ItemHandler.prototype.draw = function(gfx)
 {
     gfx.clear("#000");
+    gfx.gfx.save();
+    gfx.gfx.translate(this.curItem.x, this.curItem.y);
     this.curItem.draw(gfx);
+    gfx.gfx.restore();
 
     if(this.gotoItem != null)
     {
+        gfx.gfx.save();
+        gfx.gfx.translate(this.gotoItem.x, this.gotoItem.y);
         this.gotoItem.draw(gfx);
+        gfx.gfx.restore();
     }
 };

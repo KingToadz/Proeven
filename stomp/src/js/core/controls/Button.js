@@ -64,7 +64,7 @@ Button.prototype.draw = function(gfx)
 {
     if(this.texture != undefined)
     {
-        gfx.drawTexture(this.texture, this.item.x + this.alignx.sx() + this.x, this.item.y + this.aligny.sy() + this.y, this.width, this.height);
+        gfx.drawTexture(this.texture, this.alignx.sx() + this.x, this.aligny.sy() + this.y, this.width, this.height);
     }
 };
 

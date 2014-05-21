@@ -4,8 +4,19 @@
 
 Canvas = function()
 {
-    this.canvas = document.createElement("canvas");
+    if(Util.isCocoonJS)
+    {
+        // screencanvas is only supported in CocoonJS, but when used the performace is much higher
+        this.canvas = document.createElement("screencanvas");
+    }
+    else
+    {
+        // just the default HTML5 canvas for the browsers
+        this.canvas = document.createElement("canvas");
+    }
+
     document.body.appendChild(this.canvas);
+
     this.gfx = new GFX(this);
 
     this.rescale();
@@ -48,9 +59,6 @@ Canvas.prototype.rescale = function()
 
     // rotate
     this.rotated = false;
-    this.gfx.gfx.translate(0, 0);
-    this.gfx.gfx.rotate(0);
-    this.gfx.gfx.scale(1, 1);
 
     if(this.height > this.width)
     {
@@ -58,14 +66,26 @@ Canvas.prototype.rescale = function()
 
         this.rotated = true;
 
-        this.gfx.gfx.scale(this.canvasWidth / Align.height, this.canvasHeight / Align.width);
-        this.gfx.gfx.translate(Align.height, 0);
-        this.gfx.gfx.rotate(90 * Math.PI / 180);
+        this.gfx.scaleX = this.canvasWidth / Align.height;
+        this.gfx.scaleY = this.canvasHeight / Align.width;
+
+        this.gfx.offsetX = Align.height;
+        this.gfx.offsetY = 0;
+
+        this.gfx.rotation = 90 * Math.PI / 180;
     }
     else
     {
         Align.setSS(this.width, this.height);
-        this.gfx.gfx.rotate(0);
-        this.gfx.gfx.scale(this.canvasWidth / Align.width, this.canvasHeight / Align.height);
+
+        this.gfx.scaleX = this.canvasWidth / Align.width;
+        this.gfx.scaleY = this.canvasHeight / Align.height;
+
+        this.gfx.offsetX = 0;
+        this.gfx.offsetY = 0;
+
+        this.gfx.rotation = 0;
     }
+
+    this.gfx.gfx.save();
 };
