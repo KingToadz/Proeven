@@ -16,7 +16,7 @@ ItemMainMenu = function()
     button.aligny = Align.CENTER;
     button.setPosition(0, 200);
     button.setSize(Align.width, 1000);
-    button.onClick = function(){this.item.itemHandler.switchItem(ItemTutorial);};
+    button.onClick = function(){this.item.itemHandler.switchItem(ItemTutorial); this.item.itemHandler.gotoItem.tutHandler.popup.hideAllPopups(); this.item.itemHandler.gotoItem.tutHandler.popup.showSkipPopup();};
     this.buttons.push(button);
 
     // Fake PlayButton

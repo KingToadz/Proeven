@@ -60,9 +60,13 @@ Files.PIC_OPTIONSMENU_BUTTON_EFFECTSVOLUMEOFF = Files.addFile("Assets/Menu/Optio
 
 Files.SND_MENU_BACKGROUND = "Assets/Audio/Background_mid.ogg";
 
-Files.PIC_GAME_MENU_BUTTON_OPTION = Files.addFile("Assets/Menu/btnOptions.png");
-Files.PIC_GAME_MENU_BUTTON_HELP = Files.addFile("Assets/Menu/btnHoofdscherm.png");
-Files.PIC_GAME_MENU_BUTTON_BACK = Files.addFile("Assets/Menu/btnContinue.png");
+Files.PIC_POPUP_MENU_YES_BUTTON = Files.addFile("Assets/Menu/Yes.png");
+Files.PIC_POPUP_MENU_NO_BUTTON = Files.addFile("Assets/Menu/No.png");
+
+Files.PIC_GAME_MENU_BUTTON_OPTION = Files.addFile("Assets/Menu/btn_Opties.png");
+Files.PIC_GAME_MENU_BUTTON_HELP = Files.addFile("Assets/Menu/btn_Hoofdscherm.png");
+Files.PIC_GAME_MENU_BUTTON_BACK = Files.addFile("Assets/Menu/btn_Doorgaan.png");
+Files.PIC_GAME_MENU_BUTTON_TRYAGAIN = Files.addFile("Assets/Menu/btn_Opnieuw.png");
 
 Files.PIC_GAME__BACKGROUND_GREEN = Files.addFile("Assets/Game/Themes/Theme_01/bg_01_green.png");
 Files.PIC_GAME__BACKGROUND_ORANGE = Files.addFile("Assets/Game/Themes/Theme_01/bg_01_orange.png");

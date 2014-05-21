@@ -105,5 +105,5 @@ CollisionContainer.prototype.draw = function(gfx)
         }
     }
 
-    gfx.drawRect(this.owner.x + this.x, this.owner.y + this.y, this.width, this.height, "#FF0", 2);
+    //gfx.drawRect(this.owner.x + this.x, this.owner.y + this.y, this.width, this.height, "#FF0", 2);
 };

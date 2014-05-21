@@ -16,7 +16,7 @@ BackgroundHandler = function(x)
     this.layers.push(new BackgroundLayer(Files.PIC_GAME__BACKGROUND_02, 2));
     this.layers.push(new BackgroundLayer(Files.PIC_GAME__BACKGROUND_03, 3));
 
-    this.fails = 6;
+    this.fails = 0;
     this.timer = 0;
 
     for(var i = 0; i < this.layers.length; i++)

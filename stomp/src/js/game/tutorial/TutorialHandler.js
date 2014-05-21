@@ -5,7 +5,12 @@
 TutorialHandler = function(item)
 {
     this.item = item;
+
+    this.popup = new PopupHandler(this.item, Align.width, Align.height);
+
     this.startNewGame();
+
+    this.popup.showSkipPopup();
 };
 
 TutorialHandler.prototype.startNewGame = function()
@@ -22,12 +27,8 @@ TutorialHandler.prototype.startNewGame = function()
     this.world1.jumpDone = false;
     this.world2.jumpDone = false;
 
-    this.popup = new PopupHandler(this.item, Align.width, Align.height);
-
     this.world1.initialize();
     this.world2.initialize();
-
-    this.popup.showSkipPopup();
 
     // For the stomp jump
     this.stompTutStarted = false;
@@ -44,7 +45,7 @@ TutorialHandler.prototype.startNewGame = function()
     this.world1.backgroundHandler.backgroundColor.transitSpeed = 0.05;
     this.world2.backgroundHandler.backgroundColor.transitSpeed = 0.05;
 
-    this.tutorialDone = true;
+    this.tutorialDone = false;
     this.doneCounter = 0;
 };
 
@@ -157,39 +158,31 @@ TutorialHandler.prototype.tick = function()
         }
         else
         {
-            if(this.colorTutStarted)
-            {
-                if(this.world1.TouchDownInWorld())
-                {
-                    if(!this.world1.backgroundHandler.backgroundColor.switchLayer)
-                    {
-                        if(this.colorTutState[0] < 3 && this.colorTutState[0] > 0)
-                        {
+            if(this.colorTutStarted) {
+                if (this.world1.TouchDownInWorld()) {
+                    if (!this.world1.backgroundHandler.backgroundColor.switchLayer) {
+                        if (this.colorTutState[0] < 3 && this.colorTutState[0] > 0) {
                             this.world1.backgroundHandler.backgroundColor.changeLayer(1);
                         }
-                        else if(this.colorTutState[0] == 3)
-                        {
+                        else if (this.colorTutState[0] == 3) {
                             this.world1.backgroundHandler.backgroundColor.greenLayer();
                         }
                         this.colorTutState[0]++;
                     }
                 }
 
-                if(this.world2.TouchDownInWorld())
-                {
-                    if(!this.world2.backgroundHandler.backgroundColor.switchLayer)
-                    {
-                        if(this.colorTutState[1] < 3 && this.colorTutState[1] > 0)
-                        {
+                if (this.world2.TouchDownInWorld()) {
+                    if (!this.world2.backgroundHandler.backgroundColor.switchLayer) {
+                        if (this.colorTutState[1] < 3 && this.colorTutState[1] > 0) {
                             this.world2.backgroundHandler.backgroundColor.changeLayer(1);
                         }
-                        else if(this.colorTutState[1] == 3)
-                        {
+                        else if (this.colorTutState[1] == 3) {
                             this.world2.backgroundHandler.backgroundColor.greenLayer();
                         }
                         this.colorTutState[1]++;
                     }
                 }
+            }
 
             if(this.colorTutState[0] > 3 && this.colorTutState[1] > 3)
             {

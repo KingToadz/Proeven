@@ -26,6 +26,14 @@ PopupHandler.prototype.showSkipPopup = function()
     this.popups[2].show = true;
 };
 
+PopupHandler.prototype.hideAllPopups = function()
+{
+    for(var i = 0; i < this.popups.length; i++)
+    {
+        this.popups[i].show = false;
+    }
+};
+
 PopupHandler.prototype.isPopupShowing = function()
 {
     for(var i = 0; i < this.popups.length; i++)

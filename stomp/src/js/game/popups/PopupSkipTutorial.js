@@ -12,21 +12,21 @@ PopupSkipTutorial = function(width, height)
 
      // JA button
     button = new Button();
-    button.alignx = Align.LEFT;
-    button.aligny = Align.TOP;
-    button.setTexture(Files.PIC_GAME_MENU_BUTTON_BACK.obj);
-    button.setPosition(Align.width / 2, this.y  + this.height / 2);
-    button.setSize(Files.PIC_GAME_MENU_BUTTON_BACK.obj.width - 50, Files.PIC_GAME_MENU_BUTTON_BACK.obj.height - 50);
-    button.onClick = function(){this.popup.show = false;};
+    button.alignx = Align.CENTER;
+    button.aligny = Align.CENTER;
+    button.setTexture(Files.PIC_POPUP_MENU_YES_BUTTON.obj);
+    button.setPosition(0, 0);
+    button.setSize(Files.PIC_POPUP_MENU_YES_BUTTON.obj.width, Files.PIC_POPUP_MENU_YES_BUTTON.obj.height);
+    button.onClick = function(){this.popup.show = false; this.item.itemHandler.curItem.tutHandler.startNewGame();};
     this.buttons.push(button);
 
     // NEE button
     button = new Button();
-    button.alignx = Align.LEFT;
-    button.aligny = Align.TOP;
-    button.setTexture(Files.PIC_GAME_MENU_BUTTON_HELP.obj);
-    button.setPosition(Align.width / 2, this.height / 2 + button.texture.height * 2);
-    button.setSize(Files.PIC_GAME_MENU_BUTTON_HELP.obj.width - 50, Files.PIC_GAME_MENU_BUTTON_HELP.obj.height - 50);
+    button.alignx = Align.CENTER;
+    button.aligny = Align.CENTER;
+    button.setTexture(Files.PIC_POPUP_MENU_NO_BUTTON.obj);
+    button.setPosition(0, button.texture.height + 10);
+    button.setSize(Files.PIC_POPUP_MENU_NO_BUTTON.obj.width, Files.PIC_POPUP_MENU_NO_BUTTON.obj.height);
     button.onClick = function(){this.item.itemHandler.switchItem(ItemGame); this.item.itemHandler.gotoItem.gameHandler.startNewGame();};
     this.buttons.push(button);
 };

@@ -13,9 +13,9 @@ PopupEnd = function(width, height)
     button = new Button();
     button.alignx = Align.CENTER;
     button.aligny = Align.CENTER;
-    button.setTexture(Files.PIC_GAME_MENU_BUTTON_BACK.obj);
+    button.setTexture(Files.PIC_GAME_MENU_BUTTON_TRYAGAIN.obj);
     button.setPosition(0, 0);
-    button.setSize(Files.PIC_GAME_MENU_BUTTON_BACK.obj.width, Files.PIC_GAME_MENU_BUTTON_BACK.obj.height);
+    button.setSize(Files.PIC_GAME_MENU_BUTTON_TRYAGAIN.obj.width, Files.PIC_GAME_MENU_BUTTON_TRYAGAIN.obj.height);
     button.onClick = function(){this.item.itemHandler.switchItem(ItemGame); this.item.itemHandler.gotoItem.gameHandler.startNewGame();};
     this.buttons.push(button);
 
