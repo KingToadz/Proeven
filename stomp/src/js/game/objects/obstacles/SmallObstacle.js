@@ -16,6 +16,8 @@ SmallObstacle = function()
 
     this.collisionContainer = new CollisionContainer();
     this.collisionContainer.addBox(0, 0, this.width, this.height);
+    
+    this.passedPlayer = false;
 
     this.collisionContainer.owner = this;
     this.collisionContainer.initialize();

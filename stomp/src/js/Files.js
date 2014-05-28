@@ -95,6 +95,9 @@ Files.PIC_GAME_OBJECT_OBSTACLESMALL = Files.addFile("Assets/Game/Objects/Obstacl
 Files.PIC_GAME_OBJECT_OBSTACLENORMAL = Files.addFile("Assets/Game/Objects/ObstacleNormal.png");
 Files.PIC_GAME_OBJECT_OBSTACLEBIG = Files.addFile("Assets/Game/Objects/ObstacleBig.png");
 
+Files.PIC_GAME_TUTORIAL_EMPTY = Files.addFile("Assets/Game/tut_empty.png");
+Files.PIC_GAME_TUTORIAL_FILLED = Files.addFile("Assets/Game/tut_filled.png");
+
 Files.SND_GAME_BACKGROUND = "Assets/Audio/Background_mid.ogg";
 Files.SND_GAME_PLAYER_JUMP = "Assets/Audio/Jump.ogg";
 Files.SND_GAME_PLAYER_STOMP = "Assets/Audio/Stomp.ogg";

@@ -15,10 +15,10 @@ AnimationHandler.prototype.addAnimation = function(anim, x, y)
 
 AnimationHandler.prototype.addGroundStomp = function(x, y)
 {
-    var stompGroundAnimation = new Animation(Files.PIC_GAME_OBJECT_GROUND_STOMP.obj, 177, 41, 6, 4, 24);
+    var stompGroundAnimation = new Animation(Files.PIC_GAME_OBJECT_GROUND_STOMP.obj, 837, 41, 27, 1, 27);
     stompGroundAnimation.stopAfterLastFrame = true;
     stompGroundAnimation.setFPS(30);
-    this.addAnimation(stompGroundAnimation, x, y);
+    this.addAnimation(stompGroundAnimation, x - stompGroundAnimation.width / 3, y);
 };
 
 AnimationHandler.prototype.addStompSmoke = function(x, y)

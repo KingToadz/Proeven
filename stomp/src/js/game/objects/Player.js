@@ -57,13 +57,16 @@ Player.prototype.tryJump = function()
     {
         if(this.hasJumped == false)
         {
-            this.showJumpAnimation = true;
-            this.jumpAnimation.reset();
-            this.animationHandler.addJumpSmoke(this.x, this.y);
+            if(this.y == this.groundy)
+            {
+                this.showJumpAnimation = true;
+                this.jumpAnimation.reset();
+                this.animationHandler.addJumpSmoke(this.x, this.y);
 
-            this.speedy = -20;
-            this.hasJumped = true;
-            SFX.playSound(Files.SND_GAME_PLAYER_JUMP);
+                this.speedy = -20;
+                this.hasJumped = true;
+                SFX.playSound(Files.SND_GAME_PLAYER_JUMP);
+            }
         }
         else
         {

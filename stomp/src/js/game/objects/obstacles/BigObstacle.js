@@ -15,6 +15,8 @@ BigObstacle = function()
     this.y = (Align.height / 2) - (this.height + 20);
 
     this.collisionContainer = new CollisionContainer();
+    
+    this.passedPlayer = false;
 
     // a bit smaller
     this.collisionContainer.addBox(5, 5, this.width - 10, this.height - 5);

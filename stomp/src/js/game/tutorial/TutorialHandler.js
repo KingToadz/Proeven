@@ -29,283 +29,411 @@ TutorialHandler.prototype.startNewGame = function()
     
     this.world1.initialize();
     this.world2.initialize();
-
-    // For the stomp jump
-    this.stompTutStarted = false;
-    this.world1Learning = true;
+    
     this.world1Step = 0;
     this.world2Step = 0;
-
-    this.colorTutStarted = false;
-    this.colorTutDone = false;
-    this.colorTutState = [0, 0];
-
-    this.world1.backgroundHandler.backgroundColor.manualOverride = true;
-    this.world2.backgroundHandler.backgroundColor.manualOverride = true;
-    this.world1.backgroundHandler.backgroundColor.transitSpeed = 0.05;
-    this.world2.backgroundHandler.backgroundColor.transitSpeed = 0.05;
-
-    this.tutorialDone = false;
-    this.doneCounter = 0;
+    
+    this.world2.worldPaused = true;
+    this.world1.objectHandler.addObstacle(new SmallObstacle());
+    
+    // To skip first tutorial   this.state = [2,2];
+    // To skip second           this.state = [5,5];
+    // to skip first bigstone   this.state = [10,10];
+    
+    this.state = [0,0];
+    this.waitTimer = 0;
+    this.testW1 = true;
+    this.stoneDone = true;
+    
+    this.smallDone = false;
 };
 
 TutorialHandler.prototype.startTutorial = function()
 {
-    this.world1.startJumpTutorial();
-    this.world2.startJumpTutorial();
-};
-
-TutorialHandler.prototype.tryNextState = function()
-{
-    // 1.) Spawn small block
-    // 2.) Spawn big block
-    // 3.) Start a game
-
-    if(this.world1.jumpDoing == true && this.world2.jumpDoing == true && this.world1.jumpDone == true && this.world2.jumpDone == true)
-    {
-        // state++
-        this.world1.jumpDoing = false;
-        this.world2.jumpDoing = false;
-
-        // Reset all the obstacles. To prevent weird bugs
-        if(!this.stompTutStarted)
-        {
-            this.stompTutStarted = true;
-            this.world1.objectHandler.obstacles = [];
-            this.world2.objectHandler.obstacles = [];
-        }
-    }
+    
 };
 
 TutorialHandler.prototype.handleJump = function(worldDir)
-{
-    if(this.world1Learning)
+{    
+    if(worldDir == this.world1.dir)
     {
-        if(worldDir == 1)
+        console.log("World 1 jump called");
+        
+        // If the screen is paused to learn the jump
+        if(this.state[0] == 1)
         {
-            if(this.world1Step == 4 && this.world2Step == 3)
-            {
-                this.world2.worldPaused = false;
-                this.world1.worldPaused = false;
-                this.world1Step++;
-                return true;
-            }
-
-            return false;
+            this.world1.worldPaused = false;
+            //this.world2.worldPaused = false;
+            return true;
         }
-        else if(worldDir == -1)
+        // Both busy with jump
+        else if(this.state[0] >= 2 && this.state[0] < 5) 
         {
-            if(this.world2Step == 1)
-            {
-                this.world1.worldPaused = false;
-                return true;
-            }
-            else if(this.world2Step == 2)
-            {
-                this.world2.worldPaused = false;
-                this.world1.worldPaused = false;
-                this.world1Step++;
-                return true;
-            }
-            return false;
+            return true;
+        }
+        else if(this.state[0] == 7)
+        {
+            this.state[0]++;
+            this.world2.worldPaused = false;
+            this.world1.worldPaused = false;
+            return true;   
+        }
+        else if(this.state[0] == 9)
+        {
+            this.state[0]++;
+            this.world2.worldPaused = false;
+            this.world1.worldPaused = false;
+            return true;   
+        }
+        else if(this.state[0] >= 11 && this.state[0] < 15)   
+        {
+            return true;
         }
     }
     else
     {
-        if(worldDir == -1)
+        console.log("World 2 jump called");
+        
+        // If the screen is paused for the jump
+        if(this.state[1] == 1)
         {
-            if(this.world2Step == 4 && this.world1Step == 3)
-            {
-                this.world2.worldPaused = false;
-                this.world1.worldPaused = false;
-                this.world2Step++;
-                return true;
-            }
-
-            return false;
+            this.world2.worldPaused = false;
+            return true;
         }
-        else if(worldDir == 1)
+        // Both busy with jump 
+        else if(this.state[1] >= 2 && this.state[1] < 5)
         {
-            if(this.world1Step == 1)
-            {
-                this.world2.worldPaused = false;
-                return true;
-            }
-            else if(this.world1Step == 2)
-            {
-                this.world2.worldPaused = false;
-                this.world1.worldPaused = false;
-                this.world2Step++;
-                return true;
-            }
-            return false;
+            return true;
         }
+        else if(this.state[1] == 7)
+        {
+            this.state[1]++;
+            this.world2.worldPaused = false;
+            this.world1.worldPaused = false;
+            return true;   
+        }
+        else if(this.state[1] == 9)
+        {
+            this.state[1]++;
+            this.world2.worldPaused = false;
+            this.world1.worldPaused = false;
+            return true;   
+        }
+        else if(this.state[1] >= 11 && this.state[1] < 15)   
+        {
+            return true;
+        }
+        
     }
+    
+    return false;
 };
 
+TutorialHandler.prototype.checkFirstPart = function()
+{
+    if(this.state[0] > 1 && this.state[1] > 1)
+    {
+        return true;   
+    }
+    
+    if(this.state[0] == 0)
+    {
+        var distance = this.world1.distanceToPlayer();
+        if(distance > 0 && distance < 200 && this.state[0] == 0)
+        {
+            this.world1.worldPaused = true;
+            this.state[0] = 1;
+        }
+    }
+    else if(this.state[0] == 1)
+    {
+        var w1 = this.world1.playerPastObstacle();
+        if(w1 == 1)
+        {
+            this.state[0] = 2;   
+            this.world1.worldPaused = true;
+            this.world2.worldPaused = false;
+            this.world2.objectHandler.addObstacle(new SmallObstacle());
+        }
+    }
+    else if(this.state[1] == 0 && this.state[0] > 1)
+    {
+        var distance = this.world2.distanceToPlayer();
+        if(distance > 0 && distance < 200)
+        {
+            this.world2.worldPaused = true;
+            this.state[1] = 1;
+        }
+    } 
+    else if(this.state[1] == 1)
+    {
+        var w2 = this.world2.playerPastObstacle();
+        if(w2 == 1)
+        {
+            this.state[1] = 2;   
+            this.world1.worldPaused = false;
+            this.world2.worldPaused = false;
+            
+            // Spawn the next object this is the start for the 3 blocks
+            this.world1.objectHandler.addObstacle(new SmallObstacle());
+            this.world2.objectHandler.addObstacle(new SmallObstacle());
+        }
+    }
+    
+    return false;
+};
+
+TutorialHandler.prototype.check3SmallObstacles = function()
+{
+    // At the start of this one the state should both be 2
+    // Every stone adds 1 tot the state.
+    
+    if(this.state[0] >= 5 && this.state[1] >= 5)
+    {
+        return true;   
+    }
+    
+    var w1 = this.world1.playerPastObstacle();
+    if(w1 >= 0)
+    {
+        // Check if the player is over the first obstacle
+        if(w1 == 1)
+        {
+            this.state[0]++;
+            this.world1.succes++;
+        }
+        
+        if(this.state[0] < 5){
+            this.world1.objectHandler.addObstacle(new SmallObstacle());
+        }
+    }
+    
+    var w2 = this.world2.playerPastObstacle();
+    if(w2 >= 0)
+    {
+        if(w2 == 1)
+        {
+            this.state[1]++;
+            this.world2.succes++;
+        }
+        
+        if(this.state[1] < 5){
+            this.world2.objectHandler.addObstacle(new SmallObstacle());
+        }
+    }
+    
+    return false;
+};
+
+TutorialHandler.prototype.beginBigObstacles = function()
+{
+    if(this.state[0] >= 11 && this.state[1] >= 11)
+    {
+        return true;   
+    }
+    
+    // Start with an object
+    if(this.state[0] == 5)
+    {
+        this.world2.objectHandler.addObstacle(new BigObstacle());   
+        this.state[0]++;
+    }
+    else
+    // check the distance for first jump
+    if(this.state[0] == 6)
+    {
+        var distance = this.world2.distanceToPlayer();
+        if(distance > 0 && distance < 450)
+        {
+            this.world2.worldPaused = true;
+            this.world1.worldPaused = true;
+            this.state[0] = 7;
+        }
+        
+    }
+    else if(this.state[0] == 8)
+    {
+        var distance = this.world2.distanceToPlayer();
+        if(distance > 0 && distance < 300)
+        {
+            this.world2.worldPaused = true;
+            this.world1.worldPaused = true;
+            this.state[0] = 9;
+        }
+    }
+    else if(this.state[0] == 10)
+    {
+        var w2 = this.world2.playerPastObstacle();
+        if(w2 == 1)
+        {
+            this.state[0] = 11;
+            this.waitTimer = 50;
+        }
+        else if (w2 == 0)
+        {
+            this.state[0] = 5;   
+        }
+    }
+    else if(this.state[0] == 11 && this.waitTimer <= 0)
+    {
+        if(this.state[1] == 5)
+        {
+            this.world1.objectHandler.addObstacle(new BigObstacle());   
+            this.state[1]++;
+        }
+        else
+        // check the distance for first jump
+        if(this.state[1] == 6)
+        {
+            var distance = this.world1.distanceToPlayer();
+            if(distance > 0 && distance < 450)
+            {
+                this.world2.worldPaused = true;
+                this.world1.worldPaused = true;
+                this.state[1] = 7;
+            }
+
+        }
+        else if(this.state[1] == 8)
+        {
+            var distance = this.world1.distanceToPlayer();
+            if(distance > 0 && distance < 300)
+            {
+                this.world2.worldPaused = true;
+                this.world1.worldPaused = true;
+                this.state[1] = 9;
+            }
+        }
+        else if(this.state[1] == 10)
+        {
+            var w2 = this.world1.playerPastObstacle();
+            if(w2 == 1)
+            {
+                this.state[1] = 11;
+                this.waitTimer = 50;
+            }
+            else if (w2 == 0)
+            {
+                this.state[1] = 5;   
+            }
+        }
+    }
+    
+    return false;  
+};
+
+TutorialHandler.prototype.check3BigObstacles = function()
+{
+    if(this.state[0] == 15 && this.state[1] == 15)
+    {
+        return true;   
+    }
+    
+    if(this.stoneDone && this.waitTimer <= 0)
+    {
+        this.stoneDone = false;
+        
+        if(this.testW1 && this.state[0] < 15)
+        {
+            this.world2.objectHandler.addObstacle(new BigObstacle());   
+        }
+        else if(this.state[1] < 15)
+        {
+            this.world1.objectHandler.addObstacle(new BigObstacle());   
+        }
+    }
+    
+    if(this.testW1)
+    {
+        var w1 = this.world2.playerPastObstacle();
+        if(w1 >= 0)
+        {            
+            if(w1 == 1)
+            {
+                this.state[0]++;
+                this.world1.succes++;
+                console.log(this.state[0]);
+            }
+            else
+            {
+                this.world2.objectHandler.player.isImmuneFor = 5;   
+            }
+            
+            this.waitTimer = 30;
+            this.stoneDone = true;
+            
+            // If the other one is less then 15 spawn a new one
+            if(this.state[1] < 15){
+                // spawn object in the other world
+                this.testW1 = false;
+            }
+        }
+    }
+    else
+    {
+        var w2 = this.world1.playerPastObstacle();
+        if(w2 >= 0)
+        {            
+            if(w2 == 1)
+            {
+                this.state[1]++;
+                this.world2.succes++;
+                console.log(this.state[1]);
+            }
+            else
+            {
+                this.world1.objectHandler.player.isImmuneFor = 5;   
+            }
+            
+
+            this.waitTimer = 30;
+            this.stoneDone = true;
+            
+            // If the other one is less then 15 spawn a new one
+            if(this.state[0] < 15){
+                // spawn object in the other world
+                this.testW1 = true;
+            }
+        }   
+    }
+    
+    return false;
+};
+
+/// REWRITE WHOLE FUNCTION AGAIN 
 TutorialHandler.prototype.tick = function()
 {
     if(!this.popup.isPopupShowing())
     {
         this.world1.tick();
-        this.world2.tick();
-
-        this.tryNextState();
-
-        if(this.tutorialDone)
+        this.world2.tick();  
+        
+        if(this.waitTimer > 0)
         {
-            this.doneCounter++;
-
-            if(this.doneCounter > 50)
-            {
-                this.item.itemHandler.switchItem(ItemGame);
-                this.item.itemHandler.gotoItem.gameHandler.startGameFromTutorial(this);
-            }
+            this.waitTimer--;   
         }
-        else
+        
+        if(this.checkFirstPart())
         {
-            if(this.colorTutStarted) {
-                if (this.world1.TouchDownInWorld()) {
-                    if (!this.world1.backgroundHandler.backgroundColor.switchLayer) {
-                        if (this.colorTutState[0] < 3 && this.colorTutState[0] > 0) {
-                            this.world1.backgroundHandler.backgroundColor.changeLayer(1);
-                        }
-                        else if (this.colorTutState[0] == 3) {
-                            this.world1.backgroundHandler.backgroundColor.greenLayer();
-                        }
-                        this.colorTutState[0]++;
-                    }
-                }
-
-                if (this.world2.TouchDownInWorld()) {
-                    if (!this.world2.backgroundHandler.backgroundColor.switchLayer) {
-                        if (this.colorTutState[1] < 3 && this.colorTutState[1] > 0) {
-                            this.world2.backgroundHandler.backgroundColor.changeLayer(1);
-                        }
-                        else if (this.colorTutState[1] == 3) {
-                            this.world2.backgroundHandler.backgroundColor.greenLayer();
-                        }
-                        this.colorTutState[1]++;
-                    }
-                }
-            }
-
-            if(this.colorTutState[0] > 3 && this.colorTutState[1] > 3)
+            if(this.check3SmallObstacles())
             {
-                this.tutorialDone = true;
-            }
-            else if(this.world1.jumpDone && this.world2.jumpDone)
-            {
-                // Stomp tutorial hier
-                if(this.world1Learning)
+                if(!this.smallDone)
                 {
-                    if(this.world1Step == 0)
-                    {
-                        this.world1.objectHandler.addObstacle(new BigObstacle(this.world1.dir));
-                        this.world1Step = 3;
-                    }
-
-                    if(this.world2Step == 0)
-                    {
-                        if(this.world1.objectHandler.obstacles[0] != undefined)
-                        {
-                            var distance = this.world1.currentObstacleFromPlayer();
-                            if(distance > 0 && distance < 450)
-                            {
-                                this.world1.worldPaused = true;
-                                //this.world2.worldPaused = false;
-                                this.world2Step++;
-                            }
-                        }
-                    }
-                    else if(this.world2Step == 1)
-                    {
-                        var distance = this.world1.currentObstacleFromPlayer();
-                        if(distance > 0 && distance < 320)
-                        {
-                            this.world2.worldPaused = true;
-                            this.world1.worldPaused = true;
-                            this.world2Step++;
-                        }
-                    }
-                    else if(this.world2Step == 2)
-                    {
-                        var distance = this.world1.currentObstacleFromPlayer();
-                        if(distance > 0 && distance < 200)
-                        {
-                            this.world2.worldPaused = true;
-                            this.world1.worldPaused = true;
-                            this.world2Step++;
-                        }
-                    }
-
-                    if(this.world1Step == 5 && this.world2Step == 3)
-                    {
-                        var distance = this.world1.currentObstacleFromPlayer();
-                        if(distance < -100)
-                        {
-                            this.world1Learning = false;
-                            this.world1Step = 0;
-                            this.world2Step = 0;
-                        }
-                    }
+                    this.smallDone = true; 
+                    this.world1.succes = 0;
+                    this.world2.succes = 0;
                 }
-                else // Switch world1 with world2
+                
+                if(this.beginBigObstacles())
                 {
-                    if(this.world2Step == 0)
+                    if(this.check3BigObstacles())
                     {
-                        this.world2.objectHandler.addObstacle(new BigObstacle(this.world2.dir));
-                        this.world2Step = 3;
-                    }
-
-
-                    if(this.world1Step == 0)
-                    {
-                        if(this.world2.objectHandler.obstacles[0] != undefined)
-                        {
-                            var distance = this.world2.currentObstacleFromPlayer();
-                            if(distance > 0 && distance < 450)
-                            {
-                                this.world2.worldPaused = true;
-                                //this.world2.worldPaused = false;
-                                this.world1.canPlayerJump = true;
-                                this.world1Step++;
-                            }
-                        }
-                    }
-                    else if(this.world1Step == 1)
-                    {
-                        var distance = this.world2.currentObstacleFromPlayer();
-                        if(distance > 0 && distance < 320)
-                        {
-                            this.world2.worldPaused = true;
-                            this.world1.worldPaused = true;
-                            this.world1Step++;
-                        }
-                    }
-                    else if(this.world1Step == 2)
-                    {
-                        var distance = this.world2.currentObstacleFromPlayer();
-                        if(distance > 0 && distance < 200)
-                        {
-                            this.world2.worldPaused = true;
-                            this.world1.worldPaused = true;
-                            this.world1Step++;
-                        }
-                    }
-
-                    if(this.world1Step == 3 && this.world2Step == 5)
-                    {
-                        var distance = this.world2.currentObstacleFromPlayer();
-                        console.log(distance);
-                        if(distance < -100)
-                        {
-                            this.colorTutStarted = true;
-                        }
+                        console.log("Testing succes");
                     }
                 }
             }
         }
+
     }
     else
     {
@@ -316,125 +444,7 @@ TutorialHandler.prototype.tick = function()
 TutorialHandler.prototype.draw = function(gfx)
 {
     this.world1.draw(gfx);
-    this.world2.draw(gfx);
-
-    if(this.tutorialDone)
-    {
-        this.world1.drawString(gfx, "Goed gedaan je bent klaar voor het echte werk!");
-        this.world2.drawString(gfx, "Goed gedaan je bent klaar voor het echte werk!");
-    }
-    else if(this.world1.jumpDone == true && this.world2.jumpDone == true)
-    {
-        if(this.colorTutStarted)
-        {
-            switch(this.colorTutState[0])
-            {
-                case 0:
-                    this.world1.drawString(gfx, "De lucht geeft aan hoe goed het gaat. Druk om door te gaan ");
-                    break;
-                case 1:
-                    this.world1.drawString(gfx, "De groene lucht is goed");
-                    break;
-                case 2:
-                    this.world1.drawString(gfx, "Met een oranje lucht Moet je oppassen");
-                    break;
-                case 3:
-                     this.world1.drawString(gfx, "Met een rode lucht ben je bijna dood");
-                     break;
-                default:
-                    this.world1.drawString(gfx, "Goed gedaan je bent klaar voor het echte werk! ");
-                    break;
-
-            }
-
-            switch(this.colorTutState[1])
-            {
-                case 0:
-                    this.world2.drawString(gfx, "De lucht geeft aan hoe goed het gaat. Druk om door te gaan ");
-                    break;
-                case 1:
-                    this.world2.drawString(gfx, "De groene lucht is goed");
-                    break;
-                case 2:
-                    this.world2.drawString(gfx, "Met een oranje lucht Moet je oppassen");
-                    break;
-                case 3:
-                     this.world2.drawString(gfx, "Met een rode lucht ben je bijna dood");
-                     break;
-                default:
-                    this.world2.drawString(gfx, "Goed gedaan je bent klaar voor het echte werk! ");
-                    break;
-            }
-        }
-        else if(this.world1Learning)
-        {
-            switch(this.world1Step)
-            {
-                case 1:
-                    this.world1.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen ");
-                break;
-                case 4:
-                    this.world1.drawString(gfx, "Spring nu om extra hoog te komen ");
-                break;
-                default:
-                    this.world1.drawString(gfx, "De andere speler is bezig met zijn deel ");
-                    break;
-            }
-
-            switch(this.world2Step)
-            {
-                case 0:
-                    this.world2.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen ");
-                break;
-                case 1:
-                    this.world2.drawString(gfx, "Spring ");
-                break;
-                case 2:
-                    this.world2.drawString(gfx, "Als je nu nog eens op spring drukt stomp je de andere omhoog ");
-                break;
-                case 3:
-                    this.world2.drawString(gfx, "De andere speler is bezig met zijn deel ");
-                break;
-                default:
-                    this.world2.drawString(gfx, "De andere speler is bezig met zijn deel ");
-                    break;
-            }
-        }
-        else if(!this.world1Learning)
-        {
-            switch(this.world2Step)
-            {
-                case 1:
-                    this.world2.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen");
-                break;
-                case 4:
-                    this.world2.drawString(gfx, "Spring nu om extra hoog te komen");
-                break;
-                default:
-                    this.world2.drawString(gfx, "Wacht op andere speler");
-                    break;
-            }
-
-            switch(this.world1Step)
-            {
-                case 0:
-                    this.world1.drawString(gfx, "Sommige obstakels zijn te groot om alleen over heen te komen");
-                break;
-                case 1:
-                    this.world1.drawString(gfx, "Spring");
-                break;
-                case 2:
-                    this.world1.drawString(gfx, "Als je nu nog eens op spring drukt stomp je de andere omhoog");
-                break;
-                case 3:
-                    this.world1.drawString(gfx, "Wacht op de andere speler");
-                break;
-                default:
-                    this.world1.drawString(gfx, "Wacht op andere speler");
-                    break;
-            }
-        }
-    }
-
+    this.world2.draw(gfx);    
+    
     this.popup.draw(gfx);
 };
