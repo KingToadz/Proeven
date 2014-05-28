@@ -33,6 +33,7 @@ Player = function()
     this.collisionContainer = new CollisionContainer();
     this.collisionContainer.addBox(10, 10, this.width - 20, this.height - 10);
 
+
     this.collisionContainer.owner = this;
     this.collisionContainer.initialize();
 
