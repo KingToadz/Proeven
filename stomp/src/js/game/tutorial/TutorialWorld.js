@@ -64,6 +64,8 @@ TutorialWorld = function(dir, tutorialHandler)
 
     this.objectHandler = new TutorialObjectHandler(this);
     this.worldPaused = false;
+    this.succes = 0;
+    this.dark = false;
 };
 
 // this will initialize the tutorial world
@@ -76,53 +78,17 @@ TutorialWorld.prototype.initialize = function()
     }
 
     this.objectHandler.initialize();
-
-    this.jumpState = new JumpState(this);
-};
-
-TutorialWorld.prototype.startJumpTutorial = function()
-{
-    // If it's set to true before the initialize it will skip the jump tutorial
-    if(!this.jumpDone)
-    {
-        this.jumpState.reset();
-    }
-    else
-    {
-        this.jumpState.done = true
-    }
-};
-
-// Get the distance between the player and the first obstacle in the object handler.
-// All the tutorials only use 1 object
-// Returns: if the first obstacle is undefined it will return -77777 else it will return the distance
-TutorialWorld.prototype.currentObstacleFromPlayer = function()
-{
-    if(this.objectHandler.obstacles[0] === undefined)
-    {
-        return -77777;
-    }
-
-    return this.objectHandler.obstacles[0].x - this.objectHandler.player.x;
 };
 
 // Check if the player can jump
 // Returns: if the player can jump
 TutorialWorld.prototype.continueJump = function()
 {
-    // if the jump tutorial is busy check that one
-    if(this.jumpDoing)
-    {
-        return this.jumpState.handleJump();
-    }
-
-    return this.handler.handleJump(this.dir);
+    return this.gameHandler.handleJump(this.dir);
 };
 
 TutorialWorld.prototype.tick = function()
 {
-    this.jumpDone = this.jumpState.done;
-
     for(var i = 0; i < this.buttons.length; i++)
     {
         this.buttons[i].tick();
@@ -135,14 +101,50 @@ TutorialWorld.prototype.tick = function()
         }
     }
 
-    if(this.jumpDoing){
-        this.jumpState.tick();
-    }
-
     if(!this.worldPaused){
-        this.backgroundHandler.tick();
         this.objectHandler.tick();
     }
+};
+
+TutorialWorld.prototype.distanceToPlayer = function()
+{
+    var max = -10000;
+    for(var i = 0; i < this.objectHandler.obstacles.length; i++)
+    {
+        if(this.objectHandler.obstacles[i].x + this.objectHandler.obstacles[i].width > this.objectHandler.player.x && !this.objectHandler.obstacles[i].passedPlayer)
+        {
+            if(this.objectHandler.obstacles[i].x - this.objectHandler.player.x > max)
+            {
+                max = this.objectHandler.obstacles[i].x - this.objectHandler.player.x
+            }
+        }
+    }
+    
+    return max;
+};
+
+//  1 Over obstacle no dead
+//  0 Over obstacle with dead
+// -1 Not over obstacle
+TutorialWorld.prototype.playerPastObstacle = function()
+{
+    for(var i = 0; i < this.objectHandler.obstacles.length; i++)
+    {
+        if(this.objectHandler.obstacles[i].x + this.objectHandler.obstacles[i].width < this.objectHandler.player.x && !this.objectHandler.obstacles[i].passedPlayer)
+        {            
+            this.objectHandler.obstacles[i].passedPlayer = true;
+            if(this.objectHandler.player.isImmuneFor <= 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0; 
+            }
+        }
+    }
+    
+    return -1;
 };
 
 TutorialWorld.prototype.TouchDownInWorld = function()
@@ -180,13 +182,26 @@ TutorialWorld.prototype.draw = function(gfx)
     this.backgroundHandler.draw(gfx);
 
     this.objectHandler.draw(gfx);
+    
+    for(var i = 0; i < 3; i++)
+    {
+        if(i < this.succes)
+        {
+            gfx.drawTexture(Files.PIC_GAME_TUTORIAL_FILLED.obj, Align.width / 2 + i * 50, 100, Files.PIC_GAME_TUTORIAL_FILLED.obj.width, Files.PIC_GAME_TUTORIAL_FILLED.obj.height);  
+        }
+        else   
+        {
+            gfx.drawTexture(Files.PIC_GAME_TUTORIAL_EMPTY.obj, Align.width / 2 + i * 50, 100, Files.PIC_GAME_TUTORIAL_FILLED.obj.width, Files.PIC_GAME_TUTORIAL_FILLED.obj.height);  
+        }
+         
+    }
+    
+    if(this.dark)
+    {
+        gfx.fillTransparentRect(0,0,Align.width, Align.height / 2, "#000", 0.8);   
+    }
 
     gfx.gfx.restore();
-
-    if(this.jumpDoing)
-    {
-        this.jumpState.draw(gfx);
-    }
 
     for(var i = 0; i < this.buttons.length; i++)
     {

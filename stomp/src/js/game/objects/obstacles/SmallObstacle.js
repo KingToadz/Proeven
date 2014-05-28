@@ -15,12 +15,16 @@ SmallObstacle = function()
     this.y = (Align.height / 2) - (this.height + 20);
 
     this.collisionContainer = new CollisionContainer();
+    
     this.collisionContainer.addBox(5, this.height / 2, 45, this.height / 2); // medium left
     this.collisionContainer.addBox(this.width - 50, this.height / 2, 45, this.height / 2); // medium right
     this.collisionContainer.addBox(20, (this.height / 2) - 20, 30, 20); // small center left
     this.collisionContainer.addBox(this.width - 50, (this.height / 2) - 20, 30, 20); // small center right
     this.collisionContainer.addBox(50, 0, this.width - 100, this.height); // long middle
     //this.collisionContainer.addBox(0, 0, this.width, this.height);
+
+    
+    this.passedPlayer = false;
 
     this.collisionContainer.owner = this;
     this.collisionContainer.initialize();

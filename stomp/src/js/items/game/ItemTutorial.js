@@ -27,6 +27,4 @@ ItemTutorial.prototype.tick = function()
 ItemTutorial.prototype.draw = function(gfx)
 {
     this.tutHandler.draw(gfx);
-    //gfx.clear('#000000');
-    //gfx.fillRect(10, 10, 100, 100, "#FF0000");
 };
