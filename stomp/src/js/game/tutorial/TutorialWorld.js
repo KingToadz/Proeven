@@ -187,11 +187,11 @@ TutorialWorld.prototype.draw = function(gfx)
     {
         if(i < this.succes)
         {
-            gfx.drawTexture(Files.PIC_GAME_TUTORIAL_FILLED.obj, Align.width / 2 + i * 50, 100, Files.PIC_GAME_TUTORIAL_FILLED.obj.width, Files.PIC_GAME_TUTORIAL_FILLED.obj.height);  
+            gfx.drawTexture(Files.PIC_GAME_TUTORIAL_FILLED, Align.width / 2 + i * 50, 100, Files.PIC_GAME_TUTORIAL_FILLED.width, Files.PIC_GAME_TUTORIAL_FILLED.height);  
         }
         else   
         {
-            gfx.drawTexture(Files.PIC_GAME_TUTORIAL_EMPTY.obj, Align.width / 2 + i * 50, 100, Files.PIC_GAME_TUTORIAL_FILLED.obj.width, Files.PIC_GAME_TUTORIAL_FILLED.obj.height);  
+            gfx.drawTexture(Files.PIC_GAME_TUTORIAL_EMPTY, Align.width / 2 + i * 50, 100, Files.PIC_GAME_TUTORIAL_FILLED.width, Files.PIC_GAME_TUTORIAL_FILLED.height);  
         }
          
     }

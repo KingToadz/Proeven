@@ -63,8 +63,8 @@ Files.PIC_GAME_OBJECT_PLAYER_JUMP = "Assets/Game/Objects/character_jump.png";
 Files.PIC_GAME_OBJECT_OBSTACLESMALL = "Assets/Game/Objects/obstakel__s.png";
 Files.PIC_GAME_OBJECT_OBSTACLEBIG = "Assets/Game/Objects/obstakel__l.png";
 
-Files.PIC_GAME_TUTORIAL_EMPTY = Files.addFile("Assets/Game/tut_empty.png");
-Files.PIC_GAME_TUTORIAL_FILLED = Files.addFile("Assets/Game/tut_filled.png");
+Files.PIC_GAME_TUTORIAL_EMPTY = "Assets/Game/tut_empty.png";
+Files.PIC_GAME_TUTORIAL_FILLED = "Assets/Game/tut_filled.png";
 
 Files.SND_GAME_BACKGROUND = "Assets/Audio/Background_mid.ogg";
 Files.SND_GAME_PLAYER_JUMP = "Assets/Audio/Jump.ogg";
