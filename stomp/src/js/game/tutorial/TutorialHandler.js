@@ -138,6 +138,7 @@ TutorialHandler.prototype.checkFirstPart = function()
     
     if(this.state[0] == 0)
     {
+        this.world2.dark = true;
         var distance = this.world1.distanceToPlayer();
         if(distance > 0 && distance < 200 && this.state[0] == 0)
         {
@@ -153,6 +154,8 @@ TutorialHandler.prototype.checkFirstPart = function()
             this.state[0] = 2;   
             this.world1.worldPaused = true;
             this.world2.worldPaused = false;
+            this.world2.dark = false;
+            this.world1.dark = true;
             this.world2.objectHandler.addObstacle(new SmallObstacle());
         }
     }
@@ -173,6 +176,7 @@ TutorialHandler.prototype.checkFirstPart = function()
             this.state[1] = 2;   
             this.world1.worldPaused = false;
             this.world2.worldPaused = false;
+            this.world1.dark = false;
             
             // Spawn the next object this is the start for the 3 blocks
             this.world1.objectHandler.addObstacle(new SmallObstacle());
