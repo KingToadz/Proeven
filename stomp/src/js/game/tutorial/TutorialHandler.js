@@ -63,7 +63,6 @@ TutorialHandler.prototype.handleJump = function(worldDir)
         if(this.state[0] == 1)
         {
             this.world1.worldPaused = false;
-            //this.world2.worldPaused = false;
             return true;
         }
         // Both busy with jump
@@ -71,6 +70,7 @@ TutorialHandler.prototype.handleJump = function(worldDir)
         {
             return true;
         }
+        // Big stone tutorial
         else if(this.state[0] == 7)
         {
             this.state[0]++;
@@ -78,6 +78,7 @@ TutorialHandler.prototype.handleJump = function(worldDir)
             this.world1.worldPaused = false;
             return true;   
         }
+        // Big stone multiple
         else if(this.state[0] == 9)
         {
             this.state[0]++;
@@ -85,7 +86,7 @@ TutorialHandler.prototype.handleJump = function(worldDir)
             this.world1.worldPaused = false;
             return true;   
         }
-        else if(this.state[0] >= 11 && this.state[0] < 15)   
+        else if(this.state[0] > 11 && this.state[0] < 15)   
         {
             return true;
         }
@@ -119,11 +120,10 @@ TutorialHandler.prototype.handleJump = function(worldDir)
             this.world1.worldPaused = false;
             return true;   
         }
-        else if(this.state[1] >= 11 && this.state[1] < 15)   
+        else if(this.state[1] > 11 && this.state[1] < 15)   
         {
             return true;
         }
-        
     }
     
     return false;
@@ -135,6 +135,9 @@ TutorialHandler.prototype.checkFirstPart = function()
     {
         return true;   
     }
+    
+    this.world1.objectHandler.player.canStomp = false;
+    this.world2.objectHandler.player.canStomp = false;
     
     if(this.state[0] == 0)
     {
@@ -236,6 +239,9 @@ TutorialHandler.prototype.beginBigObstacles = function()
         return true;   
     }
     
+    this.world1.objectHandler.player.canStomp = true;
+    this.world2.objectHandler.player.canStomp = true;
+    
     // Start with an object
     if(this.state[0] == 5)
     {
@@ -313,7 +319,8 @@ TutorialHandler.prototype.beginBigObstacles = function()
             var w2 = this.world1.playerPastObstacle();
             if(w2 == 1)
             {
-                this.state[1] = 11;
+                this.state[0] = 12;
+                this.state[1] = 12;
                 this.waitTimer = 50;
             }
             else if (w2 == 0)
@@ -432,7 +439,8 @@ TutorialHandler.prototype.tick = function()
                 {
                     if(this.check3BigObstacles())
                     {
-                        console.log("Testing succes");
+                        this.item.itemHandler.switchItem(ItemGame);
+                        this.item.itemHandler.gotoItem.gameHandler.startGameFromTutorial(this);
                     }
                 }
             }
@@ -447,8 +455,8 @@ TutorialHandler.prototype.tick = function()
 
 TutorialHandler.prototype.draw = function(gfx)
 {
-    this.world1.draw(gfx);
-    this.world2.draw(gfx);    
+    this.world1.draw(gfx, "Test");
+    this.world2.draw(gfx, "Test2");    
     
     this.popup.draw(gfx);
 };

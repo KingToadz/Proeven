@@ -102,6 +102,7 @@ TutorialWorld.prototype.tick = function()
     }
 
     if(!this.worldPaused){
+        this.backgroundHandler.tick();
         this.objectHandler.tick();
     }
 };
@@ -172,12 +173,14 @@ TutorialWorld.prototype.TouchDownInWorld = function()
     return false;
 };
 
-TutorialWorld.prototype.draw = function(gfx)
+TutorialWorld.prototype.draw = function(gfx, text)
 {
     // prepare draw
     gfx.gfx.save();
     gfx.gfx.scale(1, this.dir);
     gfx.gfx.translate(0, (Align.height / 2) * (this.dir - 1));
+    
+    gfx.flipText = (this.dir == -1);
 
     this.backgroundHandler.draw(gfx);
 
@@ -200,23 +203,15 @@ TutorialWorld.prototype.draw = function(gfx)
     {
         gfx.fillTransparentRect(0,0,Align.width, Align.height / 2, "#000", 0.8);   
     }
+    
+    gfx.drawString(text, Align.width / 2, Align.height / 4, "#FFF", "80pt " + Files.FNT_DEFAULT_FONT);
 
     gfx.gfx.restore();
+    
+    gfx.flipText = false;
 
     for(var i = 0; i < this.buttons.length; i++)
     {
         this.buttons[i].draw(gfx);
-    }
-};
-
-TutorialWorld.prototype.drawString = function(gfx, text)
-{
-    if(this.dir == -1)
-    {
-        gfx.drawReversedCenteredString(text, Align.width / 2, 200, "#FFF", "80pt " + Files.FNT_TUTORIAL_FONT);
-    }
-    else
-    {
-        gfx.drawCenteredString(text, Align.width / 2, 200, "#FFF", "80pt " + Files.FNT_TUTORIAL_FONT);
     }
 };

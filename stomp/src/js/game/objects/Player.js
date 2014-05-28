@@ -49,6 +49,8 @@ Player = function()
     this.shouldStomp = false;
     this.hasJumped = false;
     this.isStomping = false;
+    
+    this.canStomp = true;
 };
 
 Player.prototype.tryJump = function()
@@ -70,11 +72,14 @@ Player.prototype.tryJump = function()
         }
         else
         {
-            this.speedy = 50;
-            this.shouldStomp = true;
-            this.isStomping = true;
-            this.stompAnimation.reset();
-            this.animationHandler.addStompSmoke(this.x - 50, this.groundy);
+            if(this.canStomp)
+            {
+                this.speedy = 50;
+                this.shouldStomp = true;
+                this.isStomping = true;
+                this.stompAnimation.reset();
+                this.animationHandler.addStompSmoke(this.x - 50, this.groundy);
+            }
         }
     }
 };
