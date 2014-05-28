@@ -8,6 +8,8 @@ ObjectHandler = function(world)
 
     this.canSpawnItems = true;
 
+    this.moveSpeed = 10;
+
     // obstacles
     this.obstacleSpawner = new ObstacleSpawner();
     this.obstacleSpawner.objectHandler = this;
@@ -26,6 +28,7 @@ ObjectHandler.prototype.initialize = function()
 
 ObjectHandler.prototype.addObstacle = function(obj)
 {
+    obj.objectHandler = this;
     this.obstacles.push(obj);
 };
 

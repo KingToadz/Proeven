@@ -4,29 +4,26 @@
 
 Player = function()
 {
-    this.texture = Files.PIC_GAME_OBJECT_PLAYER.obj;
+    this.texture = Files.PIC_GAME_OBJECT_PLAYER;
 
-    this.runAnimation = new AnimationHandler(this.texture, 97, 91, 1, 5, 5);
+    this.runAnimation = new Animation(this.texture, 97, 91, 1, 5, 5);
     this.runAnimation.setFPS(15);
 
-    this.runAnimationDust = new AnimationHandler(Files.PIC_GAME_OBJECT_PLAYER_RUN_DUST.obj, 94, 75, 1, 5, 5);
+    this.runAnimationDust = new Animation(Files.PIC_GAME_OBJECT_PLAYER_RUN_DUST, 94, 75, 1, 5, 5);
     this.runAnimationDust.setFPS(15);
 
-    this.jumpAnimation = new AnimationHandler(Files.PIC_GAME_OBJECT_PLAYER_JUMP.obj, 107, 101, 2, 5, 5);
+    this.jumpAnimation = new Animation(Files.PIC_GAME_OBJECT_PLAYER_JUMP, 107, 101, 2, 5, 5);
     this.jumpAnimation.setFPS(15);
 
-    this.stompAnimation = new AnimationHandler(Files.PIC_GAME_OBJECT_PLAYER_STOMP.obj, 158, 300, 3, 4, 11);
+    this.stompAnimation = new Animation(Files.PIC_GAME_OBJECT_PLAYER_STOMP, 158, 300, 3, 4, 11);
     this.stompAnimation.setFPS(15);
     this.stompAnimation.visibleForOneLoop = true;
 
-    this.stompAnimationDust = new AnimationHandler(Files.PIC_GAME_OBJECT_PLAYER_STOMP_DUST.obj, 251, 192, 2, 5, 10);
-    this.stompAnimationDust.visible = false;
-    this.stompAnimationDust.setFPS(15);
-    this.stompAnimationDust.visibleForOneLoop = true;
-
-    this.jumpAnimationDust = new AnimationHandler(Files.PIC_GAME_OBJECT_PLAYER_JUMP_DUST.obj, 112, 92, 2, 5, 10);
+    this.jumpAnimationDust = new Animation(Files.PIC_GAME_OBJECT_PLAYER_JUMP_DUST, 112, 92, 2, 5, 10);
     this.jumpAnimationDust.setFPS(30);
     this.jumpAnimationDust.visibleForOneLoop = true;
+    
+    this.animationHandler = new AnimationHandler();
 
     this.showJumpAnimation = false;
 
@@ -34,7 +31,7 @@ Player = function()
     this.height = this.runAnimation.height;
 
     this.collisionContainer = new CollisionContainer();
-    this.collisionContainer.addBox(0, 0, this.width, this.height);
+    this.collisionContainer.addBox(10, 10, this.width - 20, this.height - 10);
 
     this.collisionContainer.owner = this;
     this.collisionContainer.initialize();
@@ -55,17 +52,20 @@ Player = function()
 
 Player.prototype.tryJump = function()
 {
-    if(this.hasCollided == false)
+    //if(this.hasCollided == false)
     {
-        if(this.hasJumped == false)
+        if(this.y == this.groundy)
         {
-            this.showJumpAnimation = true;
-            this.jumpAnimation.reset();
-            this.jumpAnimationDust.reset();
+            if(this.hasJumped == false)
+            {
+                this.showJumpAnimation = true;
+                this.jumpAnimation.reset();
+                this.animationHandler.addJumpSmoke(this.x, this.y);
 
-            this.speedy = -20;
-            this.hasJumped = true;
-            SFX.playSound(Files.SND_GAME_PLAYER_JUMP);
+                this.speedy = -20;
+                this.hasJumped = true;
+                SFX.playSound(Files.SND_GAME_PLAYER_JUMP);
+            }
         }
         else
         {
@@ -73,18 +73,20 @@ Player.prototype.tryJump = function()
             this.shouldStomp = true;
             this.isStomping = true;
             this.stompAnimation.reset();
-            this.stompAnimationDust.reset();
+            this.animationHandler.addStompSmoke(this.x - 50, this.groundy);
         }
     }
 };
 
 Player.prototype.tryStomp = function()
 {
-    if(this.hasCollided == false && this.y == this.groundy)
+    if(this.y == this.groundy) //if(this.hasCollided == false && this.y == this.groundy)
     {
-        this.speedy = -40;
+        this.speedy = -25;
         this.showJumpAnimation = true;
         this.jumpAnimation.reset();
+        //this.stompGroundAnimation.reset();
+        this.animationHandler.addGroundStomp(this.x - this.width / 2, this.groundy + 65);
     }
 };
 
@@ -92,9 +94,9 @@ Player.prototype.onCollision = function()
 {
     if(this.hasCollided == false)
     {
-        this.collisionContainer.isColliding = true;
+        //this.collisionContainer.isColliding = true;
         this.hasCollided = true;
-        this.shouldStomp = false;
+        //this.shouldStomp = false;
         this.objectHandler.world.backgroundHandler.onPlayerDead();
 
         this.isImmuneFor = 180;
@@ -108,7 +110,8 @@ Player.prototype.tick = function()
 {
     this.runAnimation.tick();
     this.runAnimationDust.tick();
-    this.stompAnimationDust.tick();
+    
+    this.animationHandler.tick();
 
     this.speedy += this.gravity;
     this.y += this.speedy;
@@ -132,11 +135,7 @@ Player.prototype.tick = function()
         this.jumpAnimationDust.tick();
     }
 
-    if(!this.stompAnimationDust.visible)
-    {
-        this.isStomping = false;
-    }
-    else if(this.isStomping)
+    if(this.isStomping)
     {
         this.stompAnimation.tick();
     }
@@ -154,7 +153,7 @@ Player.prototype.tick = function()
     {
         if(this.hasCollided == false)
         {
-            this.collisionContainer.tick(this.objectHandler.obstacles);
+            this.collisionContainer.collisionCheck(this.objectHandler.obstacles);
         }
     }
 };
@@ -163,11 +162,9 @@ Player.prototype.draw = function(gfx)
 {
     if(this.isImmuneFor > 0)
     {
-        //gfx.drawTransparentTexture(this.texture, this.x, this.y, this.width, this.height, 0.3);
         if(this.showJumpAnimation)
         {
             this.jumpAnimation.drawTransparent(gfx, this.x, this.y, 0.3);
-            this.jumpAnimationDust.drawTransparent(gfx, this.x - 50, this.groundy, 0.3);
         }
         else
         {
@@ -177,7 +174,6 @@ Player.prototype.draw = function(gfx)
     }
     else
     {
-        //gfx.drawTexture(this.texture, this.x, this.y, this.width, this.height);
         /*if(this.isStomping)
         {
             this.stompAnimation.draw(gfx, this.x, this.y);
@@ -185,18 +181,14 @@ Player.prototype.draw = function(gfx)
         else */if(this.showJumpAnimation)
         {
             this.jumpAnimation.draw(gfx, this.x, this.y);
-            this.jumpAnimationDust.draw(gfx, this.x - 50, this.groundy);
         }
         else
         {
             this.runAnimation.draw(gfx, this.x, this.y);
             this.runAnimationDust.draw(gfx, this.x - this.width + 10, this.y + 20);
         }
-
-        if(!this.stompAnimationDust.paused){
-            this.stompAnimationDust.draw(gfx, this.x - 50, this.groundy - this.stompAnimationDust.height / 2);
-        }
     }
+    this.animationHandler.draw(gfx);
 
     this.collisionContainer.draw(gfx);
 };

@@ -4,13 +4,13 @@
 
 ItemLoader = function()
 {
-    this.backgroundTexture = Files.PIC_LOADER_BACKGROUND.obj;
+    this.backgroundTexture = Files.PREPIC_LOADER_BACKGROUND;
 
-    this.loader = new Loader(Files.files);
+    this.loader = new Loader(1);
     this.loader.start();
 
-    this.loadingBar = Files.PIC_LOADER_LOADINGBAR.obj;
-    this.loadingBarOutline = Files.PIC_LOADER_LOADINGBAROUTLINE.obj;
+    this.loadingBar = Files.PREPIC_LOADER_LOADINGBAR;
+    this.loadingBarOutline = Files.PREPIC_LOADER_LOADINGBAROUTLINE;
 };
 
 ItemLoader.prototype.initialize = function()

@@ -6,6 +6,8 @@ TutorialObjectHandler = function(world)
 {
     this.world = world;
 
+    this.moveSpeed = 10;
+
     // obstacles
     this.obstacles = [];
 
@@ -21,6 +23,7 @@ TutorialObjectHandler.prototype.initialize = function()
 
 TutorialObjectHandler.prototype.addObstacle = function(obj)
 {
+    obj.objectHandler = this;
     this.obstacles.push(obj);
 };
 

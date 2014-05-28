@@ -4,7 +4,7 @@
 
 ItemCreditsMenu = function()
 {
-    this.backgroundTexture = Files.PIC_CREDITSMENU_BACKGROUND.obj;
+    this.backgroundTexture = Files.PIC_CREDITSMENU_BACKGROUND;
 
     this.buttons = [];
 
@@ -14,9 +14,9 @@ ItemCreditsMenu = function()
     button = new Button();
     button.alignx = Align.LEFT;
     button.aligny = Align.TOP;
-    button.setTexture(Files.PIC_MENU_BUTTON_BACK.obj);
+    button.setTexture(Files.PIC_MENU_BUTTON_BACK);
     button.setPosition(120, 120);
-    button.setSize(Files.PIC_MENU_BUTTON_BACK.obj.width, Files.PIC_MENU_BUTTON_BACK.obj.height);
+    button.setSize(Files.PIC_MENU_BUTTON_BACK.width, Files.PIC_MENU_BUTTON_BACK.height);
     button.onClick = function(){this.item.itemHandler.switchItem(ItemMainMenu, "up");};
     this.buttons.push(button);
 };

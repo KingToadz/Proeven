@@ -4,7 +4,9 @@
 
 ItemMainMenu = function()
 {
-    this.backgroundTexture = Files.PIC_MAINMENU_BACKGROUND.obj;
+    this.backgroundTexture = Files.PIC_MAINMENU_BACKGROUND;
+
+    //Util.imageChangeNonTransparencyToColor(this.backgroundTexture, [0, 0, 255]);
 
     this.buttons = [];
 
@@ -23,28 +25,28 @@ ItemMainMenu = function()
     button = new Button();
     button.alignx = Align.CENTER;
     button.aligny = Align.CENTER;
-    button.setTexture(Files.PIC_MAINMENU_BUTTON_PLAY.obj);
+    button.setTexture(Files.PIC_MAINMENU_BUTTON_PLAY);
     button.setPosition(0, 400);
-    button.setSize(Files.PIC_MAINMENU_BUTTON_PLAY.obj.width, Files.PIC_MAINMENU_BUTTON_PLAY.obj.height);
+    button.setSize(Files.PIC_MAINMENU_BUTTON_PLAY.width, Files.PIC_MAINMENU_BUTTON_PLAY.height);
     this.buttons.push(button);
 
     // OptionsButton
     button = new Button();
     button.alignx = Align.LEFT;
     button.aligny = Align.TOP;
-    button.setTexture(Files.PIC_MAINMENU_BUTTON_OPTIONS.obj);
+    button.setTexture(Files.PIC_MAINMENU_BUTTON_OPTIONS);
     button.setPosition(120, 120);
-    button.setSize(Files.PIC_MAINMENU_BUTTON_OPTIONS.obj.width, Files.PIC_MAINMENU_BUTTON_OPTIONS.obj.height);
-    button.onClick = function(){this.item.itemHandler.switchItem(ItemOptionsMenu, "down");};
+    button.setSize(Files.PIC_MAINMENU_BUTTON_OPTIONS.width, Files.PIC_MAINMENU_BUTTON_OPTIONS.height);
+    button.onClick = function(){var func = function(){}; func.execute = function(){func.item.itemHandler.switchItem(ItemMainMenu, "up");}; this.item.itemHandler.switchItem(ItemOptionsMenu, "down"); this.item.itemHandler.gotoItem.setBackButtonFunction(func);};
     this.buttons.push(button);
 
     // CreditsButton
     button = new Button();
     button.alignx = Align.RIGHT;
     button.aligny = Align.TOP;
-    button.setTexture(Files.PIC_MAINMENU_BUTTON_CREDITS.obj);
+    button.setTexture(Files.PIC_MAINMENU_BUTTON_CREDITS);
     button.setPosition(-120, 120);
-    button.setSize(Files.PIC_MAINMENU_BUTTON_CREDITS.obj.width, Files.PIC_MAINMENU_BUTTON_CREDITS.obj.height);
+    button.setSize(Files.PIC_MAINMENU_BUTTON_CREDITS.width, Files.PIC_MAINMENU_BUTTON_CREDITS.height);
     button.onClick = function(){this.item.itemHandler.switchItem(ItemCreditsMenu, "down");};
     this.buttons.push(button);
 
@@ -89,5 +91,5 @@ ItemMainMenu.prototype.draw = function(gfx)
         this.buttons[i].draw(gfx);
     }
 
-    gfx.drawString("HighScore: " + this.highScore, 50, (Align.height / 2) - 50, "#FFF", "80pt " + Files.FNT_DEFAULT_FONT.obj);
+    gfx.drawString("HighScore: " + parseInt(this.highScore) + "m", 50, (Align.height / 2) - 50, "#FFF", "80pt " + Files.FNT_DEFAULT_FONT);
 };

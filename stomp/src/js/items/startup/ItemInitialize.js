@@ -6,7 +6,7 @@ ItemInitialize = function(){};
 
 ItemInitialize.prototype.initialize = function()
 {
-    this.loader = new Loader(Files.prefiles);
+    this.loader = new Loader(0);
     this.loader.start();
 };
 

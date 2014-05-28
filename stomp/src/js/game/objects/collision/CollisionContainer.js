@@ -33,6 +33,7 @@ CollisionContainer.prototype.initialize = function()
     for(var i = 0; i < this.boxes.length; i++)
     {
         var box = this.boxes[i];
+
         var cx1 = box.x;
         var cy1 = box.y;
         var cx2 = box.x + box.width;
@@ -69,25 +70,28 @@ CollisionContainer.prototype.isCollidingWith = function(checkContainer)
     return CollisionUtil.checkCollision(tx1, ty1, tx2, ty2, cx1, cy1, cx2, cy2);
 };
 
-CollisionContainer.prototype.tick = function(obstacles)
+CollisionContainer.prototype.collisionCheck = function(obstacles)
 {
     for(var i = 0; i < obstacles.length; i++)
     {
         if(obstacles[i].collisionContainer.isCollidingWith(this))
         {
-            if(obstacles[i].collisionContainer.boxes.length == 1)
+            if(obstacles[i].collisionContainer.boxes.length == 1 && this.boxes.length == 1)
             {
                 obstacles[i].onPlayerCollision(this.owner);
             }
             else
             {
-                var boxes = obstacles[i].collisionContainer.boxes;
-                for(var j = 0; j < boxes.length; j++)
+                var checkBoxes = obstacles[i].collisionContainer.boxes;
+                for(var j = 0; j < this.boxes.length; j++)
                 {
-                    if(boxes[j].isCollidingWith(this.boxes[0]))
+                    for (var k = 0; k < checkBoxes.length; k++)
                     {
-                        obstacles[i].onPlayerCollision(this.owner);
-                        break;
+                        if (checkBoxes[k].isCollidingWith(this.boxes[j]))
+                        {
+                            obstacles[i].onPlayerCollision(this.owner);
+                            break;
+                        }
                     }
                 }
             }
@@ -97,13 +101,10 @@ CollisionContainer.prototype.tick = function(obstacles)
 
 CollisionContainer.prototype.draw = function(gfx)
 {
-    if(this.boxes.length > 0)
-    {
-        for(var i = 0; i < this.boxes.length; i++)
-        {
-            //this.boxes[i].draw(gfx);
-        }
-    }
+    //gfx.drawRect(this.owner.x + this.x, this.owner.y + this.y, this.width, this.height, "#F00", 2);
 
-    //gfx.drawRect(this.owner.x + this.x, this.owner.y + this.y, this.width, this.height, "#FF0", 2);
+    for(var i = 0; i < this.boxes.length; i++)
+    {
+        this.boxes[i].draw(gfx);
+    }
 };

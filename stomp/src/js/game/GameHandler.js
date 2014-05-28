@@ -13,7 +13,7 @@ GameHandler = function(item)
 
 GameHandler.prototype.startNewGame = function()
 {
-    this.score = 0;
+    this.score = 0.0;
 
     this.popup = new PopupHandler(this.item, Align.width * 0.8, Align.height * 0.8);
 
@@ -83,7 +83,7 @@ GameHandler.prototype.tick = function()
         this.world1.tick();
         this.world2.tick();
 
-        this.score++;
+        this.score += 0.254; // 55 km/h / 3.6 = 15.27 m/s / 60fps = 0.254 m/tick
 
         if(this.world1.backgroundHandler.fails > 6 || this.world2.backgroundHandler.fails > 6)
         {
@@ -103,8 +103,8 @@ GameHandler.prototype.draw = function(gfx)
     this.world1.draw(gfx);
     this.world2.draw(gfx);
 
-    gfx.drawCenteredString("Score: " + this.score, Align.width / 2, 50, "#FFF", "70pt " + Files.FNT_DEFAULT_FONT.obj);
-    gfx.drawReversedCenteredString("Score: " + this.score, Align.width / 2, 480, "#FFF", "70pt " + Files.FNT_DEFAULT_FONT.obj);
+    //gfx.drawCenteredString("Score: " + this.score, Align.width / 2, 60, "#FFF", "70pt " + Files.FNT_DEFAULT_FONT);
+    //gfx.drawReversedCenteredString("Score: " + this.score, Align.width / 2, 480, "#FFF", "70pt " + Files.FNT_DEFAULT_FONT);
 
     this.popup.draw(gfx);
 };

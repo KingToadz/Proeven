@@ -6,6 +6,8 @@ PopupPause = function(width, height)
     this.y = Align.height / 2 - this.height / 2;
     this.show = false;
 
+    this.alpha = 0.6;
+    
     this.buttons = [];
 
     var button;
@@ -14,9 +16,9 @@ PopupPause = function(width, height)
     button = new Button();
     button.alignx = Align.CENTER;
     button.aligny = Align.CENTER;
-    button.setTexture(Files.PIC_GAME_MENU_BUTTON_BACK.obj);
+    button.setTexture(Files.PIC_GAME_MENU_BUTTON_BACK);
     button.setPosition(0, -(button.texture.height + 10));
-    button.setSize(Files.PIC_GAME_MENU_BUTTON_BACK.obj.width, Files.PIC_GAME_MENU_BUTTON_BACK.obj.height);
+    button.setSize(Files.PIC_GAME_MENU_BUTTON_BACK.width, Files.PIC_GAME_MENU_BUTTON_BACK.height);
     button.onClick = function(){this.popup.show = false;};
     this.buttons.push(button);
 
@@ -24,19 +26,19 @@ PopupPause = function(width, height)
     button = new Button();
     button.alignx = Align.CENTER;
     button.aligny = Align.CENTER;
-    button.setTexture(Files.PIC_GAME_MENU_BUTTON_OPTION.obj);
+    button.setTexture(Files.PIC_GAME_MENU_BUTTON_OPTION);
     button.setPosition(0, 0);
-    button.setSize(Files.PIC_GAME_MENU_BUTTON_OPTION.obj.width, Files.PIC_GAME_MENU_BUTTON_OPTION.obj.height);
-    //button.onClick = function(){this.item.itemHandler.switchItem(ItemOptionsMenu);};
+    button.setSize(Files.PIC_GAME_MENU_BUTTON_OPTION.width, Files.PIC_GAME_MENU_BUTTON_OPTION.height);
+    button.onClick = function(){var switchItem = this.item.constructor; var func = function(){}; func.execute = function(){func.item.itemHandler.switchItem(switchItem, "up");}; this.item.itemHandler.switchItem(ItemOptionsMenu, "down"); this.item.itemHandler.gotoItem.setBackButtonFunction(func);};
     this.buttons.push(button);
 
     // menu button
     button = new Button();
     button.alignx = Align.CENTER;
     button.aligny = Align.CENTER;
-    button.setTexture(Files.PIC_GAME_MENU_BUTTON_HELP.obj);
+    button.setTexture(Files.PIC_GAME_MENU_BUTTON_HELP);
     button.setPosition(0, button.texture.height + 10);
-    button.setSize(Files.PIC_GAME_MENU_BUTTON_HELP.obj.width, Files.PIC_GAME_MENU_BUTTON_HELP.obj.height);
+    button.setSize(Files.PIC_GAME_MENU_BUTTON_HELP.width, Files.PIC_GAME_MENU_BUTTON_HELP.height);
     button.onClick = function(){this.item.itemHandler.switchItem(ItemMainMenu);};
     this.buttons.push(button);
 };

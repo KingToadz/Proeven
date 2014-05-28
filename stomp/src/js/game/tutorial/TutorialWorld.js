@@ -27,8 +27,8 @@ TutorialWorld = function(dir, tutorialHandler)
     button = new RotatableButton();
     button.alignx = Align.LEFT;
     button.aligny = Align.TOP;
-    button.setTexture(Files.PIC_GAME_BUTTON_JUMP.obj);
-    button.setSize(Files.PIC_GAME_BUTTON_JUMP.obj.width, Files.PIC_GAME_BUTTON_JUMP.obj.height);
+    button.setTexture(Files.PIC_GAME_BUTTON_JUMP);
+    button.setSize(Files.PIC_GAME_BUTTON_JUMP.width, Files.PIC_GAME_BUTTON_JUMP.height);
 
     var screenPosX = -(Align.width / 2) * (dir - 1);
     var screenPosY = -(Align.height / 2) * (dir - 1);
@@ -46,8 +46,8 @@ TutorialWorld = function(dir, tutorialHandler)
     button = new RotatableButton();
     button.alignx = Align.LEFT;
     button.aligny = Align.TOP;
-    button.setTexture(Files.PIC_GAME_BUTTON_BACK.obj);
-    button.setSize(Files.PIC_GAME_BUTTON_BACK.obj.width, Files.PIC_GAME_BUTTON_BACK.obj.height);
+    button.setTexture(Files.PIC_GAME_BUTTON_BACK);
+    button.setSize(Files.PIC_GAME_BUTTON_BACK.width, Files.PIC_GAME_BUTTON_BACK.height);
 
     var screenPosX = (Align.width / 2) * (dir + 1);
     var screenPosY = -(Align.height / 2) * (dir - 1);
@@ -78,10 +78,14 @@ TutorialWorld.prototype.initialize = function()
     this.objectHandler.initialize();
 
     this.jumpState = new JumpState(this);
+};
+
+TutorialWorld.prototype.startJumpTutorial = function()
+{
     // If it's set to true before the initialize it will skip the jump tutorial
     if(!this.jumpDone)
     {
-        this.jumpState.start();
+        this.jumpState.reset();
     }
     else
     {
@@ -194,10 +198,10 @@ TutorialWorld.prototype.drawString = function(gfx, text)
 {
     if(this.dir == -1)
     {
-        gfx.drawReversedCenteredString(text, Align.width / 2, 200, "#FFF", "40pt " + Files.FNT_TUTORIAL_FONT.obj);
+        gfx.drawReversedCenteredString(text, Align.width / 2, 200, "#FFF", "80pt " + Files.FNT_TUTORIAL_FONT);
     }
     else
     {
-        gfx.drawCenteredString(text, Align.width / 2, 200, "#FFF", "40pt " + Files.FNT_TUTORIAL_FONT.obj);
+        gfx.drawCenteredString(text, Align.width / 2, 200, "#FFF", "80pt " + Files.FNT_TUTORIAL_FONT);
     }
 };

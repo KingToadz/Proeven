@@ -6,7 +6,7 @@ SmallObstacle = function()
 {
     this.remove = false;
 
-    this.texture = Files.PIC_GAME_OBJECT_OBSTACLESMALL.obj;
+    this.texture = Files.PIC_GAME_OBJECT_OBSTACLESMALL;
 
     this.width = this.texture.width;
     this.height = this.texture.height;
@@ -15,7 +15,12 @@ SmallObstacle = function()
     this.y = (Align.height / 2) - (this.height + 20);
 
     this.collisionContainer = new CollisionContainer();
-    this.collisionContainer.addBox(0, 0, this.width, this.height);
+    this.collisionContainer.addBox(5, this.height / 2, 45, this.height / 2); // medium left
+    this.collisionContainer.addBox(this.width - 50, this.height / 2, 45, this.height / 2); // medium right
+    this.collisionContainer.addBox(20, (this.height / 2) - 20, 30, 20); // small center left
+    this.collisionContainer.addBox(this.width - 50, (this.height / 2) - 20, 30, 20); // small center right
+    this.collisionContainer.addBox(50, 0, this.width - 100, this.height); // long middle
+    //this.collisionContainer.addBox(0, 0, this.width, this.height);
 
     this.collisionContainer.owner = this;
     this.collisionContainer.initialize();
@@ -29,7 +34,7 @@ SmallObstacle.prototype.onPlayerCollision = function(player)
 
 SmallObstacle.prototype.tick = function()
 {
-    this.x -= 10;
+    this.x -= this.objectHandler.moveSpeed;
     if(this.x < 0 - this.width)
     {
         this.remove = true;

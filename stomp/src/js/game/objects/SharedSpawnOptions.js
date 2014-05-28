@@ -4,7 +4,7 @@
 
 SharedSpawnOptions = function()
 {
-    this.lastBigObstacle = 200;
+    this.lastBigObstacle = 0;
 };
 
 SharedSpawnOptions.prototype.canSpawnBigObstacle = function()
@@ -14,7 +14,7 @@ SharedSpawnOptions.prototype.canSpawnBigObstacle = function()
 
 SharedSpawnOptions.prototype.onSpawnBigObstacle = function()
 {
-    this.lastBigObstacle = 200;
+    this.lastBigObstacle = 0;
 };
 
 SharedSpawnOptions.prototype.tick = function()
