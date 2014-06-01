@@ -41,6 +41,21 @@ TutorialObjectHandler.prototype.tick = function()
     this.player.tick();
 };
 
+TutorialObjectHandler.prototype.removeBigObstacles = function()
+{
+    for(var i = 0; i < this.obstacles.length; i++)
+    {
+        console.log(this.obstacles[i]);
+        if(this.obstacles[i].bigObstacle)
+        {
+            var obst = new TransformObstacle(this.obstacles[i].x);
+            obst.objectHandler = this;
+            
+            this.obstacles[i] = obst;
+        }
+    }
+};
+
 TutorialObjectHandler.prototype.draw = function(gfx)
 {
     for(var i = 0; i < this.obstacles.length; i++)

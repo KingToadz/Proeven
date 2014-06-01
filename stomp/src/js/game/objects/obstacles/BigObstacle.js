@@ -27,12 +27,15 @@ BigObstacle = function()
 
     this.collisionContainer.owner = this;
     this.collisionContainer.initialize();
+    
+    this.bigObstacle = true;
 };
 
 BigObstacle.prototype.onPlayerCollision = function(player)
 {
     this.collisionContainer.isColliding = true;
     player.onCollision();
+    player.removeBigObstacles();
 };
 
 BigObstacle.prototype.tick = function()

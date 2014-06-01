@@ -18,7 +18,7 @@ PopupSkipTutorial = function(width, height)
     button.setTexture(Files.PIC_POPUP_MENU_YES_BUTTON);
     button.setPosition(0, 0);
     button.setSize(Files.PIC_POPUP_MENU_YES_BUTTON.width, Files.PIC_POPUP_MENU_YES_BUTTON.height);
-    button.onClick = function(){this.popup.show = false; this.item.itemHandler.curItem.tutHandler.startTutorial(); this.item.itemHandler.curItem.tutHandler.startNewGame();};
+    button.onClick = function(){this.popup.show = false; this.item.itemHandler.curItem.tutHandler.startNewGame();};
     this.buttons.push(button);
 
     // NEE button

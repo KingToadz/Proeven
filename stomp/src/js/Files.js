@@ -63,6 +63,8 @@ Files.PIC_GAME_OBJECT_PLAYER_JUMP = "Assets/Game/Objects/character_jump.png";
 Files.PIC_GAME_OBJECT_OBSTACLESMALL = "Assets/Game/Objects/obstakel__s.png";
 Files.PIC_GAME_OBJECT_OBSTACLEBIG = "Assets/Game/Objects/obstakel__l.png";
 
+Files.PIC_GAME_OBSTACLE_TRANSFORM = "Assets/Game/Objects/obstakels_transform.png";
+
 Files.PIC_GAME_TUTORIAL_EMPTY = "Assets/Game/tut_empty.png";
 Files.PIC_GAME_TUTORIAL_FILLED = "Assets/Game/tut_filled.png";
 

@@ -96,6 +96,12 @@ Player.prototype.tryStomp = function()
     }
 };
 
+Player.prototype.removeBigObstacles = function()
+{
+    this.otherPlayer.objectHandler.world.objectHandler.removeBigObstacles();
+    this.objectHandler.world.objectHandler.removeBigObstacles();
+};
+
 Player.prototype.onCollision = function()
 {
     if(this.hasCollided == false)

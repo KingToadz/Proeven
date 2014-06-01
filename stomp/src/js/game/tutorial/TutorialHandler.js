@@ -33,24 +33,22 @@ TutorialHandler.prototype.startNewGame = function()
     this.world1Step = 0;
     this.world2Step = 0;
     
-    this.world2.worldPaused = true;
-    this.world1.objectHandler.addObstacle(new SmallObstacle());
-    
     // To skip first tutorial   this.state = [2,2];
     // To skip second           this.state = [5,5];
-    // to skip first bigstone   this.state = [10,10];
+    // to skip first bigstone   this.state = [11,11];
     
-    this.state = [0,0];
+    this.state = [11,11];
     this.waitTimer = 0;
     this.testW1 = true;
     this.stoneDone = true;
     
     this.smallDone = false;
-};
-
-TutorialHandler.prototype.startTutorial = function()
-{
     
+    if(this.state[0] == 0 && this.state[1] == 0)
+    {
+        this.world2.worldPaused = true;
+        this.world1.objectHandler.addObstacle(new SmallObstacle());   
+    }
 };
 
 TutorialHandler.prototype.handleJump = function(worldDir)
@@ -335,7 +333,7 @@ TutorialHandler.prototype.beginBigObstacles = function()
 
 TutorialHandler.prototype.check3BigObstacles = function()
 {
-    if(this.state[0] == 15 && this.state[1] == 15)
+    if(this.state[0] >= 15 && this.state[1] >= 15)
     {
         return true;   
     }
@@ -411,7 +409,6 @@ TutorialHandler.prototype.check3BigObstacles = function()
     return false;
 };
 
-/// REWRITE WHOLE FUNCTION AGAIN 
 TutorialHandler.prototype.tick = function()
 {
     if(!this.popup.isPopupShowing())
@@ -455,8 +452,87 @@ TutorialHandler.prototype.tick = function()
 
 TutorialHandler.prototype.draw = function(gfx)
 {
-    this.world1.draw(gfx, "Test");
-    this.world2.draw(gfx, "Test2");    
+    var textW1 = "";
+    var textW2 = "";
+    
+    if(this.state[0] > 1 && this.state[1] > 1)
+    {
+        if(this.state[0] >= 5 && this.state[1] >= 5)
+        {
+            if(this.state[0] > 11 && this.state[1] >= 11)
+            {
+                if(this.state[0] >= 15 && this.state[1] >= 15)
+                {
+                    // Done
+                }
+                else
+                {
+                    textW1 = "Probeer het nu";
+                    textW2 = "Probeer het nu";
+                }
+            }
+            else
+            {// Big stone tutorial
+                if(this.state[0] < 11)
+                {// world2 obstacle
+                    if(this.state[0] == 5)
+                    {
+                        textW1 = "Je kan ook stompen om de andere te helpen";
+                    }
+                    else if(this.state[0] == 7)
+                    {
+                        textW1 = "Spring!";
+                    }
+                    else if(this.state[0] == 9)
+                    {
+                        textW1 = "Druk nog eens om te stompen";
+                    }
+                }
+                else
+                {// World1 obstacle
+                    if(this.state[1] == 5)
+                    {
+                        textW2 = "Je kan ook stompen om de andere te helpen";
+                    }
+                    else if(this.state[1] == 7)
+                    {
+                        textW2 = "Spring!";
+                    }
+                    else if(this.state[1] == 9)
+                    {
+                        textW2 = "Druk nog eens om te stompen";
+                    }
+                }
+            }
+        }
+        else
+        { // 2e tutorial
+            if(this.state[0] == 2)
+            {
+                textW1 = "Doe het nu zelf 3x";       
+            }
+            
+            if(this.state[1] == 2)
+            {
+                textW1 = "Doe het nu zelf 3x";       
+            }
+        }
+    }
+    else
+    { // Eerste tutorial
+        if(this.state[0] == 1)
+        {
+            textW1 = "Druk op het zwarten gebied om te springen"; 
+        }
+        else if(this.state[0] > 1 && this.state[1] == 1)
+        {
+            textW2 = "Druk op het zwarten gebied om te springen"; 
+        }
+    }
+    
+    
+    this.world1.draw(gfx, textW1);
+    this.world2.draw(gfx, textW2);    
     
     this.popup.draw(gfx);
 };
