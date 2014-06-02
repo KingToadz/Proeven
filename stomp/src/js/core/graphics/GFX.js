@@ -95,6 +95,21 @@ GFX.prototype.drawString = function(text, x, y, fillstyle, font)
     }
 };
 
+GFX.prototype.drawCorrectCenteredString = function(text, x, y, fillstyle, font)
+{
+    this.gfx.fillStyle = fillstyle;
+    this.gfx.font = font;
+
+    if(this.flipText == true)
+    {
+        this.drawReversedCenteredString(text, x, y, fillstyle, font);
+    }
+    else
+    {
+        this.drawCenteredString(text, x, (y + 6), fillstyle, font);
+    }
+};
+
 GFX.prototype.drawReversedString = function(text, x, y, fillstyle, font)
 {
     this.gfx.fillStyle = fillstyle;

@@ -204,7 +204,11 @@ TutorialWorld.prototype.draw = function(gfx, text)
         gfx.fillTransparentRect(0,0,Align.width, Align.height / 2, "#000", 0.8);   
     }
     
-    gfx.drawString(text, Align.width / 2, Align.height / 4, "#FFF", "80pt " + Files.FNT_DEFAULT_FONT);
+    gfx.gfx.font = "60pt " + Files.FNT_DEFAULT_FONT;
+    var metrics = gfx.gfx.measureText(text);
+    gfx.drawString(text, (Align.width / 2 - (metrics.width / 2)), Align.height / 4, "#FFF", "75pt " + Files.FNT_DEFAULT_FONT);
+    
+    //gfx.drawString(text, Align.width / 2, Align.height / 4, "#FFF", "60pt " + Files.FNT_DEFAULT_FONT);
 
     gfx.gfx.restore();
     

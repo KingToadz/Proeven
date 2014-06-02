@@ -37,7 +37,7 @@ TutorialHandler.prototype.startNewGame = function()
     // To skip second           this.state = [5,5];
     // to skip first bigstone   this.state = [11,11];
     
-    this.state = [11,11];
+    this.state = [0, 0];
     this.waitTimer = 0;
     this.testW1 = true;
     this.stoneDone = true;
@@ -198,6 +198,11 @@ TutorialHandler.prototype.check3SmallObstacles = function()
         return true;   
     }
     
+    if(this.state[0] == 5 || this.state[1] == 5)
+    {
+        this.waitTimer = 120;   
+    }
+    
     var w1 = this.world1.playerPastObstacle();
     if(w1 >= 0)
     {
@@ -241,7 +246,7 @@ TutorialHandler.prototype.beginBigObstacles = function()
     this.world2.objectHandler.player.canStomp = true;
     
     // Start with an object
-    if(this.state[0] == 5)
+    if(this.state[0] == 5 && this.waitTimer <= 0)
     {
         this.world2.objectHandler.addObstacle(new BigObstacle());   
         this.state[0]++;
@@ -275,7 +280,7 @@ TutorialHandler.prototype.beginBigObstacles = function()
         if(w2 == 1)
         {
             this.state[0] = 11;
-            this.waitTimer = 50;
+            this.waitTimer = 120;
         }
         else if (w2 == 0)
         {
@@ -430,6 +435,7 @@ TutorialHandler.prototype.tick = function()
                     this.smallDone = true; 
                     this.world1.succes = 0;
                     this.world2.succes = 0;
+                    this.waitTimer = 120;
                 }
                 
                 if(this.beginBigObstacles())
@@ -467,8 +473,8 @@ TutorialHandler.prototype.draw = function(gfx)
                 }
                 else
                 {
-                    textW1 = "Probeer het nu";
-                    textW2 = "Probeer het nu";
+                    textW1 = "Help de ander 3x over een obstakel";
+                    textW2 = "Help de ander 3x over een obstakel";
                 }
             }
             else
@@ -514,7 +520,7 @@ TutorialHandler.prototype.draw = function(gfx)
             
             if(this.state[1] == 2)
             {
-                textW1 = "Doe het nu zelf 3x";       
+                textW2 = "Doe het nu zelf 3x";       
             }
         }
     }

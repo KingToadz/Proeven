@@ -63,7 +63,6 @@ ObjectHandler.prototype.removeBigObstacles = function()
 {
     for(var i = 0; i < this.obstacles.length; i++)
     {
-        console.log(this.obstacles[i]);
         if(this.obstacles[i].bigObstacle)
         {
             var obst = new TransformObstacle(this.obstacles[i].x);
