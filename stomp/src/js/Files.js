@@ -40,7 +40,7 @@ Files.PIC_GAME_MENU_BUTTON_HELP = "Assets/Menu/btn_Hoofdscherm.png";
 Files.PIC_GAME_MENU_BUTTON_BACK = "Assets/Menu/btn_Doorgaan.png";
 Files.PIC_GAME_MENU_BUTTON_TRYAGAIN = "Assets/Menu/btn_Opnieuw.png";
 
-Files.PIC_GAME_BACKGROUND_GREEN = "Assets/Game/Themes/BG_colors/Green.png";
+Files.PIC_GAME_BACKGROUND_GREEN = "Assets/Game/Themes/BG_colors/Greentest.png";
 Files.PIC_GAME_BACKGROUND_ORANGE = "Assets/Game/Themes/BG_colors/Orange.png";
 Files.PIC_GAME_BACKGROUND_RED = "Assets/Game/Themes/BG_colors/Red.png";
 
@@ -69,11 +69,7 @@ Files.PIC_GAME_THEME05_BACKGROUND_03 = "Assets/Game/Themes/Theme_05/bg_03.png";
 Files.PIC_GAME_THEME06_BACKGROUND_01 = "Assets/Game/Themes/Theme_06/bg_1.png";
 Files.PIC_GAME_THEME06_BACKGROUND_02 = "Assets/Game/Themes/Theme_06/bg_2.png";
 Files.PIC_GAME_THEME06_BACKGROUND_03 = "Assets/Game/Themes/Theme_06/bg_3.png";
-/*
-Files.PIC_GAME_THEME07_BACKGROUND_01 = "Assets/Game/Themes/Theme_07/bg_1.png";
-Files.PIC_GAME_THEME07_BACKGROUND_02 = "Assets/Game/Themes/Theme_07/bg_2.png";
-Files.PIC_GAME_THEME07_BACKGROUND_03 = "Assets/Game/Themes/Theme_07/bg_3.png";
-*/
+
 Files.PIC_GAME_BUTTON_JUMP = "Assets/Game/wips_Jump.png";
 Files.PIC_GAME_BUTTON_BACK = "Assets/Game/Pause.png";
 
@@ -86,6 +82,7 @@ Files.PIC_GAME_OBJECT_GROUND_STOMP      = "Assets/Game/Objects/grond_animatie.pn
 Files.PIC_GAME_OBJECT_PLAYER = "Assets/Game/Objects/character_run.png";
 Files.PIC_GAME_OBJECT_PLAYER_JUMP = "Assets/Game/Objects/character_jump.png";
 
+Files.PIC_GAME_OBJECT_OBSTACLESMALLXXS = "Assets/Game/Objects/obstakel_xxs.png";
 Files.PIC_GAME_OBJECT_OBSTACLESMALLXS = "Assets/Game/Objects/objects_xs.png";
 Files.PIC_GAME_OBJECT_OBSTACLEBIGXS = "Assets/Game/Objects/object_xsl.png";
 

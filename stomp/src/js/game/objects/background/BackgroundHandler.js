@@ -30,18 +30,18 @@ BackgroundHandler.prototype.initialize = function()
 BackgroundHandler.prototype.switchToTheme = function(theme, instant)
 {
     var layers = [];
-    layers.push(new BackgroundLayer(theme.layers[0], 1.0 / 5 * theme.moveSpeed));
-    layers.push(new BackgroundLayer(theme.layers[1], 2.5 / 5 * theme.moveSpeed));
-    layers.push(new BackgroundLayer(theme.layers[2], theme.moveSpeed));
+    layers.push(new BackgroundLayer(theme.layers[0], 0.25));
+    layers.push(new BackgroundLayer(theme.layers[1], 0.5));
+    layers.push(new BackgroundLayer(theme.layers[2], 1.0));
 
-    for(var i = 0; i < this.layers.length; i++)
+    for(var i = 0; i < layers.length; i++)
     {
-        this.layers[i].speed = layers[i].speed;
+        layers[i].x -= this.x;
+        layers[i].backgroundHandler = this;
     }
 
     this.nextLayerSwitch = theme.switchAtScore;
-
-    this.world.objectHandler.moveSpeed = theme.moveSpeed;
+    this.world.objectHandler.gotoSpeed = theme.moveSpeed;
 
     if(instant == true)
     {
@@ -51,11 +51,6 @@ BackgroundHandler.prototype.switchToTheme = function(theme, instant)
     {
         this.switchLayersX = Align.width + 50;
         this.switchingLayers = true;
-
-        for(var i = 0; i < layers.length; i++)
-        {
-            layers[i].x -= this.x;
-        }
 
         this.switchLayers = layers;
     }
@@ -123,7 +118,7 @@ BackgroundHandler.prototype.onPlayerDead = function()
     if(!this.backgroundColor.manualOverride)
     {
         this.timer = 0;
-        if(this.fails < 7)
+        if(this.fails < 3)
         {
             this.fails++;
             this.checkBackground();
@@ -151,16 +146,12 @@ BackgroundHandler.prototype.checkBackground = function()
     switch(this.fails)
     {
         case 0:
-        case 1:
             this.backgroundColor.greenLayer();
             break;
-        case 2:
-        case 3:
-        case 4:
+        case 1:
             this.backgroundColor.orangeLayer();
             break;
-        case 5:
-        case 6:
+        case 2:
             this.backgroundColor.redLayer();
             break;
     }

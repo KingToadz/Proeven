@@ -5,7 +5,7 @@
 ObstacleSpawner = function()
 {
     this.curTick = 0;
-    this.nextSpawn = 100 + parseInt(Math.random() * 100);
+    this.nextSpawn = 0;
 };
 
 ObstacleSpawner.prototype.initialize = function()
@@ -16,16 +16,20 @@ ObstacleSpawner.prototype.initialize = function()
 ObstacleSpawner.prototype.spawn = function()
 {
     this.curTick = 0;
-    this.nextSpawn = 100 + parseInt(Math.random() * 100);
 
     var obstacle = undefined;
 
-    if(this.sharedSpawnOptions.canSpawnBigObstacle() == true)
+    this.nextSpawn = 0;
+
+    if(this.sharedSpawnOptions.canSpawnBigObstacle() == true && this.themeHandler.curTheme.bigObject != undefined)
     {
-        var r = Math.random() * 5;
+        var r = Math.random() * 3;
         if(r <= 1)
         {
             obstacle = new this.themeHandler.curTheme.bigObject(this.objectHandler.world.dir);
+            obstacle.x += (25 * this.objectHandler.moveSpeed) + 200;
+            this.nextSpawn += 1200 / this.objectHandler.moveSpeed;
+            this.objectHandler.world.otherWorld.objectHandler.obstacleSpawner.nextSpawn += 900 / this.objectHandler.moveSpeed;
             this.sharedSpawnOptions.onSpawnBigObstacle();
         }
     }
@@ -35,12 +39,16 @@ ObstacleSpawner.prototype.spawn = function()
         obstacle = new this.themeHandler.curTheme.smallObject(this.objectHandler.world.dir);
     }
 
+    this.nextSpawn += ((obstacle.width) / this.objectHandler.moveSpeed) + 50;
+
+    this.nextSpawn += parseInt(Math.random() * 50);
+
     this.objectHandler.addObstacle(obstacle);
 };
 
 ObstacleSpawner.prototype.tick = function()
 {
-    if(this.objectHandler.canSpawnItems == true)
+    if(this.objectHandler.canSpawnItems == true && this.objectHandler.themeHandler.curTheme.switchAtScore - 20 > this.objectHandler.world.gameHandler.score && this.objectHandler.themeHandler.curTheme.startAtScore + 20 < this.objectHandler.world.gameHandler.score)
     {
         this.curTick++;
     }

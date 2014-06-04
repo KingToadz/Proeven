@@ -5,10 +5,11 @@
 BackgroundLayer = function(textureObj, speed)
 {
     this.texture = textureObj;
-    this.speed = speed;
 
     this.width = Align.width * 2;
     this.height = Align.height / 2;
+
+    this.speedRatio = speed;
 
     this.x = 0;
     this.cratio = this.width / this.texture.width;
@@ -19,7 +20,7 @@ BackgroundLayer = function(textureObj, speed)
 
 BackgroundLayer.prototype.tick = function()
 {
-    this.x -= this.speed;
+    this.x -= this.backgroundHandler.world.objectHandler.moveSpeed * this.speedRatio;
     this.x = this.x % this.width;
 };
 
