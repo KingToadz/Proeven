@@ -489,10 +489,17 @@ TutorialHandler.prototype.draw = function(gfx)
                 {
                     // Done
                 }
-                else
+                else 
                 {
-                    textW1 = "Help de ander 3x over een obstakel";
-                    textW2 = "Help de ander 3x over een obstakel";
+                    if(this.state[0] == 12)
+                    {
+                        textW1 = "Help de ander 3x over een obstakel";
+                    }
+                    
+                    if(this.state[1] == 12)
+                    {
+                        textW2 = "Help de ander 3x over een obstakel";   
+                    }
                 }
             }
             else

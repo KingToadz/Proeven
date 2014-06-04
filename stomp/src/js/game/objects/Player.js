@@ -7,16 +7,19 @@ Player = function()
     this.texture = Files.PIC_GAME_OBJECT_PLAYER;
 
     this.runAnimation = new Animation(this.texture, 97, 91, 1, 5, 5);
-    this.runAnimation.setFPS(15);
+    //this.runAnimation = new Animation(Files.PIC_CHARACTER_RUN, 900, 600, 1, 16, 16);
+    this.runAnimation.setFPS(15); // 24
 
     this.runAnimationDust = new Animation(Files.PIC_GAME_OBJECT_PLAYER_RUN_DUST, 94, 75, 1, 5, 5);
     this.runAnimationDust.setFPS(15);
 
     this.jumpAnimation = new Animation(Files.PIC_GAME_OBJECT_PLAYER_JUMP, 107, 101, 2, 5, 5);
-    this.jumpAnimation.setFPS(15);
+    //this.jumpAnimation = new Animation(Files.PIC_CHARACTER_JUMP, 900, 650, 1, 21, 21);
+    this.jumpAnimation.setFPS(15); // 24
 
     this.stompAnimation = new Animation(Files.PIC_GAME_OBJECT_PLAYER_STOMP, 158, 300, 3, 4, 11);
-    this.stompAnimation.setFPS(15);
+    //this.stompAnimation = new Animation(Files.PIC_CHARACTER_STOMP, 900, 650, 1, 21, 21);
+    this.stompAnimation.setFPS(15); //24
     this.stompAnimation.visibleForOneLoop = true;
 
     this.jumpAnimationDust = new Animation(Files.PIC_GAME_OBJECT_PLAYER_JUMP_DUST, 112, 92, 2, 5, 10);
@@ -84,6 +87,7 @@ Player.prototype.tryJump = function()
                 this.shouldStomp = true;
                 this.isStomping = true;
                 this.stompAnimation.reset();
+                this.stompAnimation.currentFrame = 9;
                 this.animationHandler.addStompSmoke(this.x - 50, this.groundy);
             }
         }
