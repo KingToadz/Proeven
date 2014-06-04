@@ -8,6 +8,8 @@ ObjectHandler = function(world)
 
     this.canSpawnItems = true;
     this.moveSpeed = 5;
+    this.curMoveSpeed = this.moveSpeed;
+    this.gotoSpeed = this.moveSpeed;
 
     // obstacles
     this.obstacleSpawner = new ObstacleSpawner();
@@ -44,6 +46,17 @@ ObjectHandler.prototype.onPlayerDead = function()
 
 ObjectHandler.prototype.tick = function()
 {
+    if(this.curMoveSpeed < this.gotoSpeed)
+    {
+        this.curMoveSpeed += 0.01;
+        if(this.curMoveSpeed >= this.gotoSpeed)
+        {
+            this.curMoveSpeed = this.gotoSpeed;
+        }
+
+        this.moveSpeed = parseInt(this.curMoveSpeed);
+    }
+
     this.obstacleSpawner.tick();
 
     for(var i = 0; i < this.obstacles.length; i++)
