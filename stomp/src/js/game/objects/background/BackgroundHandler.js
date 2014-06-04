@@ -6,32 +6,101 @@ BackgroundHandler = function(x)
 {
     this.x = x * 400;
 
-    this.layers = [];
+    this.minX = 0;
+    this.maxX = Align.width;
 
-    //this.backgroundTexture = Files.PIC_GAME__BACKGROUND.obj;
+    this.layers = [];
+    this.switchLayers = [];
+    this.switchLayersX = 0;
+    this.switchingLayers = false;
 
     this.backgroundColor = new BackgroundColorLayer();
-
-    this.layers.push(new BackgroundLayer(Files.PIC_GAME__BACKGROUND_01, 1));
-    this.layers.push(new BackgroundLayer(Files.PIC_GAME__BACKGROUND_02, 2));
-    this.layers.push(new BackgroundLayer(Files.PIC_GAME__BACKGROUND_03, 3));
 
     this.fails = 0;
     this.timer = 0;
 
+    this.ground = new Ground();
+};
+
+BackgroundHandler.prototype.initialize = function()
+{
+    this.switchToTheme(this.themeHandler.curTheme, true);
+};
+
+BackgroundHandler.prototype.switchToTheme = function(theme, instant)
+{
+    var layers = [];
+    layers.push(new BackgroundLayer(theme.layers[0], 1.0 / 5 * theme.moveSpeed));
+    layers.push(new BackgroundLayer(theme.layers[1], 2.5 / 5 * theme.moveSpeed));
+    layers.push(new BackgroundLayer(theme.layers[2], theme.moveSpeed));
+
     for(var i = 0; i < this.layers.length; i++)
     {
-        this.layers[i].x -= this.x;
+        this.layers[i].speed = layers[i].speed;
     }
-    this.ground = new Ground();
+
+    this.nextLayerSwitch = theme.switchAtScore;
+
+    this.world.objectHandler.moveSpeed = theme.moveSpeed;
+
+    if(instant == true)
+    {
+        this.layers = layers;
+    }
+    else
+    {
+        this.switchLayersX = Align.width + 50;
+        this.switchingLayers = true;
+
+        for(var i = 0; i < layers.length; i++)
+        {
+            layers[i].x -= this.x;
+        }
+
+        this.switchLayers = layers;
+    }
 };
 
 BackgroundHandler.prototype.tick = function()
 {
     this.backgroundColor.tick();
-    for(var i = 0; i < this.layers.length; i++)
+
+    if(this.nextLayerSwitch != -1 && this.world.gameHandler.score > this.nextLayerSwitch)
     {
-        this.layers[i].tick();
+        this.switchToTheme(this.themeHandler.nextTheme(), false);
+    }
+
+    if(this.switchingLayers == true)
+    {
+        this.switchLayersX -= this.world.objectHandler.moveSpeed;
+        if(this.switchLayersX < -50)
+        {
+            this.layers = this.switchLayers;
+            this.switchingLayers = false;
+        }
+        else
+        {
+            for(var i = 0; i < this.layers.length; i++)
+            {
+                this.layers[i].minX = 0;
+                this.layers[i].maxX = this.switchLayersX;
+                this.layers[i].tick();
+            }
+
+            for(var i = 0; i < this.switchLayers.length; i++)
+            {
+                this.switchLayers[i].minX = this.switchLayersX;
+                this.switchLayers[i].maxX = Align.width;
+                this.switchLayers[i].tick();
+            }
+        }
+    }
+    else
+    {
+        for(var i = 0; i < this.layers.length; i++)
+        {
+            this.layers[i].tick();
+        }
     }
 
     if(this.fails > 0)
@@ -67,11 +136,10 @@ BackgroundHandler.prototype.onPlayerSucces = function()
     if(!this.backgroundColor.manualOverride)
     {
         this.fails--;
-        console.log(this.fails);
 
         if(this.fails < 0)
         {
-            this.fails = 0 ;
+            this.fails = 0;
         }
 
         this.checkBackground();
@@ -104,6 +172,16 @@ BackgroundHandler.prototype.draw = function(gfx)
     for(var i = 0; i < this.layers.length; i++)
     {
         this.layers[i].draw(gfx);
+    }
+
+    if(this.switchingLayers == true)
+    {
+        for(var i = 0; i < this.switchLayers.length; i++)
+        {
+            this.switchLayers[i].draw(gfx);
+        }
+
+        gfx.drawTexture(Files.PIC_GAME_THEME_TRANSITION, this.switchLayersX - (Files.PIC_GAME_THEME_TRANSITION.width / 2), 0, Files.PIC_GAME_THEME_TRANSITION.width, Align.height / 2);
     }
 
     this.ground.draw(gfx);

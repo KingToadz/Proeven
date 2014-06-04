@@ -30,7 +30,7 @@ Util.stringBeginsWith = function(haystack, needle)
     return (haystack.substr(0, needle.length) == needle);
 };
 
-Util.imageChangeNonTransparencyToColor = function(image, rgb)
+Util.setImageColor = function(image, rgb)
 {
     var w = image.width;
     var h = image.height;

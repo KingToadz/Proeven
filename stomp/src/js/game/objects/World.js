@@ -6,7 +6,11 @@ World = function(dir)
 {
     this.dir = dir;
 
+    this.themeHandler = new ThemeHandler();
+
     this.backgroundHandler = new BackgroundHandler((-(this.dir - 1)));
+    this.backgroundHandler.world = this;
+    this.backgroundHandler.themeHandler = this.themeHandler;
 
     this.buttons = [];
 
@@ -49,6 +53,7 @@ World = function(dir)
     this.buttons.push(button);
 
     this.objectHandler = new ObjectHandler(this);
+    this.objectHandler.themeHandler = this.themeHandler;
 };
 
 World.prototype.initialize = function()
@@ -59,6 +64,7 @@ World.prototype.initialize = function()
         this.buttons[i].initialize();
     }
 
+    this.backgroundHandler.initialize();
     this.objectHandler.initialize();
 };
 

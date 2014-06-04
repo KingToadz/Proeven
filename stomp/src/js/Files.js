@@ -40,14 +40,40 @@ Files.PIC_GAME_MENU_BUTTON_HELP = "Assets/Menu/btn_Hoofdscherm.png";
 Files.PIC_GAME_MENU_BUTTON_BACK = "Assets/Menu/btn_Doorgaan.png";
 Files.PIC_GAME_MENU_BUTTON_TRYAGAIN = "Assets/Menu/btn_Opnieuw.png";
 
-Files.PIC_GAME__BACKGROUND_GREEN = "Assets/Game/Themes/Theme_01/bg_01_green.png";
-Files.PIC_GAME__BACKGROUND_ORANGE = "Assets/Game/Themes/Theme_01/bg_01_orange.png";
-Files.PIC_GAME__BACKGROUND_RED = "Assets/Game/Themes/Theme_01/bg_01_red.png";
+Files.PIC_GAME_BACKGROUND_GREEN = "Assets/Game/Themes/BG_colors/Green.png";
+Files.PIC_GAME_BACKGROUND_ORANGE = "Assets/Game/Themes/BG_colors/Orange.png";
+Files.PIC_GAME_BACKGROUND_RED = "Assets/Game/Themes/BG_colors/Red.png";
 
-Files.PIC_GAME__BACKGROUND_01 = "Assets/Game/Themes/Theme_01/bg_02.png";
-Files.PIC_GAME__BACKGROUND_02 = "Assets/Game/Themes/Theme_01/bg_03.png";
-Files.PIC_GAME__BACKGROUND_03 = "Assets/Game/Themes/Theme_01/bg_04.png";
+Files.PIC_GAME_THEME_TRANSITION = "Assets/Game/Themes/transition02.PNG";
 
+Files.PIC_GAME_THEME01_BACKGROUND_01 = "Assets/Game/Themes/Theme_01/bg_02.png";
+Files.PIC_GAME_THEME01_BACKGROUND_02 = "Assets/Game/Themes/Theme_01/bg_03.png";
+Files.PIC_GAME_THEME01_BACKGROUND_03 = "Assets/Game/Themes/Theme_01/bg_04.png";
+
+Files.PIC_GAME_THEME02_BACKGROUND_01 = "Assets/Game/Themes/Theme_02/bg_02.png";
+Files.PIC_GAME_THEME02_BACKGROUND_02 = "Assets/Game/Themes/Theme_02/bg_03.png";
+Files.PIC_GAME_THEME02_BACKGROUND_03 = "Assets/Game/Themes/Theme_02/bg_04.png";
+
+Files.PIC_GAME_THEME03_BACKGROUND_01 = "Assets/Game/Themes/Theme_03/BG_02.png";
+Files.PIC_GAME_THEME03_BACKGROUND_02 = "Assets/Game/Themes/Theme_03/BG_03.png";
+Files.PIC_GAME_THEME03_BACKGROUND_03 = "Assets/Game/Themes/Theme_03/bg_04.png";
+
+Files.PIC_GAME_THEME04_BACKGROUND_01 = "Assets/Game/Themes/Theme_04/bg_1.png";
+Files.PIC_GAME_THEME04_BACKGROUND_02 = "Assets/Game/Themes/Theme_04/bg_2.png";
+Files.PIC_GAME_THEME04_BACKGROUND_03 = "Assets/Game/Themes/Theme_04/bg_3.png";
+
+Files.PIC_GAME_THEME05_BACKGROUND_01 = "Assets/Game/Themes/Theme_05/bg_01.png";
+Files.PIC_GAME_THEME05_BACKGROUND_02 = "Assets/Game/Themes/Theme_05/bg_02.png";
+Files.PIC_GAME_THEME05_BACKGROUND_03 = "Assets/Game/Themes/Theme_05/bg_03.png";
+
+Files.PIC_GAME_THEME06_BACKGROUND_01 = "Assets/Game/Themes/Theme_06/bg_1.png";
+Files.PIC_GAME_THEME06_BACKGROUND_02 = "Assets/Game/Themes/Theme_06/bg_2.png";
+Files.PIC_GAME_THEME06_BACKGROUND_03 = "Assets/Game/Themes/Theme_06/bg_3.png";
+/*
+Files.PIC_GAME_THEME07_BACKGROUND_01 = "Assets/Game/Themes/Theme_07/bg_1.png";
+Files.PIC_GAME_THEME07_BACKGROUND_02 = "Assets/Game/Themes/Theme_07/bg_2.png";
+Files.PIC_GAME_THEME07_BACKGROUND_03 = "Assets/Game/Themes/Theme_07/bg_3.png";
+*/
 Files.PIC_GAME_BUTTON_JUMP = "Assets/Game/wips_Jump.png";
 Files.PIC_GAME_BUTTON_BACK = "Assets/Game/Pause.png";
 
@@ -59,6 +85,9 @@ Files.PIC_GAME_OBJECT_GROUND_STOMP      = "Assets/Game/Objects/grond_animatie.pn
 
 Files.PIC_GAME_OBJECT_PLAYER = "Assets/Game/Objects/character_run.png";
 Files.PIC_GAME_OBJECT_PLAYER_JUMP = "Assets/Game/Objects/character_jump.png";
+
+Files.PIC_GAME_OBJECT_OBSTACLESMALLXS = "Assets/Game/Objects/objects_xs.png";
+Files.PIC_GAME_OBJECT_OBSTACLEBIGXS = "Assets/Game/Objects/object_xsl.png";
 
 Files.PIC_GAME_OBJECT_OBSTACLESMALL = "Assets/Game/Objects/obstakel__s.png";
 Files.PIC_GAME_OBJECT_OBSTACLEBIG = "Assets/Game/Objects/obstakel__l.png";

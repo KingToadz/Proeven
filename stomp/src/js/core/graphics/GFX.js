@@ -132,7 +132,7 @@ GFX.prototype.drawReversedCenteredString = function(text, x, y, fillstyle, font)
 
 GFX.prototype.drawTexture = function(texture, x, y, width, height)
 {
-    this.gfx.drawImage(texture, x, y, width, height);
+    this.gfx.drawImage(texture, parseInt(x), parseInt(y), parseInt(width), parseInt(height));
 };
 
 GFX.prototype.drawRotatedTexture = function(texture, x, y, width, height, rotation)
@@ -143,7 +143,7 @@ GFX.prototype.drawRotatedTexture = function(texture, x, y, width, height, rotati
 
     this.gfx.rotate(rotation * (Math.PI / 180));
 
-    this.gfx.drawImage(texture, -(width / 2), -(height / 2), width, height);
+    this.gfx.drawImage(texture, parseInt(-(width / 2)), parseInt(-(height / 2)), parseInt(width), parseInt(height));
 
     this.gfx.restore();
 };
@@ -151,18 +151,18 @@ GFX.prototype.drawRotatedTexture = function(texture, x, y, width, height, rotati
 GFX.prototype.drawTransparentTexture = function(texture, x, y, width, height, alpha)
 {
     this.gfx.globalAlpha = alpha;
-    this.gfx.drawImage(texture, x, y, width, height);
+    this.gfx.drawImage(texture, parseInt(x), parseInt(y), parseInt(width), parseInt(height));
     this.gfx.globalAlpha = 1.0;
 };
 
 GFX.prototype.drawClippedTexture = function(texture, x, y, width, height, cx, cy, cwidth, cheight)
 {
-    this.gfx.drawImage(texture, cx, cy, cwidth, cheight, x, y, width, height);
+    this.gfx.drawImage(texture, parseInt(cx), parseInt(cy), parseInt(cwidth), parseInt(cheight), parseInt(x), parseInt(y), parseInt(width), parseInt(height));
 };
 
 GFX.prototype.drawTransparentClippedTexture = function(texture, x, y, width, height, cx, cy, cwidth, cheight, alpha)
 {
     this.gfx.globalAlpha = alpha;
-    this.gfx.drawImage(texture, cx, cy, cwidth, cheight, x, y, width, height);
+    this.gfx.drawImage(texture, parseInt(cx), parseInt(cy), parseInt(cwidth), parseInt(cheight), parseInt(x), parseInt(y), parseInt(width), parseInt(height));
     this.gfx.globalAlpha = 1.0;
 };
