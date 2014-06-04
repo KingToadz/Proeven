@@ -11,6 +11,11 @@ ItemMainMenu = function()
     this.buttons = [];
 
     var button = undefined;
+    //721-H=862
+    this.logoAnim = new Animation(Files.PIC_LOGO_ANIMATION, 721, 862, 3, 6, 18);
+    this.logoAnim.setFPS(30);
+    this.logoAnim.stopAfterLastFrame = true;
+    this.logoAnim.pause();
 
     // Real PlayButton
     button = new Button();
@@ -51,6 +56,8 @@ ItemMainMenu = function()
     this.buttons.push(button);
 
     SFX.setBackgroundSound(Files.SND_MENU_BACKGROUND);
+    
+    this.waitTime = 60;
 };
 
 ItemMainMenu.prototype.initialize = function()
@@ -80,6 +87,15 @@ ItemMainMenu.prototype.tick = function()
     {
         this.buttons[i].tick();
     }
+    
+    this.waitTime--;
+    
+    if(this.waitTime == 0)
+    {
+        this.logoAnim.reset();   
+    }
+    
+    this.logoAnim.tick();
 };
 
 ItemMainMenu.prototype.draw = function(gfx)
@@ -90,6 +106,8 @@ ItemMainMenu.prototype.draw = function(gfx)
     {
         this.buttons[i].draw(gfx);
     }
+    
+    this.logoAnim.draw(gfx, Align.width / 2 - this.logoAnim.width / 2, Align.height / 2 - this.logoAnim.height / 1.2);
 
     gfx.drawString("HighScore: " + parseInt(this.highScore) + "m", 30, (Align.height / 2) + 180, "#FFF", "80pt " + Files.FNT_DEFAULT_FONT);
 };

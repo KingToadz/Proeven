@@ -15,7 +15,7 @@ Files.FNT_TUTORIAL_FONT = Files.FNT_DEFAULT_FONT;
 
 Files.PIC_MENU_BUTTON_BACK = "Assets/Menu/BackButton.png";
 
-Files.PIC_MAINMENU_BACKGROUND = "Assets/Menu/Main/Background.png";
+Files.PIC_MAINMENU_BACKGROUND = "Assets/Menu/Main/Background.jpg";
 Files.PIC_MAINMENU_BUTTON_PLAY = "Assets/Menu/Main/PlayButton.png";
 Files.PIC_MAINMENU_BUTTON_OPTIONS = "Assets/Menu/Main/OptionsButton.png";
 Files.PIC_MAINMENU_BUTTON_CREDITS = "Assets/Menu/Main/CreditsButton.png";
@@ -85,9 +85,11 @@ Files.PIC_GAME_OBJECT_GROUND_STOMP      = "Assets/Game/Objects/grond_animatie.pn
 Files.PIC_GAME_OBJECT_PLAYER_DEATH      = "Assets/Game/Objects/character_death.png"
 
 /* NEW PLAYER SPRITESHEET */
-Files.PIC_CHARACTER_RUN = "Assets/Game/Objects/character/vos1_RUN_spritesheet.png";
-Files.PIC_CHARACTER_JUMP = "Assets/Game/Objects/character/vos1_RUN_spritesheet.png";
-Files.PIC_CHARACTER_STOMP = "Assets/Game/Objects/character/vos1_RUN_spritesheet.png";
+//Files.PIC_CHARACTER_RUN = "Assets/Game/Objects/character/vos1_RUN_spritesheet.png";
+//Files.PIC_CHARACTER_JUMP = "Assets/Game/Objects/character/vos1_RUN_spritesheet.png";
+//Files.PIC_CHARACTER_STOMP = "Assets/Game/Objects/character/vos1_RUN_spritesheet.png";
+
+Files.PIC_LOGO_ANIMATION = "Assets/Menu/Main/logo_nieuw.png";
 
 Files.PIC_GAME_OBJECT_PLAYER = "Assets/Game/Objects/character_run.png";
 Files.PIC_GAME_OBJECT_PLAYER_JUMP = "Assets/Game/Objects/character_jump.png";

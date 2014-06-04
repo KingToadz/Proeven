@@ -22,7 +22,7 @@ Player = function()
     this.stompAnimation.visibleForOneLoop = true;
 
     this.jumpAnimationDust = new Animation(Files.PIC_GAME_OBJECT_PLAYER_JUMP_DUST, 112, 92, 2, 5, 10);
-    this.jumpAnimationDust.setFPS(30);
+    this.jumpAnimationDust.setFPS(20);
     this.jumpAnimationDust.visibleForOneLoop = true;
     
     this.deadAnimation = new Animation(Files.PIC_GAME_OBJECT_PLAYER_DEATH, 158,130, 3, 6, 16);
@@ -123,7 +123,6 @@ Player.prototype.onCollision = function()
         // Dead animation
         this.deadAnimation.reset();
         this.deadAnimation.currentFrame = 0;
-        console.log("Dead anim reset");
 
         this.isImmuneFor = 180;
         this.objectHandler.canSpawnItems = false;
@@ -145,7 +144,6 @@ Player.prototype.tick = function()
     // The frame starts at 1 and ends with 0
     if(this.isImmuneFor > 0)
     {
-        console.log(this.deadAnimation.currentFrame);
         if(this.deadAnimation.currentFrame == this.deadAnimation.totalFrames - 1 && !this.deadAnimation.reverse)
         {
             this.deadAnimation.reverse = true;
@@ -221,11 +219,13 @@ Player.prototype.draw = function(gfx)
     }
     else
     {
-        /*if(this.isStomping)
+        /* 
+        if(this.isStomping)
         {
             this.stompAnimation.draw(gfx, this.x, this.y);
         }
-        else */if(this.showJumpAnimation)
+        else */
+        if(this.showJumpAnimation)
         {
             this.jumpAnimation.draw(gfx, this.x, this.y);
         }

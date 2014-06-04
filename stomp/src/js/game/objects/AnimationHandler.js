@@ -25,7 +25,7 @@ AnimationHandler.prototype.addStompSmoke = function(x, y)
 {
     var stompAnimationDust = new Animation(Files.PIC_GAME_OBJECT_PLAYER_STOMP_DUST, 251, 192, 2, 4, 8);
     stompAnimationDust.visible = true;
-    stompAnimationDust.setFPS(15);
+    stompAnimationDust.setFPS(17);
     stompAnimationDust.visibleForOneLoop = true;
     
     this.addAnimation(stompAnimationDust, x, y - stompAnimationDust.height / 2);
