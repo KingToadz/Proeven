@@ -23,6 +23,9 @@ SmallObstacleXS = function()
 
     this.collisionContainer.owner = this;
     this.collisionContainer.initialize();
+    
+    this.bigObstacle = false;
+    this.xsmall = false;
 };
 
 SmallObstacleXS.prototype.onPlayerCollision = function(player)

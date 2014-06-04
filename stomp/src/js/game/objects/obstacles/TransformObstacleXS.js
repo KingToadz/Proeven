@@ -1,10 +1,10 @@
-TransformObstacle = function(x)
+TransformObstacleXS = function(x)
 {
     this.remove = false;
     
     this.texture = "";
 
-    this.transformAnimation = new Animation(Files.PIC_GAME_OBSTACLE_TRANSFORM, 196, 320, 4, 6, 21);
+    this.transformAnimation = new Animation(Files.PIC_GAME_OBSTACLE_TRANSFORM_XS, 126, 320, 4, 6, 21);
     this.transformAnimation.stopAfterLastFrame = true;
     this.transformAnimation.setFPS(30);
     
@@ -38,13 +38,13 @@ TransformObstacle = function(x)
     this.xsmall = false;
 };
 
-TransformObstacle.prototype.onPlayerCollision = function(player)
+TransformObstacleXS.prototype.onPlayerCollision = function(player)
 {
     this.collisionContainer.isColliding = true;
     player.onCollision();
 };
 
-TransformObstacle.prototype.tick = function()
+TransformObstacleXS.prototype.tick = function()
 {
     this.transformAnimation.tick();
     
@@ -55,7 +55,7 @@ TransformObstacle.prototype.tick = function()
     }
 };
 
-TransformObstacle.prototype.draw = function(gfx)
+TransformObstacleXS.prototype.draw = function(gfx)
 {
     this.transformAnimation.draw(gfx, this.x, this.y);
 

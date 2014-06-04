@@ -65,10 +65,20 @@ ObjectHandler.prototype.removeBigObstacles = function()
     {
         if(this.obstacles[i].bigObstacle)
         {
-            var obst = new TransformObstacle(this.obstacles[i].x);
-            obst.objectHandler = this;
-            
-            this.obstacles[i] = obst;
+            if(this.obstacles[i].xsmall)
+            {
+                var obst = new TransformObstacleXS(this.obstacles[i].x);
+                obst.objectHandler = this;
+
+                this.obstacles[i] = obst;
+            }
+            else
+            {
+                var obst = new TransformObstacle(this.obstacles[i].x);
+                obst.objectHandler = this;
+
+                this.obstacles[i] = obst;
+            }
         }
     }
 };

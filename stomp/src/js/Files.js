@@ -95,6 +95,8 @@ Files.PIC_GAME_OBJECT_PLAYER_JUMP = "Assets/Game/Objects/character_jump.png";
 Files.PIC_GAME_OBJECT_OBSTACLESMALLXS = "Assets/Game/Objects/objects_xs.png";
 Files.PIC_GAME_OBJECT_OBSTACLEBIGXS = "Assets/Game/Objects/object_xsl.png";
 
+Files.PIC_GAME_OBSTACLE_TRANSFORM_XS = "Assets/Game/Objects/obstakels_GnK3_xsl";
+
 Files.PIC_GAME_OBJECT_OBSTACLESMALL = "Assets/Game/Objects/obstakel__s.png";
 Files.PIC_GAME_OBJECT_OBSTACLEBIG = "Assets/Game/Objects/obstakel__l.png";
 

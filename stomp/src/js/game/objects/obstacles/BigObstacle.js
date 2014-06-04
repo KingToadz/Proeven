@@ -28,6 +28,7 @@ BigObstacle = function()
     this.collisionContainer.initialize();
     
     this.bigObstacle = true;
+    this.xsmall = false;
 };
 
 BigObstacle.prototype.onPlayerCollision = function(player)

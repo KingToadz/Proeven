@@ -10,7 +10,11 @@ TutorialWorld = function(dir, tutorialHandler)
 {
     this.dir = dir;
 
-    this.backgroundHandler = new BackgroundHandler((-(this.dir - 1)));
+    this.themeHandler = new ThemeHandler();
+    
+    this.backgroundHandler = new TutorialBackgroundHandler((-(this.dir - 1)));
+    this.backgroundHandler.world = this;
+    this.backgroundHandler.themeHandler = this.themeHandler;
 
     this.buttons = [];
 
@@ -77,6 +81,7 @@ TutorialWorld.prototype.initialize = function()
         this.buttons[i].initialize();
     }
 
+    this.backgroundHandler.initialize();
     this.objectHandler.initialize();
 };
 

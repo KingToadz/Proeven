@@ -22,6 +22,7 @@ Animation = function(spritesheet, width, height, rows, cols, totalFrames)
     this.visibleForOneLoop = false;
     this.stopAfterLastFrame = false;
     this.reverse = false;
+    this.reverse = false;
 };
 
 Animation.prototype.setFPS = function(fps)

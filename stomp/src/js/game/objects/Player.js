@@ -16,7 +16,6 @@ Player = function()
     this.jumpAnimation = new Animation(Files.PIC_GAME_OBJECT_PLAYER_JUMP, 107, 101, 2, 5, 5);
     //this.jumpAnimation = new Animation(Files.PIC_CHARACTER_JUMP, 900, 650, 1, 21, 21);
     this.jumpAnimation.setFPS(15); // 24
-
     this.stompAnimation = new Animation(Files.PIC_GAME_OBJECT_PLAYER_STOMP, 158, 300, 3, 4, 11);
     //this.stompAnimation = new Animation(Files.PIC_CHARACTER_STOMP, 900, 650, 1, 21, 21);
     this.stompAnimation.setFPS(15); //24
