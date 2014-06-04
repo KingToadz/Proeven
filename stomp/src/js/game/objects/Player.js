@@ -23,6 +23,12 @@ Player = function()
     this.jumpAnimationDust.setFPS(30);
     this.jumpAnimationDust.visibleForOneLoop = true;
     
+    this.deadAnimation = new Animation(Files.PIC_GAME_OBJECT_PLAYER_DEATH, 158,130, 3, 6, 16);
+    this.deadAnimation.setFPS(15);
+    this.deadAnimation.pause();
+    this.deadAnimation.visible = false;
+    this.deadAnimation.visibleForOneLoop = false;
+    
     this.animationHandler = new AnimationHandler();
 
     this.showJumpAnimation = false;
@@ -110,6 +116,11 @@ Player.prototype.onCollision = function()
         this.hasCollided = true;
         //this.shouldStomp = false;
         this.objectHandler.world.backgroundHandler.onPlayerDead();
+        
+        // Dead animation
+        this.deadAnimation.reset();
+        this.deadAnimation.currentFrame = 0;
+        console.log("Dead anim reset");
 
         this.isImmuneFor = 180;
         this.objectHandler.canSpawnItems = false;
@@ -124,6 +135,24 @@ Player.prototype.tick = function()
     this.runAnimationDust.tick();
     
     this.animationHandler.tick();
+    
+    this.deadAnimation.tick();
+    
+    // This will only be 0 if it played the animation forwards and backwards
+    // The frame starts at 1 and ends with 0
+    if(this.isImmuneFor > 0)
+    {
+        console.log(this.deadAnimation.currentFrame);
+        if(this.deadAnimation.currentFrame == this.deadAnimation.totalFrames - 1 && !this.deadAnimation.reverse)
+        {
+            this.deadAnimation.reverse = true;
+        }
+        else if(this.deadAnimation.currentFrame == 1 && this.deadAnimation.reverse)
+        {
+            this.deadAnimation.reverse = false;
+            this.isImmuneFor = 1;
+        }
+    }
 
     this.speedy += this.gravity;
     this.y += this.speedy;
@@ -174,6 +203,8 @@ Player.prototype.draw = function(gfx)
 {
     if(this.isImmuneFor > 0)
     {
+        this.deadAnimation.draw(gfx, this.x - this.width / 2 - this.width / 4, this.y - this.height / 2);
+        /*
         if(this.showJumpAnimation)
         {
             this.jumpAnimation.drawTransparent(gfx, this.x, this.y, 0.3);
@@ -183,6 +214,7 @@ Player.prototype.draw = function(gfx)
             this.runAnimation.drawTransparent(gfx, this.x, this.y, 0.3);
             this.runAnimationDust.drawTransparent(gfx, this.x - this.width + 10, this.y + 20, 0.3);
         }
+        */
     }
     else
     {

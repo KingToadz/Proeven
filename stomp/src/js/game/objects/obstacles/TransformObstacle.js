@@ -4,7 +4,7 @@ TransformObstacle = function(x)
     
     this.texture = "";
 
-    this.transformAnimation = new Animation(Files.PIC_GAME_OBSTACLE_TRANSFORM, 196, 320, 4, 6, 11);
+    this.transformAnimation = new Animation(Files.PIC_GAME_OBSTACLE_TRANSFORM, 196, 320, 4, 6, 21);
     this.transformAnimation.stopAfterLastFrame = true;
     this.transformAnimation.setFPS(30);
     
@@ -15,11 +15,11 @@ TransformObstacle = function(x)
 
     this.collisionContainer = new CollisionContainer();
     
-    this.collisionContainer.addBox(5, difHeight + this.height / 2, 45, this.height / 2); // medium left
-    this.collisionContainer.addBox(this.width - 50, difHeight + this.height / 2, 45, this.height / 2); // medium right
-    this.collisionContainer.addBox(20, difHeight + (this.height / 2) - 20, 30, 20); // small center left
-    this.collisionContainer.addBox(this.width - 50, difHeight + (this.height / 2) - 20, 30, 20); // small center right
-    this.collisionContainer.addBox(50, difHeight + 0, this.width - 100, this.height); // long middle
+    this.collisionContainer.addBox(45, difHeight + this.height / 2, 85, this.height / 2); // medium left
+    this.collisionContainer.addBox(this.width - 50, difHeight + this.height / 2, 85, this.height / 2); // medium right
+    this.collisionContainer.addBox(60, difHeight + (this.height / 2) - 20, 50, 20); // small center left
+    this.collisionContainer.addBox(this.width - 50, difHeight + (this.height / 2) - 20, 50, 20); // small center right
+    this.collisionContainer.addBox(90, difHeight + 0, this.width - 100, this.height); // long middle
     //this.collisionContainer.addBox(0, 0, this.width, this.height);
 
     

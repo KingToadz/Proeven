@@ -21,6 +21,7 @@ Animation = function(spritesheet, width, height, rows, cols, totalFrames)
     this.visible = true;
     this.visibleForOneLoop = false;
     this.stopAfterLastFrame = false;
+    this.reverse = false;
 };
 
 Animation.prototype.setFPS = function(fps)
@@ -31,8 +32,15 @@ Animation.prototype.setFPS = function(fps)
 Animation.prototype.reset = function()
 {
     this.currentFrame = 0;
+    this.startFrameTime = Date.now();
     this.visible = true;
     this.paused = false;
+    
+    if(this.rows > 1){
+        this.currentRow = Math.floor(this.currentFrame / this.cols);
+    }else{ this.currentRow = 0; }
+
+    this.currentCol = this.currentFrame % this.cols;
 };
 
 Animation.prototype.pause = function()
@@ -56,24 +64,47 @@ Animation.prototype.tick = function()
         if(timeNow - this.startFrameTime > this.timePerFrame)
         {
             //console.log("Old Frame: " + this.currentFrame);
-            this.currentFrame++;
             this.startFrameTime = timeNow;
 
-            if(this.currentFrame > this.totalFrames - 1)
+            if(this.reverse)
             {
-                if(this.stopAfterLastFrame)
+                this.currentFrame--;
+                if(this.currentFrame <= 0)
                 {
-                    this.paused = true;
-                }
-                else
-                {                  
-                    this.currentFrame = 0;
-
-                    if(this.visibleForOneLoop)
+                    if(this.stopAfterLastFrame)
                     {
-                        this.visible = false;
                         this.paused = true;
-                    }   
+                    }
+                    else
+                    {                  
+                        this.currentFrame = this.totalFrames - 1;
+                        if(this.visibleForOneLoop)
+                        {
+                            this.visible = false;
+                            this.paused = true;
+                        }   
+                    }
+                }
+            }
+            else
+            {
+                this.currentFrame++;
+                if(this.currentFrame > this.totalFrames - 1)
+                {
+                    if(this.stopAfterLastFrame)
+                    {
+                        this.paused = true;
+                    }
+                    else
+                    {                  
+                        this.currentFrame = 0;
+
+                        if(this.visibleForOneLoop)
+                        {
+                            this.visible = false;
+                            this.paused = true;
+                        }   
+                    }
                 }
             }
 

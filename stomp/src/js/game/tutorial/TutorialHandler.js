@@ -39,6 +39,7 @@ TutorialHandler.prototype.startNewGame = function()
     
     this.state = [0, 0];
     this.waitTimer = 0;
+    this.waitTimer2 = 0;
     this.testW1 = true;
     this.stoneDone = true;
     
@@ -198,9 +199,26 @@ TutorialHandler.prototype.check3SmallObstacles = function()
         return true;   
     }
     
-    if(this.state[0] == 5 || this.state[1] == 5)
+    if(this.state[0] == 5)
     {
         this.waitTimer = 120;   
+    }
+    
+    if(this.state[1] == 5)
+    {
+        this.waitTimer2 = 120;   
+    }
+    
+    this.waitTimer2--;
+    
+    if(this.waitTimer == 0)
+    {
+        this.world1.objectHandler.addObstacle(new SmallObstacle());
+    }
+    
+    if(this.waitTimer2 == 0)
+    {
+        this.world2.objectHandler.addObstacle(new SmallObstacle());
     }
     
     var w1 = this.world1.playerPastObstacle();
@@ -214,7 +232,7 @@ TutorialHandler.prototype.check3SmallObstacles = function()
         }
         
         if(this.state[0] < 5){
-            this.world1.objectHandler.addObstacle(new SmallObstacle());
+            this.waitTimer = 100;
         }
     }
     
@@ -228,7 +246,7 @@ TutorialHandler.prototype.check3SmallObstacles = function()
         }
         
         if(this.state[1] < 5){
-            this.world2.objectHandler.addObstacle(new SmallObstacle());
+            this.waitTimer2 = 100;
         }
     }
     
@@ -370,10 +388,10 @@ TutorialHandler.prototype.check3BigObstacles = function()
             }
             else
             {
-                this.world2.objectHandler.player.isImmuneFor = 5;   
+                //this.world2.objectHandler.player.isImmuneFor = 5;   
             }
             
-            this.waitTimer = 30;
+            this.waitTimer = 60;
             this.stoneDone = true;
             
             // If the other one is less then 15 spawn a new one
@@ -396,11 +414,11 @@ TutorialHandler.prototype.check3BigObstacles = function()
             }
             else
             {
-                this.world1.objectHandler.player.isImmuneFor = 5;   
+                //this.world1.objectHandler.player.isImmuneFor = 5;   
             }
             
 
-            this.waitTimer = 30;
+            this.waitTimer = 60;
             this.stoneDone = true;
             
             // If the other one is less then 15 spawn a new one
@@ -421,10 +439,10 @@ TutorialHandler.prototype.tick = function()
         this.world1.tick();
         this.world2.tick();  
         
-        if(this.waitTimer > 0)
-        {
+        //if(this.waitTimer > 0)
+        //{
             this.waitTimer--;   
-        }
+        //}
         
         if(this.checkFirstPart())
         {

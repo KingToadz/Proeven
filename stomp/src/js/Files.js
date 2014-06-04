@@ -56,6 +56,7 @@ Files.PIC_GAME_OBJECT_PLAYER_STOMP_DUST = "Assets/Game/Objects/stomp_dust.png";
 Files.PIC_GAME_OBJECT_PLAYER_RUN_DUST   = "Assets/Game/Objects/run_dust.png";
 Files.PIC_GAME_OBJECT_PLAYER_JUMP_DUST  = "Assets/Game/Objects/jump_dust.png";
 Files.PIC_GAME_OBJECT_GROUND_STOMP      = "Assets/Game/Objects/grond_animatie.png";
+Files.PIC_GAME_OBJECT_PLAYER_DEATH      = "Assets/Game/Objects/character_death.png"
 
 Files.PIC_GAME_OBJECT_PLAYER = "Assets/Game/Objects/character_run.png";
 Files.PIC_GAME_OBJECT_PLAYER_JUMP = "Assets/Game/Objects/character_jump.png";
