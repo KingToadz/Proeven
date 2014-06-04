@@ -24,6 +24,7 @@ Player = function()
     this.jumpAnimationDust.visibleForOneLoop = true;
     
     this.animationHandler = new AnimationHandler();
+    this.animationHandler.player = this;
 
     this.showJumpAnimation = false;
 
@@ -32,7 +33,6 @@ Player = function()
 
     this.collisionContainer = new CollisionContainer();
     this.collisionContainer.addBox(10, 10, this.width - 20, this.height - 10);
-
 
     this.collisionContainer.owner = this;
     this.collisionContainer.initialize();
@@ -190,6 +190,4 @@ Player.prototype.draw = function(gfx)
         }
     }
     this.animationHandler.draw(gfx);
-
-    this.collisionContainer.draw(gfx);
 };

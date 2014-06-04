@@ -91,5 +91,5 @@ ItemMainMenu.prototype.draw = function(gfx)
         this.buttons[i].draw(gfx);
     }
 
-    gfx.drawString("HighScore: " + parseInt(this.highScore) + "m", 50, (Align.height / 2) - 50, "#FFF", "80pt " + Files.FNT_DEFAULT_FONT);
+    gfx.drawString("HighScore: " + parseInt(this.highScore) + "m", 30, (Align.height / 2) + 180, "#FFF", "80pt " + Files.FNT_DEFAULT_FONT);
 };

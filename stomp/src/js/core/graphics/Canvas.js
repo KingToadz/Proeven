@@ -45,8 +45,6 @@ Canvas.prototype.rescale = function()
         this.canvasHeight = parseInt(arg_height);
     }
 
-    console.log("Canvas rescaling to " + this.canvasWidth + "x" + this.canvasHeight + ";");
-
     this.canvas.width = this.canvasWidth;
     this.canvas.height = this.canvasHeight;
 

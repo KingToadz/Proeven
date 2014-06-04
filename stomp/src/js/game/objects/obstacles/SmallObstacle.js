@@ -20,7 +20,6 @@ SmallObstacle = function()
     this.collisionContainer.addBox(20, (this.height / 2) - 20, 30, 20); // small center left
     this.collisionContainer.addBox(this.width - 50, (this.height / 2) - 20, 30, 20); // small center right
     this.collisionContainer.addBox(50, 0, this.width - 100, this.height); // long middle
-    //this.collisionContainer.addBox(0, 0, this.width, this.height);
 
     this.collisionContainer.owner = this;
     this.collisionContainer.initialize();
@@ -44,6 +43,4 @@ SmallObstacle.prototype.tick = function()
 SmallObstacle.prototype.draw = function(gfx)
 {
     gfx.drawTexture(this.texture, this.x, this.y, this.width, this.height);
-
-    this.collisionContainer.draw(gfx, this.x, this.y);
 };
