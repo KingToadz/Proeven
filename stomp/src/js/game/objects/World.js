@@ -42,8 +42,8 @@ World = function(dir)
     var screenPosX = (Align.width / 2) * (dir + 1);
     var screenPosY = -(Align.height / 2) * (dir - 1);
 
-    var objPosX = (-(button.width / 2) - 45) * (dir);
-    var objPosY = ((button.height / 2) + 45) * (dir);
+    var objPosX = (-(button.width / 2)) * (dir);
+    var objPosY = ((button.height / 2)) * (dir);
 
     button.setPosition(screenPosX + objPosX, screenPosY + objPosY);
 
@@ -109,7 +109,7 @@ World.prototype.draw = function(gfx)
     this.backgroundHandler.draw(gfx);
     this.objectHandler.draw(gfx);
 
-    gfx.drawString("" + parseInt(this.gameHandler.score) + "m", 50, 90, "#FFF", "80pt " + Files.FNT_DEFAULT_FONT);
+    gfx.drawString("" + parseInt(this.gameHandler.score) + "m", 50, 120, "#FFF", "80pt " + Files.FNT_DEFAULT_FONT);
 
     gfx.gfx.restore();
 

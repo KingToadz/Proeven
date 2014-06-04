@@ -95,12 +95,11 @@ Player.prototype.tryJump = function()
 
 Player.prototype.tryStomp = function()
 {
-    if(this.y == this.groundy) //if(this.hasCollided == false && this.y == this.groundy)
+    if(this.y == this.groundy)
     {
         this.speedy = -25;
         this.showJumpAnimation = true;
         this.jumpAnimation.reset();
-        //this.stompGroundAnimation.reset();
         this.animationHandler.addGroundStomp(this.x - this.width / 2, this.groundy + 65);
     }
 };
@@ -115,9 +114,7 @@ Player.prototype.onCollision = function()
 {
     if(this.hasCollided == false)
     {
-        //this.collisionContainer.isColliding = true;
         this.hasCollided = true;
-        //this.shouldStomp = false;
         this.objectHandler.world.backgroundHandler.onPlayerDead();
         
         // Dead animation
@@ -126,7 +123,6 @@ Player.prototype.onCollision = function()
 
         this.isImmuneFor = 180;
         this.objectHandler.canSpawnItems = false;
-        //this.objectHandler.obstacleSpawner.nextSpawn = ((Align.width / 2) / 10) + 100;
         SFX.playSound(Files.SND_GAME_PLAYER_DEATH);
     }
 };

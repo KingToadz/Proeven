@@ -85,7 +85,7 @@ GameHandler.prototype.tick = function()
 
         this.score += 0.254; // 55 km/h / 3.6 = 15.27 m/s / 60fps = 0.254 m/tick
 
-        if(this.world1.backgroundHandler.fails > 6 || this.world2.backgroundHandler.fails > 6)
+        if(this.world1.backgroundHandler.fails > 2 || this.world2.backgroundHandler.fails > 2)
         {
             this.endCurrentGame();
         }
