@@ -7,8 +7,7 @@ ObjectHandler = function(world)
     this.world = world;
 
     this.canSpawnItems = true;
-
-    this.moveSpeed = 10;
+    this.moveSpeed = 5;
 
     // obstacles
     this.obstacleSpawner = new ObstacleSpawner();
@@ -22,6 +21,7 @@ ObjectHandler = function(world)
 
 ObjectHandler.prototype.initialize = function()
 {
+    this.obstacleSpawner.themeHandler = this.themeHandler;
     this.obstacleSpawner.initialize();
     this.player.otherPlayer = this.world.otherWorld.objectHandler.player;
 };

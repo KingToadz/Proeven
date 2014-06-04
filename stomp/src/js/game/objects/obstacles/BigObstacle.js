@@ -21,7 +21,6 @@ BigObstacle = function()
     this.collisionContainer.addBox(25, (this.height / 2) - 25, 25, 25); // small center left
     this.collisionContainer.addBox(this.width - 25, this.height - 50, 25, 50); // small bottom right
     this.collisionContainer.addBox(50, 15, this.width - 100, this.height - 15); // long middle
-    //this.collisionContainer.addBox(0, 0, this.width, this.height);
     
     this.passedPlayer = false;
 
@@ -50,6 +49,4 @@ BigObstacle.prototype.tick = function()
 BigObstacle.prototype.draw = function(gfx)
 {
     gfx.drawTexture(this.texture, this.x, this.y, this.width, this.height);
-
-    this.collisionContainer.draw(gfx, this.x, this.y);
 };

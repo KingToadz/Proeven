@@ -3,7 +3,6 @@ AnimationHandler = function()
     this.animations = [];
     this.yPositions = [];
     this.xPositions = [];
-    this.speed = 10;
 };
 
 AnimationHandler.prototype.addAnimation = function(anim, x, y)
@@ -46,7 +45,7 @@ AnimationHandler.prototype.tick = function()
     for(var i = 0; i < this.animations.length; i++)
     {
         this.animations[i].tick();
-        this.xPositions[i] -= this.speed;
+        this.xPositions[i] -= this.player.objectHandler.moveSpeed;
         
         if(this.xPositions[i] + this.animations[i].width < 0)
         {

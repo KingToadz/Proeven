@@ -46,7 +46,6 @@ Ticker.prototype.tick = function()
     {
         this.lastFPSCountTime = this.curTime;
         this.curFPS = this.curFPSCount;
-        console.log("FPS: " + this.curFPS);
         this.curFPSCount = 0;
     }
 
