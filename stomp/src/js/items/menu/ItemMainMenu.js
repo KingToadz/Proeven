@@ -57,7 +57,7 @@ ItemMainMenu = function()
 
     SFX.setBackgroundSound(Files.SND_MENU_BACKGROUND);
     
-    this.waitTime = 60;
+    this.waitTime = 30;
 };
 
 ItemMainMenu.prototype.initialize = function()

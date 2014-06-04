@@ -120,6 +120,8 @@ Player.prototype.onCollision = function()
         // Dead animation
         this.deadAnimation.reset();
         this.deadAnimation.currentFrame = 0;
+        
+        this.removeBigObstacles();
 
         this.isImmuneFor = 180;
         this.objectHandler.canSpawnItems = false;

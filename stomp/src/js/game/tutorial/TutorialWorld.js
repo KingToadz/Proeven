@@ -28,11 +28,13 @@ TutorialWorld = function(dir, tutorialHandler)
     this.handler = tutorialHandler;
 
     // Jump button
+    /*
     button = new RotatableButton();
     button.alignx = Align.LEFT;
     button.aligny = Align.TOP;
     button.setTexture(Files.PIC_GAME_BUTTON_JUMP);
     button.setSize(Files.PIC_GAME_BUTTON_JUMP.width, Files.PIC_GAME_BUTTON_JUMP.height);
+    
 
     var screenPosX = -(Align.width / 2) * (dir - 1);
     var screenPosY = -(Align.height / 2) * (dir - 1);
@@ -45,6 +47,7 @@ TutorialWorld = function(dir, tutorialHandler)
     button.rotation = (dir + 1) * 90;
     button.world = this;
     this.buttons.push(button);
+    */
 
     // Back button
     button = new RotatableButton();
@@ -209,7 +212,7 @@ TutorialWorld.prototype.draw = function(gfx, text)
         gfx.fillTransparentRect(0,0,Align.width, Align.height / 2, "#000", 0.8);   
     }
     
-    gfx.gfx.font = "60pt " + Files.FNT_DEFAULT_FONT;
+    gfx.gfx.font = "75pt " + Files.FNT_DEFAULT_FONT;
     var metrics = gfx.gfx.measureText(text);
     gfx.drawString(text, (Align.width / 2 - (metrics.width / 2)), Align.height / 4, "#FFF", "75pt " + Files.FNT_DEFAULT_FONT);
     
