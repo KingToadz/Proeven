@@ -26,13 +26,14 @@ TutorialBackgroundHandler.prototype.initialize = function()
 TutorialBackgroundHandler.prototype.switchToTheme = function(theme, instant)
 {
     var layers = [];
-    layers.push(new BackgroundLayer(theme.layers[0], 1.0 / 5 * theme.moveSpeed));
-    layers.push(new BackgroundLayer(theme.layers[1], 2.5 / 5 * theme.moveSpeed));
-    layers.push(new BackgroundLayer(theme.layers[2], theme.moveSpeed));
+    layers.push(new BackgroundLayer(theme.layers[0], 0.25));
+    layers.push(new BackgroundLayer(theme.layers[1], 0.5));
+    layers.push(new BackgroundLayer(theme.layers[2], 1.0));
 
-    for(var i = 0; i < this.layers.length; i++)
+    for(var i = 0; i < layers.length; i++)
     {
-        this.layers[i].speed = layers[i].speed;
+        layers[i].speed = layers[i].speed;
+        layers[i].backgroundHandler = this;
     }
 
     this.nextLayerSwitch = theme.switchAtScore;

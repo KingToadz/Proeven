@@ -118,11 +118,11 @@ BackgroundHandler.prototype.onPlayerDead = function()
     if(!this.backgroundColor.manualOverride)
     {
         this.timer = 0;
-        if(this.fails < 3)
-        {
+        //if(this.fails < 3)
+        //{
             this.fails++;
             this.checkBackground();
-        }
+        //}
     }
 };
 
@@ -147,12 +147,15 @@ BackgroundHandler.prototype.checkBackground = function()
     {
         case 0:
             this.backgroundColor.greenLayer();
+            console.log("Green");
             break;
         case 1:
             this.backgroundColor.orangeLayer();
+            console.log("Orange");
             break;
         case 2:
             this.backgroundColor.redLayer();
+            console.log("RED");
             break;
     }
 };

@@ -9,7 +9,7 @@ BackgroundColorLayer = function()
     this.currentLayer = 0;
     this.nextLayer = 0;
     this.switchLayer = false;
-    this.transitSpeed = 0.005;
+    this.transitSpeed = 0.01;
 
     this.manualOverride = false;
 };

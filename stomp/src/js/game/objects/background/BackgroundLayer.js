@@ -19,7 +19,7 @@ BackgroundLayer = function(textureObj, speed)
 };
 
 BackgroundLayer.prototype.tick = function()
-{
+{    
     this.x -= this.backgroundHandler.world.objectHandler.moveSpeed * this.speedRatio;
     this.x = this.x % this.width;
 };
