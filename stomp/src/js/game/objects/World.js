@@ -74,6 +74,31 @@ World.prototype.tick = function()
     {
         this.buttons[i].tick();
     }
+    
+    if(this.gameHandler.item.itemHandler.windowHandler.isKeyDown())
+    {
+        var keysdown = this.gameHandler.item.itemHandler.windowHandler.getKeysDown();
+        for (var i = 0; i < keysdown.length; i++)
+        {
+            if (keysdown[i].ticksAlive == 1 && keysdown[i].keyCode == 90 && this.dir == -1)
+            {
+                // make sure the pause popup is not showing
+                if(this.gameHandler.popup.popups[0].show == false)
+                {
+                    this.objectHandler.player.tryJump();
+                }
+            }
+            
+            if (keysdown[i].ticksAlive == 1 && keysdown[i].keyCode == 77 && this.dir == 1)
+            {
+                // make sure the pause popup is not showing
+                if(this.gameHandler.popup.popups[0].show == false)
+                {
+                    this.objectHandler.player.tryJump();
+                }
+            }
+        }
+    }
 
     if(this.gameHandler.item.itemHandler.windowHandler.isMouseDown())
     {

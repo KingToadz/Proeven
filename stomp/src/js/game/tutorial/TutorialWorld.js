@@ -158,6 +158,23 @@ TutorialWorld.prototype.playerPastObstacle = function()
 
 TutorialWorld.prototype.TouchDownInWorld = function()
 {
+    if(this.gameHandler.item.itemHandler.windowHandler.isKeyDown())
+    {
+        var keysdown = this.gameHandler.item.itemHandler.windowHandler.getKeysDown();
+        for (var i = 0; i < keysdown.length; i++)
+        {
+            if (keysdown[i].ticksAlive == 1 && keysdown[i].keyCode == 90 && this.dir == -1)
+            {
+                return true;
+            }
+            
+            if (keysdown[i].ticksAlive == 1 && keysdown[i].keyCode == 77 && this.dir == 1)
+            {
+                return true;
+            }
+        }
+    }
+    
     if(this.gameHandler.item.itemHandler.windowHandler.isMouseDown())
     {
         var mousesdown = this.gameHandler.item.itemHandler.windowHandler.getMousesDown();

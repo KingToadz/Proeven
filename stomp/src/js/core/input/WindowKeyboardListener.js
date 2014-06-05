@@ -36,6 +36,11 @@ WindowKeyboardListener.prototype.tick = function()
     }
 };
 
+WindowKeyboardListener.prototype.isKeyDown = function()
+{
+    return this.keysDown.length > 0;
+};
+
 // events
 WindowKeyboardListener.prototype.onKeyDown = function(ev)
 {

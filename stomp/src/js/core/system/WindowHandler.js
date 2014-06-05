@@ -40,6 +40,16 @@ WindowHandler.prototype.getMousesDown = function()
     return this.mouseListener.mousedown;
 };
 
+WindowHandler.prototype.isKeyDown = function()
+{
+    return this.keyboardListener.isKeyDown();
+};
+
+WindowHandler.prototype.getKeysDown = function()
+{
+    return this.keyboardListener.keysDown;
+};
+
 WindowHandler.prototype.tick = function()
 {
     // check if should rescale
