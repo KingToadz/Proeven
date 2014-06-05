@@ -16,11 +16,22 @@ BackgroundLayer = function(textureObj, speed)
 
     this.minX = 0;
     this.maxX = Align.width;
+    
+    this.forceMoveSpeed = false;
+    this.moveSpeed = 1;
 };
 
 BackgroundLayer.prototype.tick = function()
 {    
-    this.x -= this.backgroundHandler.world.objectHandler.moveSpeed * this.speedRatio;
+    if(this.forceMoveSpeed)
+    {
+        this.x -= this.moveSpeed * this.speedRatio;
+    }
+    else
+    {
+        this.x -= this.backgroundHandler.world.objectHandler.moveSpeed * this.speedRatio;
+    }
+    
     this.x = this.x % this.width;
 };
 

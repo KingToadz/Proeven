@@ -182,6 +182,14 @@ Player.prototype.tick = function()
 
     if(this.isImmuneFor > 0)
     {
+        if(this.isImmuneFor == 1)
+        {
+            
+            if(this.distanceToClosest() < 80)
+            {
+                this.isImmuneFor++;   
+            }
+        }
         this.isImmuneFor--;
         if(this.isImmuneFor == 0)
         {
@@ -196,6 +204,21 @@ Player.prototype.tick = function()
             this.collisionContainer.collisionCheck(this.objectHandler.obstacles);
         }
     }
+};
+
+Player.prototype.distanceToClosest =function()
+{
+    var distance = 1000000;
+    
+    for(var i = 0; i < this.objectHandler.obstacles.length; i++)
+    {
+        if(this.x - this.objectHandler.obstacles[i] < distance && this.x - this.objectHandler.obstacles[i] > -this.objectHandler.obstacles[i].width)
+        {
+            distance = this.x - this.objectHandler.obstacles[i];
+        }
+    }
+    
+    return distance;
 };
 
 Player.prototype.draw = function(gfx)

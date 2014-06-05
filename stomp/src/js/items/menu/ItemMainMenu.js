@@ -12,11 +12,19 @@ ItemMainMenu = function()
 
     var button = undefined;
     //721-H=862
-    this.logoAnim = new Animation(Files.PIC_LOGO_ANIMATION, 721, 862, 3, 6, 18);
+    /*
+    this.logoAnim = new Animation(Files.PIC_LOGO_ANIMATION, 513, 612, 3, 6, 18);
     this.logoAnim.setFPS(30);
     this.logoAnim.stopAfterLastFrame = true;
+    this.logoAnim.visibleForOneLoop = true;
     this.logoAnim.pause();
-
+    
+    this.logoAnim2 = new Animation(Files.PIC_LOGO2_ANIMATION, 618, 375, 3, 7, 21);
+    this.logoAnim2.visible = false;
+    this.logoAnim2.setFPS(30);
+    this.logoAnim2.stopAfterLastFrame = true;
+    this.logoAnim2.pause();
+*/
     // Real PlayButton
     button = new Button();
     button.alignx = Align.CENTER;
@@ -57,7 +65,7 @@ ItemMainMenu = function()
 
     SFX.setBackgroundSound(Files.SND_MENU_BACKGROUND);
     
-    this.waitTime = 30;
+    //this.waitTime = 30;
 };
 
 ItemMainMenu.prototype.initialize = function()
@@ -88,14 +96,24 @@ ItemMainMenu.prototype.tick = function()
         this.buttons[i].tick();
     }
     
+    /*
     this.waitTime--;
     
     if(this.waitTime == 0)
     {
         this.logoAnim.reset();   
+        this.waitTime--;
     }
     
     this.logoAnim.tick();
+    this.logoAnim2.tick();
+    
+    if(this.logoAnim.currentFrame == this.logoAnim.totalFrames && this.logoAnim.visible)
+    {
+        this.logoAnim2.reset();
+        this.logoAnim.visible = false;
+    }
+    */
 };
 
 ItemMainMenu.prototype.draw = function(gfx)
@@ -107,7 +125,9 @@ ItemMainMenu.prototype.draw = function(gfx)
         this.buttons[i].draw(gfx);
     }
     
-    this.logoAnim.draw(gfx, Align.width / 2 - this.logoAnim.width / 2, Align.height / 2 - this.logoAnim.height / 1.2);
+    
+    //this.logoAnim.draw(gfx, Align.width / 2 - this.logoAnim.width / 2, Align.height / 2 - this.logoAnim.height / 1.2);
+    //this.logoAnim2.draw(gfx, Align.width / 2 - this.logoAnim2.width / 2, Align.height / 2 - (this.logoAnim2.height - 37) / 1.2);
 
     gfx.drawString("HighScore: " + parseInt(this.highScore) + "m", 30, (Align.height / 2) + 180, "#FFF", "80pt " + Files.FNT_DEFAULT_FONT);
 };

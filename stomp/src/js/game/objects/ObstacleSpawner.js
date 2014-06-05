@@ -48,7 +48,7 @@ ObstacleSpawner.prototype.spawn = function()
 
 ObstacleSpawner.prototype.tick = function()
 {
-    if(this.objectHandler.canSpawnItems == true && this.objectHandler.themeHandler.curTheme.switchAtScore - 20 > this.objectHandler.world.gameHandler.score && this.objectHandler.themeHandler.curTheme.startAtScore + 20 < this.objectHandler.world.gameHandler.score)
+    if(this.objectHandler.canSpawnItems == true && (this.objectHandler.themeHandler.curTheme.switchAtScore - 20 > this.objectHandler.world.gameHandler.score || this.objectHandler.themeHandler.curTheme.switchAtScore == -1) && this.objectHandler.themeHandler.curTheme.startAtScore + 20 < this.objectHandler.world.gameHandler.score)
     {
         this.curTick++;
     }

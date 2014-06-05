@@ -4,7 +4,7 @@ TransformObstacleXS = function(x)
     
     this.texture = "";
 
-    this.transformAnimation = new Animation(Files.PIC_GAME_OBSTACLE_TRANSFORM_XS, 126, 320, 4, 6, 21);
+    this.transformAnimation = new Animation(Files.PIC_GAME_OBSTACLE_TRANSFORM_XS, 126, 320, 3, 7, 21);
     this.transformAnimation.stopAfterLastFrame = true;
     this.transformAnimation.setFPS(30);
     

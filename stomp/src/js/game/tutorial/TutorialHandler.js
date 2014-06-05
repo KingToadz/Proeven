@@ -553,11 +553,11 @@ TutorialHandler.prototype.draw = function(gfx)
     { // Eerste tutorial
         if(this.state[0] == 1)
         {
-            textW1 = "Druk op het zwarten gebied om te springen"; 
+            textW1 = "Druk op het zwarte gebied om te springen"; 
         }
         else if(this.state[0] > 1 && this.state[1] == 1)
         {
-            textW2 = "Druk op het zwarten gebied om te springen"; 
+            textW2 = "Druk op het zwarte gebied om te springen"; 
         }
     }
     

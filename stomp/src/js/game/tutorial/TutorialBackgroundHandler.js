@@ -34,6 +34,8 @@ TutorialBackgroundHandler.prototype.switchToTheme = function(theme, instant)
     {
         layers[i].speed = layers[i].speed;
         layers[i].backgroundHandler = this;
+        layers[i].forceMoveSpeed = true;
+        layers[i].moveSpeed = 7;
     }
 
     this.nextLayerSwitch = theme.switchAtScore;

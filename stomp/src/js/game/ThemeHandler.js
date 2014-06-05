@@ -5,7 +5,7 @@
 ThemeHandler = function()
 {
     this.themes = [];
-    this.addTheme("THEME01", SmallObstacleXXS, undefined, 100, 5);
+    this.addTheme("THEME01", SmallObstacleXXS, undefined, 400, 5);
     this.addTheme("THEME02", SmallObstacleXS, BigObstacleXS, 1000, 7);
     this.addTheme("THEME03", SmallObstacle, BigObstacle, 2000, 9);
     this.addTheme("THEME04", SmallObstacle, BigObstacle, 3000, 11);
